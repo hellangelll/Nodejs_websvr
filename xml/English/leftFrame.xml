@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<soap:Header>
+		<RequestSOAPHeader xmlns="http://www.aipstar.com.cn/schema/ctcc/common/v2_1">
+			<CommandType xmlns="">EnglishLanguage</CommandType>
+		</RequestSOAPHeader>
+	</soap:Header>
+	<soap:Body>
+		<channelPar>Channel</channelPar>
+		<ChannelInfoSet>Channel Set</ChannelInfoSet>
+		<VideoOutSet>Video Out</VideoOutSet>
+		<AudioParSet>Audio Set</AudioParSet>
+		<PtzParSet>Ptz Set</PtzParSet>
+		<NetWorkPar>NetWork</NetWorkPar>
+		<NetWorkSet>NetWork Set</NetWorkSet>
+		<RtspParSet>Rtsp Set</RtspParSet>
+		<NtpParSet>Ntp Set</NtpParSet>
+		<LiveHeartParSet>LiveHeart Set</LiveHeartParSet>
+		<RecordPar>Record</RecordPar>
+		<FtpParSet>Ftp Set</FtpParSet>
+		<CaptureParSet>Capture Set</CaptureParSet>
+		<WifiSet>Wifi Set</WifiSet>
+		<AlarmPar>Alarm</AlarmPar>
+		<AlarmInSet>AlarmIn Set</AlarmInSet>
+		<AlarmOutSet>AlarmOut Set</AlarmOutSet>
+		<SystemPar>System</SystemPar>
+		<UserInfoSet>User Set</UserInfoSet>
+		<SystemAdvSet>Advanced Set</SystemAdvSet>
+		<StorageSet>Storage Set</StorageSet>
+		<DriveInfoSet>Disk Set</DriveInfoSet>
+		<VideoPositionSet>Video Set</VideoPositionSet>
+		<DeviceSet>System Set</DeviceSet>
+		<LogDisplay>Log Display</LogDisplay>
+		<DeviceStatus>Status</DeviceStatus>
+	</soap:Body>
+</soap:Envelope>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<soap:Header>
+		<RequestSOAPHeader xmlns="http://www.aipstar.com.cn/schema/ctcc/common/v2_1">
+			<CommandType xmlns="">EnglishLanguage</CommandType>
+		</RequestSOAPHeader>
+	</soap:Header>
+	<soap:Body> 
+		<AlarmInDiv>
+			<AlarmInSet>AlarmIn Set</AlarmInSet>
+			<ChooseAlarmInput>AlarmInput</ChooseAlarmInput>
+			<sAlarmIn>Shown here is specified channel channel name!</sAlarmIn>
+			<strAlarmName>Name</strAlarmName>
+			<sAlarmName>Here can customize the current alarm input the name!</sAlarmName>
+			<strAlarmType>Type</strAlarmType>
+			<alarmInTypeOpt0>NO</alarmInTypeOpt0>
+			<alarmInTypeOpt1>NC</alarmInTypeOpt1>
+			<AlarmInSelectWeek>Week</AlarmInSelectWeek>
+			<AlarmInWeekOpt0>Monday</AlarmInWeekOpt0>
+			<AlarmInWeekOpt1>Tuesday</AlarmInWeekOpt1>
+			<AlarmInWeekOpt2>Wednesday</AlarmInWeekOpt2>
+			<AlarmInWeekOpt3>Thursday</AlarmInWeekOpt3>
+			<AlarmInWeekOpt4>Friday</AlarmInWeekOpt4>
+			<AlarmInWeekOpt5>Saturday</AlarmInWeekOpt5>
+			<AlarmInWeekOpt6>Sunday</AlarmInWeekOpt6>
+			<AlarmInCopyTo>Copy to</AlarmInCopyTo>
+			<AlarmInCopyWeekOpt7>Everyday</AlarmInCopyWeekOpt7>
+			<btnAlarmInCopy>Copy</btnAlarmInCopy>
+			<AlarmInSegment>Time</AlarmInSegment>
+			<AlarmInStartTime>Start</AlarmInStartTime>
+			<AlarmInEndTime>End</AlarmInEndTime>
+			<AlarmInSegmentOne>Segment one</AlarmInSegmentOne>
+			<AlarmInHourOne>H</AlarmInHourOne>
+			<AlarmInMinOne>M</AlarmInMinOne>
+			<AlarmInHourTwo>H</AlarmInHourTwo>
+			<AlarmInMinTwo>M</AlarmInMinTwo>
+			<AlarmInSegmentTwo>Segment two</AlarmInSegmentTwo>
+			<AlarmInHourThree>H</AlarmInHourThree>
+			<AlarmInMinThree>M</AlarmInMinThree>
+			<AlarmInHourFour>H</AlarmInHourFour>
+			<AlarmInMinFour>M</AlarmInMinFour>
+			<AlarmInSegmentThree>Segment three</AlarmInSegmentThree>
+			<AlarmInHourFive>H</AlarmInHourFive>
+			<AlarmInMinFive>M</AlarmInMinFive>
+			<AlarmInHourSix>H</AlarmInHourSix>
+			<AlarmInMinSix>M</AlarmInMinSix>
+			<AlarmInSegmentFour>Segment four</AlarmInSegmentFour>
+			<AlarmInHourSeven>H</AlarmInHourSeven>
+			<AlarmInMinSeven>M</AlarmInMinSeven>
+			<AlarmInHourEight>H</AlarmInHourEight>
+			<AlarmInMinEight>M</AlarmInMinEight>
+			<TriggerAction>Alarming type</TriggerAction>
+			<Enable>Enable</Enable>
+			<TriggerPTZ>PTZ</TriggerPTZ>
+			<sTriggerPTZ>This is a set yuntai linkage project parameters and can be specified channel preset a linkage and video!</sTriggerPTZ>
+			<AlarmInTriggerPTZ0>Channel preset 1</AlarmInTriggerPTZ0>
+			<AlarmInTriggerPTZ1>Channel preset 2</AlarmInTriggerPTZ1>
+			<AlarmInTriggerPTZ2>Channel preset 3</AlarmInTriggerPTZ2>
+			<AlarmInTriggerPTZ3>Channel preset 4</AlarmInTriggerPTZ3>
+			<strAlarmInRecord0>Record</strAlarmInRecord0>
+			<ReportCenter>Center</ReportCenter>
+			<sReportCenter>Here can set will alarm signal to the management control center, need to specify the management control center of the IP address and port number!</sReportCenter>
+			<AlarmInCenterIp>IP</AlarmInCenterIp>
+			<AlarmInCenterPort>Port</AlarmInCenterPort>
+			<TriggerAlarmOutput>Trigger alarm output </TriggerAlarmOutput>
+			<sTriggerAlarmOutput>Trigger NVR equipment own alarm output!</sTriggerAlarmOutput>
+			<TriggerAlarmOutputOne>Output one</TriggerAlarmOutputOne>
+			<TriggerAlarmOutputTwo>Output two</TriggerAlarmOutputTwo>
+			<TriggerAlarmOutputThree>Output three</TriggerAlarmOutputThree>
+			<TriggerAlarmOutputFour>Output four</TriggerAlarmOutputFour>
+			<strEnableChannelPoint>Enable Ptz</strEnableChannelPoint>
+			<strEnableRecord>Record</strEnableRecord>
+			<strRecordStateNote>This channel no storage project, please set parameters in the video-> storage project Settings page Settings</strRecordStateNote>
+			<btnSaveAlarmIn>Submit</btnSaveAlarmIn>
+			<btnRefreshAlarmIn>Refresh</btnRefreshAlarmIn>
+		</AlarmInDiv>
+		
+		<AlarmOutDiv>
+			<AlarmOutSet>AlarmOut Set</AlarmOutSet>
+			<ChooseAlarmOutput>Alarm Output</ChooseAlarmOutput>
+			<strAlarmOutName>Name</strAlarmOutName>
+			<sAlarmOut>Here is your custom alarm output, the name of the default for net alarm out, can customize the value!</sAlarmOut>
+			<AlarmOutputType>Type</AlarmOutputType>
+			<BySchedule>Schedule</BySchedule>
+			<AllDay>All day</AllDay>
+			<Close>Close</Close>
+			<SelectWeek>Week</SelectWeek>
+			<AlarmOutWeekOpt0>Monday</AlarmOutWeekOpt0>
+			<AlarmOutWeekOpt1>Tuesday</AlarmOutWeekOpt1>
+			<AlarmOutWeekOpt2>Wednesday</AlarmOutWeekOpt2>
+			<AlarmOutWeekOpt3>Thursday</AlarmOutWeekOpt3>
+			<AlarmOutWeekOpt4>Friday</AlarmOutWeekOpt4>
+			<AlarmOutWeekOpt5>Saturday</AlarmOutWeekOpt5>
+			<AlarmOutWeekOpt6>Sunday</AlarmOutWeekOpt6>
+			<CopyTo>Copy To</CopyTo>
+			<AlarmOutCopyWeekOpt7>Everyday</AlarmOutCopyWeekOpt7>
+			<btnAlarmOutCopy>Copy</btnAlarmOutCopy>
+			<Segment>Time</Segment>
+			<StartTime>Start</StartTime>
+			<EndTime>End</EndTime>
+			<SegmentOne>Segment One</SegmentOne>
+			<HourOne>H</HourOne>
+			<MinOne>M</MinOne>
+			<HourTwo>H</HourTwo>
+			<MinTwo>M</MinTwo>
+			<SegmentTwo>Segment Two</SegmentTwo>
+			<HourThree>H</HourThree>
+			<MinThree>M</MinThree>
+			<HourFour>H</HourFour>
+			<MinFour>M</MinFour>
+			<SegmentThree>Segment Three</SegmentThree>
+			<HourFive>H</HourFive>
+			<MinFive>M</MinFive>
+			<HourSix>H</HourSix>
+			<MinSix>M</MinSix>
+			<SegmentFour>Segment Four</SegmentFour>
+			<HourSeven>H</HourSeven>
+			<MinSeven>M</MinSeven>
+			<HourEight>H</HourEight>
+			<MinEight>M</MinEight>
+			<OutputDuration>Output Duration(1-300s):</OutputDuration>
+			<btnCloseAlarm>Alarm off</btnCloseAlarm>
+			<btnOpenAlarm>Alarm on</btnOpenAlarm>
+			<btnSaveAlarmOut>Submit</btnSaveAlarmOut>
+			<btnRefreshAlarmOut>Refresh</btnRefreshAlarmOut>
+		</AlarmOutDiv>
+		
+		<a_manualClose>Manual Close</a_manualClose>
+		<a_second>S</a_second>
+		<a_succeed>Set Succeed!</a_succeed>
+		<a_faild>Set Fail!</a_faild>
+		<a_ParameterInvalid>The parameter is invalid!</a_ParameterInvalid>
+		<a_AlarmIn>AlarmIn</a_AlarmIn>
+		<a_AlarmOut>AlarmOut</a_AlarmOut>
+		<a_ContralFail>Contral Fail!</a_ContralFail>
+	</soap:Body>
+</soap:Envelope>

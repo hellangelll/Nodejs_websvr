@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<soap:Header>
+		<RequestSOAPHeader xmlns="http://www.aipstar.com.cn/schema/ctcc/common/v2_1">
+			<CommandType xmlns="">EnglishLanguage</CommandType>
+		</RequestSOAPHeader>
+	</soap:Header>
+	<soap:Body>
+		<ParameterDiv>
+			<VideoSetup>Video</VideoSetup>
+			<PtzContral>PTZ</PtzContral>
+			<PictureModeSetting>Picture</PictureModeSetting>
+			<VideoPlayback>Playback</VideoPlayback>
+			<CompressionPar>Compress</CompressionPar>
+			<OSDOverlying>OSD</OSDOverlying>
+			<MotionDetection>Motion</MotionDetection>
+			<strVideoIn>VideoIn</strVideoIn>
+			<strDeviceInfo>Device</strDeviceInfo>
+		</ParameterDiv>
+		
+		<PtzContralDiv>
+			<strPTZSpeed>PTZ speed</strPTZSpeed>
+			<PtzCallPoint>PTZ point</PtzCallPoint>
+			<CallPtzPoint>Call</CallPtzPoint>
+			<EditePtzPoint>Save</EditePtzPoint>
+			<DelPtzPoint>Delete</DelPtzPoint>
+			<AuxiliaryOpen>Auxilliary open</AuxiliaryOpen>
+			<AuxiliaryClose>Auxilliary close</AuxiliaryClose>
+			<PtzAuxOpt0>Light</PtzAuxOpt0>
+			<PtzAuxOpt1>Brush</PtzAuxOpt1>
+			<PtzAuxOpt2>Fan</PtzAuxOpt2>
+			<PtzAuxOpt3>Heater</PtzAuxOpt3>
+			<a_notRightClose>Sorry, you do not have permission to do it, please contact the system administrator!</a_notRightClose>
+		</PtzContralDiv>
+		
+		<VideoParameterDiv>
+			<strVideoParameter>Video parameter</strVideoParameter>
+			<strBrightness>Brightness:</strBrightness>
+			<strContrast>Contrast:</strContrast>
+			<strSaturation>Saturation:</strSaturation>
+			<strHue>Chroma:</strHue>
+			<strAcutance>Acutance:</strAcutance>
+			<TransType>Video transmission type:</TransType>
+			<Realtime>Realtime</Realtime>
+			<FullFrame>Full frame</FullFrame>
+			<btnSetParam>Setup</btnSetParam>
+			<btnDefault>Default</btnDefault>
+		</VideoParameterDiv>
+		
+		<PicModeDiv>
+			<strPictureModeSetting>Picture mode settingup:</strPictureModeSetting>
+			<strMode>Mode:</strMode>
+			<ModeOpt0>Day mode</ModeOpt0>
+			<ModeOpt1>Highlight mode</ModeOpt1>
+			<ModeOpt2>Dusk mode</ModeOpt2>
+			<ModeOpt3>Night mode</ModeOpt3>
+			<strEnable>Enable</strEnable>
+			<StarTime>Start:</StarTime>
+			<strStartHourT>Hour</strStartHourT>
+			<strStartMinT>Minute</strStartMinT>
+			<EndTime1>End:</EndTime1>
+			<strEndHourT>Hour</strEndHourT>
+			<strEndMinT>Minute</strEndMinT>
+			<strBrightness1>Brightness:</strBrightness1>
+			<strContrast1>Contrast:</strContrast1>
+			<strSaturation1>Saturation:</strSaturation1>
+			<strHue1>Chroma:</strHue1>
+			<strAcutance1>Acutance:</strAcutance1>
+			<btnSaveMode>Setup</btnSaveMode>
+			<btnPreview>Preview</btnPreview>
+			<btnRecommend>Recommend</btnRecommend>
+			<LongitudeAndLatitude>Longitude and latitude parameter:</LongitudeAndLatitude>
+			<strLongitude>Longitude:</strLongitude>
+			<strLatitude>Latitude:</strLatitude>
+			<btnLongLatituSet>Setup</btnLongLatituSet>
+		</PicModeDiv>
+		
+		<VideoPlaybackDiv>
+			<strVideoPlayback>Video playback</strVideoPlayback>
+			<SearchTime>Time:</SearchTime>
+			<strStarTime>Start:</strStarTime>
+			<strStartHour>H</strStartHour>
+			<strStartMin>M</strStartMin>
+			<strEndTime>End:</strEndTime>
+			<strEndHour>H</strEndHour>
+			<strEndMin>M</strEndMin>
+			<strSearchChannel>Channel:</strSearchChannel>
+			<btnSearchRemote>Search</btnSearchRemote>
+			<SelectLocal>Select local file</SelectLocal>
+			<ChannelList>ChannelList</ChannelList>
+			<PayBackFileList>PayBackFileList</PayBackFileList>
+			<a_strUpdate>Operate fail</a_strUpdate>
+		</VideoPlaybackDiv>
+		
+		<CompressFormatDiv>
+			<strStreamType>Coding:</strStreamType>
+			<strParameterSetting0>First video stream parameter setting</strParameterSetting0>
+			<strFrameRate0>Rate:</strFrameRate0>
+			<StreamingType0>Stream:</StreamingType0>
+			<StreamType0Opt0>Video</StreamType0Opt0>
+			<StreamType0Opt1>Complex</StreamType0Opt1>
+			<BitType0>Bitrate:</BitType0>
+			<BitrateType0Opt0>CBR</BitrateType0Opt0>
+			<BitrateType0Opt1>VBR</BitrateType0Opt1>
+			<BitrateType0Opt2>LBR</BitrateType0Opt2>
+			<Quality0>Quality:</Quality0>
+			<PicQuality0Opt0>Best</PicQuality0Opt0>
+			<PicQuality0Opt1>Better</PicQuality0Opt1>
+			<PicQuality0Opt2>Little better</PicQuality0Opt2>
+			<PicQuality0Opt3>Good</PicQuality0Opt3>
+			<PicQuality0Opt4>Less good</PicQuality0Opt4>
+			<PicQuality0Opt5>Ordinary</PicQuality0Opt5>
+			<KeyframeEvery0>Key framerate interval:</KeyframeEvery0>
+			<FrameInterval0Opt0>Default</FrameInterval0Opt0>
+			<FrameInterval0Opt1>Full key framerate</FrameInterval0Opt1>
+			<MaxRate0>Rate:</MaxRate0>
+			<VideoBitrate0Opt0>Self-definition</VideoBitrate0Opt0>
+			<strParameterSetting1>Second video stream parameter setting</strParameterSetting1>
+			<strParameterSetting2>Third video stream parameter setting</strParameterSetting2>
+			<btnSaveCompress>Setup</btnSaveCompress>
+			<btnRefreshCompress>Refresh</btnRefreshCompress>
+			<a_arrVideoFrameRate0>All</a_arrVideoFrameRate0>
+		</CompressFormatDiv>
+		
+		<OsdDiv>
+			<strOSDOverlying>OSD Overlying:</strOSDOverlying>
+			<ShowWeek>Show week</ShowWeek>
+			<LanguageOpt0>Chinese</LanguageOpt0>
+			<LanguageOpt1>English</LanguageOpt1>
+			<ShowChanneName>Name</ShowChanneName>
+			<Positon>Position</Positon>
+			<strRelativeTo0>Relative To</strRelativeTo0>
+			<RelativeTo0>LeftTop</RelativeTo0>
+			<RelativeTo1>RightTop</RelativeTo1>
+			<RelativeTo2>LeftBottom</RelativeTo2>
+			<RelativeTo3>RightBottom</RelativeTo3>
+			<PositonX>X</PositonX>
+			<PositonY>Y</PositonY>
+			<ChannelPositon>Channel Positon</ChannelPositon>
+			<strRelativeTo1>Relative To</strRelativeTo1>
+			<LeftTop>LeftTop</LeftTop>
+			<RightTop>RightTop</RightTop>
+			<LeftBotton>LeftBottom</LeftBotton>
+			<RightBotton>RightBottom</RightBotton>
+			<ShowDatetime>Overlying time</ShowDatetime>
+			<TimeTypeOpt0>"Year/Month/Day/Hour/Minute/Second"</TimeTypeOpt0>
+			<TimeTypeOpt1>"Month/Day/Year/Hour/Minute/Second"</TimeTypeOpt1>
+			<TimeTypeOpt2>"Hour Minute Second"</TimeTypeOpt2>
+			<TimeTypeOpt3>"Year-Month-Day HourMinuteSecond"</TimeTypeOpt3>
+			<TimeTypeOpt4>"Month-Day-Year HourMinuteSecond"</TimeTypeOpt4>
+			<btnSaveOsd>Save</btnSaveOsd>
+			<btnRefreshOsd>Refresh</btnRefreshOsd>
+		</OsdDiv>
+		
+		<MotionSetDiv>
+			<strEnableMotion>Enable motion detection</strEnableMotion>
+			<Threshold>Threshold</Threshold>
+			<strSensitive>Sensitive</strSensitive>
+			<SensitiveOpt0>Lowest</SensitiveOpt0>
+			<SensitiveOpt1>Highest</SensitiveOpt1>
+			<AlarmSchedule>Alarming Schedule</AlarmSchedule>
+			<SelectWeek>Time</SelectWeek>
+			<WeekOpt0>Monday</WeekOpt0>
+			<WeekOpt1>Tuesday</WeekOpt1>
+			<WeekOpt2>Wednesday</WeekOpt2>
+			<WeekOpt3>Thursday</WeekOpt3>
+			<WeekOpt4>Friday</WeekOpt4>
+			<WeekOpt5>Saturday</WeekOpt5>
+			<WeekOpt6>Sunday</WeekOpt6>
+			<CopyTo>CopyTo</CopyTo>
+			<CopyWeekOpt7>Everyday</CopyWeekOpt7>
+			<btnCopy>Copy</btnCopy>
+			<TimeSegment>Time</TimeSegment>
+			<Starttime>Start</Starttime>
+			<Endtime>End</Endtime>
+			<SegmentOne>One</SegmentOne>
+			<MotionHour1>H</MotionHour1>
+			<MotionMin1>M</MotionMin1>
+			<MotionHour2>H</MotionHour2>
+			<MotionMin2>M</MotionMin2>
+			<SegmentTwo>Two</SegmentTwo>
+			<MotionHour3>H</MotionHour3>
+			<MotionMin3>M</MotionMin3>
+			<MotionHour4>H</MotionHour4>
+			<MotionMin4>M</MotionMin4>
+			<SegmentThree>Three</SegmentThree>
+			<MotionHour5>H</MotionHour5>
+			<MotionMin5>M</MotionMin5>
+			<MotionHour6>H</MotionHour6>
+			<MotionMin6>M</MotionMin6>
+			<SegmentFour>Four</SegmentFour>
+			<MotionHour7>H</MotionHour7>
+			<MotionMin7>M</MotionMin7>
+			<MotionHour8>H</MotionHour8>
+			<MotionMin8>M</MotionMin8>
+			<strAlarmType>Alarming type</strAlarmType>
+			<Enable>Enable</Enable>
+			<TriggerPTZ>PTZ</TriggerPTZ>
+			<ReportCenter>Center</ReportCenter>
+			<TriggerAlarmOutput>Trigger alarm output</TriggerAlarmOutput>
+			<TriggerAlarmOutputOne>Output one</TriggerAlarmOutputOne>
+			<TriggerAlarmOutputTwo>Output two</TriggerAlarmOutputTwo>
+			<TriggerAlarmOutputThree>Output three</TriggerAlarmOutputThree>
+			<TriggerAlarmOutputFour>Output Four</TriggerAlarmOutputFour>
+			<btnSaveMotion>Setup</btnSaveMotion>
+			<btnRefreshMotion>Refresh</btnRefreshMotion>
+			<btnClear>ClearZone</btnClear>
+		</MotionSetDiv>
+		
+		<DeviceInfoDiv>
+			<DeviceInfo>Device information:</DeviceInfo>
+			<strName>Name:</strName>
+			<VideoFormat>Format:</VideoFormat>
+			<strDevice>Device type:</strDevice>
+			<SN>Product SN:</SN>
+			<strMACAddress>MAC Address:</strMACAddress>
+			<SoftwareVersion>Software Version:</SoftwareVersion>
+			<WebVersion>Web Version:</WebVersion>
+			<FirmwareVersion>Firmware Version:</FirmwareVersion>
+			<ChannelNumber>Channel Number:</ChannelNumber>
+			<btnSaveDevice>Setup</btnSaveDevice>
+			<btnRefreshDevice>Refresh</btnRefreshDevice>
+			<Note>Note:Fomat modification need to be saved and restarted in higher setup.</Note>
+		</DeviceInfoDiv>
+		
+		<VideoInDiv>
+			<VideoIn>Video In:</VideoIn>
+			<strAntiFlicker>Flicker:</strAntiFlicker>
+			<strColorMode>Mode:</strColorMode>
+			<TurnVideo>Turning:</TurnVideo>
+			<TurnOpt0>Disable</TurnOpt0>
+			<TurnOpt1>Enable</TurnOpt1>
+			<ColorToBlack>Color:</ColorToBlack>
+			<ColorToWhiteOpt0>Auto</ColorToWhiteOpt0>
+			<ColorToWhiteOpt1>Colour</ColorToWhiteOpt1>
+			<ColorToWhiteOpt2>Black</ColorToWhiteOpt2>
+			<ShutterSpeed>Shutter:</ShutterSpeed>
+			<ShutterOpt0>Auto</ShutterOpt0>
+			<strWidthrange>WDR:</strWidthrange>
+			<WidthrangeOpt0>Auto</WidthrangeOpt0>
+			<WidthrangeOpt1>Manual1</WidthrangeOpt1>
+			<WidthrangeOpt2>Manual2</WidthrangeOpt2>
+			<WidthrangeOpt3>Manual3</WidthrangeOpt3>
+			<strBlc>Blc:</strBlc>
+			<BlcOpt0>Close</BlcOpt0>
+			<BlcOpt1>Open</BlcOpt1>
+			<strMctf>3D:</strMctf>
+			<DMctfOpt0>Close</DMctfOpt0>
+			<DMctfOpt1>Super</DMctfOpt1>
+			<DMctfOpt2>strong</DMctfOpt2>
+			<DMctfOpt3>general</DMctfOpt3>
+			<DMctfOpt4>weak</DMctfOpt4>
+			<strExposureMode>Exposure:</strExposureMode>
+			<auto_exposureOpt0>Auto</auto_exposureOpt0>
+			<!--<auto_exposureOpt1>Auto ExposureR1</auto_exposureOpt1>
+			<auto_exposureOpt2>Auto ExposureR2</auto_exposureOpt2>
+			<auto_exposureOpt3>Auto Exposure+</auto_exposureOpt3>
+			<auto_exposureOpt4>Auto ExposureR+1</auto_exposureOpt4>
+			<auto_exposureOpt5>Auto ExposureR+2</auto_exposureOpt5>
+			<auto_exposureOpt6>Auto ExposureR+3</auto_exposureOpt6>
+			<auto_exposureOpt7>Shutter priority</auto_exposureOpt7>
+			<auto_exposureOpt8>Exposure priority</auto_exposureOpt8>
+			<auto_exposureOpt9>AGC priority</auto_exposureOpt9>-->
+			<strWhitebalance>WB:</strWhitebalance>
+			<WhitebalanceOpt0>Close</WhitebalanceOpt0>
+			<WhitebalanceOpt1>Auto</WhitebalanceOpt1>
+			<WhitebalanceOpt2>FilamentLamp</WhitebalanceOpt2>
+			<WhitebalanceOpt3>D4000</WhitebalanceOpt3>
+			<WhitebalanceOpt4>D5000</WhitebalanceOpt4>
+			<WhitebalanceOpt5>Sunlight</WhitebalanceOpt5>
+			<WhitebalanceOpt6>Cloudy</WhitebalanceOpt6>
+			<WhitebalanceOpt7>Flashlight</WhitebalanceOpt7>
+			<WhitebalanceOpt8>Fluorescent</WhitebalanceOpt8>
+			<WhitebalanceOpt9>FluorescentH</WhitebalanceOpt9>
+			<WhitebalanceOpt10>Undersea</WhitebalanceOpt10>
+			<strIRMode>IR:</strIRMode>
+			<IRShutterModeOpt0>Auto switch</IRShutterModeOpt0>
+			<IRShutterModeOpt1>Fixtime switch</IRShutterModeOpt1>
+			<IRShutterModeOpt2>Alarming switch</IRShutterModeOpt2>
+			<SwitchOn>Open:</SwitchOn>
+			<Hour1>Hour</Hour1>
+			<Min1>Minute</Min1>
+			<SwitchOff>Close:</SwitchOff>
+			<Hour2>Hour</Hour2>
+			<Min2>Minute</Min2>
+			<btnSaveVideoIn>Setup</btnSaveVideoIn>
+			<btnRefreshVideoIn>Refresh</btnRefreshVideoIn>
+		</VideoInDiv>
+		
+		<VideoPlayContralDiv>
+			<btnPPlay>Play</btnPPlay>
+			<btnPPause>Pause</btnPPause>
+			<btnPPrev>Stop</btnPPrev>
+			<btnPNext>Next</btnPNext>
+			<btnSlow2>Slow X2</btnSlow2>
+			<btnPFast2>Fast X2</btnPFast2>
+			<btnPFast4>Fast X4</btnPFast4>
+			<btnPCapture>Capture</btnPCapture>
+			<chPlayIsMute>Open audio</chPlayIsMute>
+			<Cut>Cut</Cut>
+			<CutCancel>CancelCut</CutCancel>
+			<DownloadRecord>DownLoad</DownloadRecord>
+			<ChannelName>Channel</ChannelName>
+			<PayBackFileName>PayBackFileName</PayBackFileName>
+			<a_SearchMacDay>Only three day's support</a_SearchMacDay>
+		</VideoPlayContralDiv>
+		
+		<VideoContralDiv>
+			<MastStream>MastStream</MastStream>
+			<SecStream>SecStream</SecStream>
+			<PlayStop>Stop</PlayStop>
+			<PlayCapture>Capture</PlayCapture>
+			<PlayRecord>Record</PlayRecord>
+			<PlayOpenAudio>Open audio</PlayOpenAudio>
+			<PlayOpenAudio>Open audio</PlayOpenAudio>
+			<a_VideoConnect>The Contral connect fail!</a_VideoConnect>
+			<a_NoPopedom>Sorry, you have no popedom!</a_NoPopedom>
+			<a_Record>Record</a_Record>
+			<a_StopRecord>StopRecord</a_StopRecord>
+			<a_OpenAudio>Open Audio</a_OpenAudio>
+			<a_CloseAudio>Close Audio</a_CloseAudio>
+			<a_ContralFail>Contral Fail!</a_ContralFail>
+			<a_ParameterInvalid>The parameter is invalid!</a_ParameterInvalid>
+			<a_getChannel>Please Check the Channel</a_getChannel>
+			<a_succeed>Set Succeed!</a_succeed>
+			<a_faild>Set Fail!</a_faild>
+			<a_Auto>Auto</a_Auto>
+			<a_Colour>Color</a_Colour>
+			<a_BlackWhite>BlackWhite</a_BlackWhite>
+			
+			
+		</VideoContralDiv>
+		
+		<divDownload>
+			<TooltipControl>No video control file ordonnot need upgrading，please press"download control file" to install</TooltipControl>
+			<bt_BkFile>Download BKfile</bt_BkFile>
+		</divDownload>
+		
+	</soap:Body>
+</soap:Envelope>		

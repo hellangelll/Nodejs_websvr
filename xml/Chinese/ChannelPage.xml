@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<soap:Header>
+		<RequestSOAPHeader xmlns="http://www.aipstar.com.cn/schema/ctcc/common/v2_1">
+			<CommandType xmlns="">EnglishLanguage</CommandType>
+		</RequestSOAPHeader>
+	</soap:Header>
+	<soap:Body> 
+		<PTZDiv>
+			<PtzParameter>云台参数设置</PtzParameter>
+			<strChooseChannel>选择通道</strChooseChannel>
+			<Address>地&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;址</Address>
+			<strBaudRate>波特率</strBaudRate>
+			<Protocol>协&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;议</Protocol>
+			<strDataBit>数据位</strDataBit>
+			<ParityBit>校验位</ParityBit>
+			<ParityOpt0>无校验</ParityOpt0>
+			<ParityOpt1>奇校验</ParityOpt1>
+			<ParityOpt2>偶校验</ParityOpt2>
+			<btnSavePtz>确定</btnSavePtz>
+			<btnRefreshPtz>刷新</btnRefreshPtz>
+		</PTZDiv>
+		
+		<VideoOutDiv>
+			<strVideoOutSet>模拟输出设置</strVideoOutSet>
+		</VideoOutDiv>
+		
+		<AudioInfoDiv>
+			<AudioParameter>音频参数设置</AudioParameter>
+			<AudiAmplification>音频倍数</AudiAmplification>
+			<Intercom>语音对讲</Intercom>
+			<NetTalkOpt0>不启用</NetTalkOpt0>
+			<NetTalkOpt1>启用</NetTalkOpt1>
+			<SpeechMode>音频模式</SpeechMode>
+			<AudioMode0>左声道</AudioMode0>
+			<AudioMode1>右声道</AudioMode1>
+			<AudioMode2>立体声</AudioMode2>		
+			<SpeechFormat>语音格式</SpeechFormat>
+			<btnSaveAudio>确定</btnSaveAudio>
+			<btnRefreshAudio>刷新</btnRefreshAudio>
+		</AudioInfoDiv>
+		
+		<ChannelSetDiv>
+			<ChannelParameter>通道参数设置</ChannelParameter>
+			<btnSaveChannel>修改</btnSaveChannel>
+			<btnRefreshChannel>刷新</btnRefreshChannel>
+			<strNote>注意:修改通道参数后，需要在&quot;系统高级设置&quot;中保存并重启才会生效.</strNote>
+			<ChannelName>通道名称</ChannelName>
+			<ChannelAddress>地址</ChannelAddress>
+			<ChannelPort>端口</ChannelPort>
+			<ChannelUsername>用户名</ChannelUsername>
+			<ChannelPassword>密码</ChannelPassword>
+			<ChannelSubStream>启用子码流</ChannelSubStream>
+			<ChannelEnable>启用通道</ChannelEnable>
+		</ChannelSetDiv>
+		
+		<a_succeed>设置成功!</a_succeed>
+		<a_faild>设置失败!</a_faild>
+	</soap:Body>
+</soap:Envelope>
+
+

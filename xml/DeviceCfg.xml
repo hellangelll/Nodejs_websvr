@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="gbk" ?>
+<Envelope>
+	<Header>
+		<cmd>DeviceCfg</cmd>
+		<cmd_type>get</cmd_type>
+		<err_flag>0</err_flag>
+		<channel>0</channel>
+	</Header>
+	<Body>
+		<tmDeviceCfg_t>
+			<sDVSName>斯蒂芬</sDVSName>
+			<dwDVSID>0</dwDVSID>
+			<dwRecycleRecord>0</dwRecycleRecord>
+			<dwVideoStandard>0</dwVideoStandard>
+			<dwMicrophone>1</dwMicrophone>
+			<szSerialNumber>ASIPC200507001211</szSerialNumber>
+			<dwSoftwareVersion>4.3.0.01</dwSoftwareVersion>
+			<dwSoftwareBuildDate>20111017</dwSoftwareBuildDate>
+			<dwDSPSoftwareVersion>4.3.0.01</dwDSPSoftwareVersion>
+			<dwDSPSoftwareBuildDate>20111017</dwDSPSoftwareBuildDate>
+			<dwPanelVersion>0.03</dwPanelVersion>
+			<dwHardwareVersion>0.01</dwHardwareVersion>
+			<byAlarmInPortNum>1</byAlarmInPortNum>
+			<byAlarmOutPortNum>1</byAlarmOutPortNum>
+			<byRS232Num>1</byRS232Num>
+			<byRS485Num>1</byRS485Num>
+			<byNetworkPortNum>1</byNetworkPortNum>
+			<byDiskCtrlNum>0</byDiskCtrlNum>
+			<byDiskNum>0</byDiskNum>
+			<byDVSType>33</byDVSType>
+			<byChanNum>1</byChanNum>
+			<byStartChan>0</byStartChan>
+			<byDecordChans>0</byDecordChans>
+			<byVGANum>0</byVGANum>
+			<byUSBNum>1</byUSBNum>
+			<byFactory>0</byFactory>
+			<wTypeExtern>2</wTypeExtern>
+			<wAvPort>0</wAvPort>
+		</tmDeviceCfg_t>
+	</Body>
+</Envelope>

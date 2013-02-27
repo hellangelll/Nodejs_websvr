@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<soap:Header>
+		<RequestSOAPHeader xmlns="http://www.aipstar.com.cn/schema/ctcc/common/v2_1">
+			<CommandType xmlns="">EnglishLanguage</CommandType>
+		</RequestSOAPHeader>
+	</soap:Header>
+	<soap:Body> 
+		<RtspDiv>
+			<RtspSet>RTSP Set</RtspSet>
+			<strEnableRtsp>Enable</strEnableRtsp>
+			<port>Port</port>
+			<strMainStream>Main Stream</strMainStream>
+			<SubStream>Sub Stream</SubStream>
+			<strMode>Mode</strMode>
+			<RtspModeOpt0>VLC mode</RtspModeOpt0>
+			<RtspModeOpt1>QuickTime mode</RtspModeOpt1>
+			<btnSaveRtsp>Submit</btnSaveRtsp>
+			<btnRefreshRtsp>Refresh</btnRefreshRtsp>
+		</RtspDiv>
+		
+		<NetWorkDiv>
+			<NetBasic>Network Set</NetBasic>
+			<NetworkParameter>Network Parameter</NetworkParameter>
+			<strUseDhcp>Enable DHCP</strUseDhcp>
+			<sNetworkParameter>Modify the network interface parameter Settings, needs to be in &quot;System parameters > system advanced set and&quot; Page save Settings and restart your device</sNetworkParameter>
+			<IPAddress>IP Address</IPAddress>
+			<SubnetMask>Subnet Mask</SubnetMask>
+			<strGateWay>GateWay</strGateWay>
+			<strDNS>DNS</strDNS>
+			<AlternateDNS>Alternate DNS</AlternateDNS>
+			<ManageCcenter>Enable Manage Center</ManageCcenter>
+			<sManageCenter>Here the remote management center configuration and alarm input Settings page set the value of the item upload center consistent!</sManageCenter>
+			<strCenterIp>Center Ip</strCenterIp>
+			<strCenterPort>Center Port</strCenterPort>
+			<strRemoteWebport>Set the port for Remote Access</strRemoteWebport>
+			<sRemoteWebport>Note: modify the remote access parameters, needs to be in &quot; System parameter > system advanced set and &quot; Page save Settings and restart your device! And lt; Br/ &gt;If you change the port, it must use &quot; http://IP:port/ &quot; The format of the url to enter this setup again!</sRemoteWebport>
+			<strDataPort>Data Port</strDataPort>
+			<strWebPort>Web Port</strWebPort>
+			<DDNSSetting>Set the DDNS</DDNSSetting>
+			<PreferredServerAddress>Preferred</PreferredServerAddress>
+			<AlternateServerAddress>Alternate</AlternateServerAddress>
+			<strUserName>User Name</strUserName>
+			<strPassWord>Password</strPassWord>
+			<DomainName>Domain Name</DomainName>
+			<btnSaveNet>Submit</btnSaveNet>
+			<btnRefreshNet>Refresh</btnRefreshNet>
+			<strNote>Note: You should "save" the parameter in "Advaced" page when you modify the parameter of remote access. If you modify the port of web, you shoudl use the url like http://ip:port/ to access the IPCA soft!</strNote>
+		</NetWorkDiv>
+		
+		<NtpInfoDiv>
+			<strNTPSet>NTP Set</strNTPSet>
+			<strParameterNTP>The parameter of NTP server will be set in this page.</strParameterNTP>
+			<Enable>Enable</Enable>
+			<NTPServerAddress>NTP Server Address</NTPServerAddress>
+			<sNtpAddress>Note: Ntp server IP and the machine IP address can't the same!</sNtpAddress>
+			<strTimeInterval>Synchronization Interval(H)</strTimeInterval>
+			<btnSaveNtp>Submit</btnSaveNtp>
+			<btnRefreshNtp>Refresh</btnRefreshNtp>
+		</NtpInfoDiv>
+		
+		<LiveHeartDiv>
+			<LiveHeartSet>Heartbeat packet parameters Settings</LiveHeartSet>
+			<strEnableLive>Enable heartbeat inspection packet</strEnableLive>
+			<strLiveMode>Send Mode</strLiveMode>
+			<strSendSpacingInterval>Interval(S)</strSendSpacingInterval>
+			<strServiceAds>Host Addresses</strServiceAds>
+			<strServicePort>Host Port</strServicePort>
+			<btnSaveLiveHeart>Submit</btnSaveLiveHeart>
+			<btnRefreshLiveHeart>Refresh</btnRefreshLiveHeart>
+		</LiveHeartDiv>
+		
+		<WifiInfoDiv>
+			<strWifiSet>WIFI Setting</strWifiSet>
+			<strEnableWifi>WIFI</strEnableWifi>
+			<strWifiIpMethod>IP access method</strWifiIpMethod>
+			<WifiIpMethod0>Manual</WifiIpMethod0>
+			<WifiIpMethod1>Auto</WifiIpMethod1>
+			<strWifiIpAddress>IP</strWifiIpAddress>
+			<strWifiSubnetMask>Subnet Mask</strWifiSubnetMask>
+			<strWifiGateway>Gateway</strWifiGateway>
+			<strWifiDns2>Spare DNS</strWifiDns2>
+			<strWifiNetworkName>SSID</strWifiNetworkName>
+			<strWifiNetworkKey>Key</strWifiNetworkKey>
+			<strWifiIdentityAuthentication>Identity authentication</strWifiIdentityAuthentication>
+			<WifiIdentityAuthentication0>Open</WifiIdentityAuthentication0>
+			<WifiIdentityAuthentication1>Sharing</WifiIdentityAuthentication1>
+			<strWifiEncryption>Encryption method</strWifiEncryption>
+			<WifiEncryption0>Disable</WifiEncryption0>
+			<strWifiKeyExpiredTime>Key expired time</strWifiKeyExpiredTime>
+			<strWifiUnit>S(0 for not expired)</strWifiUnit>
+			<btnSaveWifi>Submit</btnSaveWifi>
+			<btnRefreshWifi>Refresh</btnRefreshWifi>
+		</WifiInfoDiv>
+		
+		<a_ParameterInvalid>The parameter is invalid!</a_ParameterInvalid>
+		<a_NtpNote>Ntp server IP and the machine IP can't the same</a_NtpNote>
+		<a_succeed>Set Succeed!</a_succeed>
+		<a_faild>Set Fail!</a_faild>
+	</soap:Body>
+</soap:Envelope>

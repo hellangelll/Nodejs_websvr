@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <title>用户登录</title>
+        <link href="css/login.css" rel="stylesheet" type="text/css" />
+        <script src="js/md5.js" type="text/javascript"></script>
+        <script src="js/login/login.js" type="text/javascript"></script>
+        <script src="js/xmlPort/XmlPort.js" type="text/javascript">			//XML数据接口</script>
+        <!--<script src="js/CookieOperate.js" type="text/javascript"></script>
+        <script src="js/xmlPort/CreateXmlObject.js" type="text/javascript"></script>
+        <script src="js/xmlPort/UserLogin.js" type="text/javascript"></script>
+        <script src="js/xmlPort/GetUserRight.js" type="text/javascript"></script>-->     
+           
+		<script type="text/javascript">
+        var g_username, g_password,g_Language="Chinese",a_ParameterInvalid,g_ServerPort,a_LoginFail,a_LoadXmlInfo;
+        
+            function JsMain(command)
+            {
+            	//初始化            	
+            	if(command == "init")
+            	{
+					//创建xml对象
+	                CreateXmlObject();
+					
+            		//初始化界面
+            		InitializeProgram();
+                } 
+
+                //登陆
+                if(command == "login")
+                {
+                	SendUserLogin();
+                }
+            }  
+            
+			var g_UserLoginObj = new UserLoginObj();
+            //验证数据   发送登录信息
+            function SendUserLogin()
+            {
+                //$("btnSubmit").disabled = "disabled";
+                if (isNull($("Port").value) || $("Port").value <= 0 || $("Port").value > 65535 || isNaN($("Port").value)) 
+                {
+                    alert(a_ParameterInvalid);
+                    $("Port").value = "";
+                    $("Port").focus();
+                    //$("btnSubmit").disabled = "";
+                    return false;
+                }
+                
+                g_ServerPort = $("Port").value;
+				//g_username = calcMD5(document.getElementById("UserName").value);
+				g_password = calcMD5($("Password").value); //MD5加密
+				g_username = $("UserName").value;
+				//g_password = document.getElementById("Password").value;
+				
+				g_UserLoginObj.callbackfunction = function(Obj){
+					
+						if(Obj.result)
+						{
+							//获取用户权限
+							SendGetUserRight();
+						}
+						else
+						{
+							alert(a_LoginFail);
+							$("Password").value = "";
+							//$("UserName").value = "";
+							$("Password").focus();
+							//$("btnSubmit").disabled = "";
+						}	
+					};
+				
+				g_UserLoginObj.method = "POST";
+				g_UserLoginObj.asynchrony = true;
+				g_UserLoginObj.headercmd = "UserLogin";
+				g_UserLoginObj.username = g_username;
+				g_UserLoginObj.password = g_password;
+				
+				UserLogin(g_UserLoginObj);
+			}
+			
+			//获取用户权限
+			var g_UserRightObj = new UserRightObj();
+			function SendGetUserRight()
+			{
+				g_UserRightObj.callbackfunction = function(Obj){
+						if (Obj.result) //判断XML返回状态
+						{
+							delCookie("g_UserName");
+							delCookie("g_Password");
+							delCookie("g_ServerPort");
+							delCookie("g_UserRight");
+							delCookie("g_ServerIp");
+							delCookie("g_connectPassword"); //连接控件的时候用的
+							delCookie("g_Language");
+							delCookie("g_LoginFlag");		//登录标志
+							
+							addCookie("g_UserName", g_username, 10, "", "");
+							addCookie("g_Password", g_password, 10, "", "");
+							addCookie("g_UserRight", Obj.userright, 10, "", "");
+							addCookie("g_ServerPort", g_ServerPort, 10, "", "");
+							addCookie("g_ServerIp", window.location.hostname, 10, "", "");
+							addCookie("g_connectPassword", $("Password").value, 10, "", "");
+							addCookie("g_Language",g_Language,10,"","");
+							addCookie("g_LoginFlag","1",10,"","");
+							
+							window.location.href = "index.html";
+						}
+						else 
+						{
+							alert("XML fail");
+							//window.location = "login.html";
+						}     				
+					};
+				
+				g_UserRightObj.method = "POST";
+				g_UserRightObj.asynchrony = true;
+				g_UserRightObj.username = g_username;
+				g_UserRightObj.password = g_password;
+				
+				GetUserRight(g_UserRightObj);
+			}
+			
+			//选择语言
+			function SeleceLanguage(value)
+			{
+				$("language_cn").checked = false;
+				$("language_en").checked = false;
+				
+				if(value == "cn")
+				{
+					$("language_cn").checked = "checked";
+					g_Language = "Chinese";
+					
+					ChangeLanguage("Chinese");
+				}
+				else if(value == "en")
+				{
+					$("language_en").checked = "checked";
+					g_Language = "English";
+					
+					ChangeLanguage("English");
+				}
+			}
+			
+			
+			//页面加载成功后实现刷新的方法，主要用来解决IE7浏览器中出现的首次不能登录成功的BUG
+			function CheckLoginFlag()
+			{
+				//判断浏览器版本号，如果是IE7则进行刷新操作，如果不是刚不进行刷性操作
+			 	var Browser_Name = navigator.appName;
+				var Browser_Version = parseFloat(navigator.appVersion);
+				var Browser_Agent = navigator.userAgent;
+				var is_IE = (Browser_Name == "Microsoft Internet Explorer");
+				
+				if(is_IE)
+				{
+					var Version_Start = Browser_Agent.indexOf("MSIE");
+	    			var Version_End = Browser_Agent.indexOf(";", Version_Start);
+	   				Actual_Version = Browser_Agent.substring(Version_Start + 5, Version_End);
+					if(Actual_Version=="7.0")
+					{
+						var flag  = getCookie("flag");		
+				
+						if (flag==1)
+						{
+						}
+						else
+						{	
+							 addCookie("flag","1",10,"","");
+							 window.location.href= "login.html";
+						}	
+					}
+				}
+			}
+        </script>
+        </head>
+        <body onload="CheckLoginFlag();">
+        <div id="backgroundDiv" class="Lg_backgroundDiv">
+          <div id="loginBoxDiv"> 
+            <!--Top层-->
+            <div class="lg_top">
+              <div class="row1"> </div>
+              <div class="row2"> </div>
+              <div class="row3"> </div>
+              <div class="row4"> </div>
+              <div id="lg_title" class="lg_top_main"> <span id="strSystemLogin">用户登录</span> </div>
+            </div>
+            <!--Body层-->
+            <div id="lg_body" class="lg_stybody">
+            	<form>
+	                <table class="lg_body_table">
+	                  <tr>
+	                    <td class="user_str"><span id="strUsername">用户名</span>: </td>
+	                    <td width="180"><input id="UserName" value="" class="lg_body_iptText" maxlength="20" type="text" /></td>
+	                  </tr>
+	                  <tr>
+	                    <td class="psw_str"><span id="strPassword">密码</span>: </td>
+	                    <td><input id="Password" value="" class="lg_body_iptPsw" maxlength="20" type="password" /></td>
+	                  </tr>
+	                  <tr>
+	                    <td class="port_str"><span id="strPort">端口</span>:</td>
+	                    <td><input id="Port" value="6002" class="lg_body_iptPort" maxlength="5" type="text" /></td>
+	                  </tr>
+	                  <tr style="display:none;">
+	                    <td class="language_str" colspan="2"><input id="language_cn" type="checkbox" onclick="SeleceLanguage('cn');" checked="checked" />
+	                      <span id="strChinase">中文</span>&nbsp;&nbsp;&nbsp;
+	                      <input id="language_en" onclick="SeleceLanguage('en');" type="checkbox" />
+	                      <span>English</span></td>
+	                  </tr>
+	                  <tr>
+	                    <td class="opt_str"><input id="btnSubmit" class="button" onclick="javascript:JsMain('login');" type="button" value="登录" /></td>
+	                    <td><input id="btnReset" class="button" type="reset" value="重置" /></td>
+	                  </tr>
+	                </table>
+				</form>
+            </div>
+          </div>
+          <!--阴影层-->
+          <div id="shadowDiv">
+            <div class="Sd_top">
+              <div class="row1"> </div>
+              <div class="row2"> </div>
+              <div class="row3"> </div>
+              <div class="row4"> </div>
+              <div class="Sd_main"> </div>
+            </div>
+          </div>
+		  
+		  <div id="SelectLanguageDiv">
+				<select id="LanguageSelent" onchange="CheckTheSelectLanguage(this);">
+					<option value=0>中文</option>
+					<option value=1>English</option>
+				</select>
+			</div>
+        </div>
+</body>
+</html>
+<script type="text/javascript">
+    JsMain("init");
+	
+function ChangeLanguage(type)
+{
+	g_xmlDoc = LoadXML("file", "xml/"+ type +"/login.xml");
+	if( typeof(g_xmlDoc) == "object" )
+	{
+		$("strSystemLogin").innerHTML = g_xmlDoc.getElementsByTagName("strSystemLogin")[0].nodeTypedValue;
+		$("strUsername").innerHTML = g_xmlDoc.getElementsByTagName("strUsername")[0].nodeTypedValue;
+		$("strPassword").innerHTML = g_xmlDoc.getElementsByTagName("strPassword")[0].nodeTypedValue;
+		$("strPort").innerHTML = g_xmlDoc.getElementsByTagName("strPort")[0].nodeTypedValue;
+		$("btnSubmit").value = g_xmlDoc.getElementsByTagName("btnSubmit")[0].nodeTypedValue;
+		$("btnReset").value = g_xmlDoc.getElementsByTagName("btnReset")[0].nodeTypedValue;
+		$("strChinase").innerHTML = g_xmlDoc.getElementsByTagName("strChinase")[0].nodeTypedValue;
+		$("LanguageSelent").options[0].text = g_xmlDoc.getElementsByTagName("strChinase")[0].nodeTypedValue;
+		
+		a_ParameterInvalid = g_xmlDoc.getElementsByTagName("a_ParameterInvalid")[0].nodeTypedValue;
+		a_LoginFail = g_xmlDoc.getElementsByTagName("a_LoginFail")[0].nodeTypedValue;
+		a_LoadXmlInfo = g_xmlDoc.getElementsByTagName("a_LoadXmlInfo")[0].nodeTypedValue;
+		
+	}
+}
+
+function CheckTheSelectLanguage(Obj)
+{	
+	switch( Obj.value )
+	{
+		case "0":
+			SeleceLanguage("cn");
+			break;
+			
+		case "1":
+			SeleceLanguage("en");
+			break;
+			
+		default:
+			SeleceLanguage("cn");
+			break;
+	}
+}
+
+function FunReset()
+{
+	document.getElementById("UserName").value = "";
+	document.getElementById("Password").value = "";
+}
+
+</script> 

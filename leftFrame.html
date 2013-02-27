@@ -1,0 +1,460 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <title>无标题文档</title>
+<link href="css/detail.css" rel="stylesheet" type="text/css" />
+<script src="js/xmlPort/XmlPort.js" type="text/javascript">				//XML数据接口</script>
+<!--<script src="js/xmlPort/CreateXmlObject.js" type="text/javascript">		//创建XML对象接口</script>
+<script src="js/CookieOperate.js" type="text/javascript">					//Cookie操作函数</script>-->
+</head>
+
+<script type="text/javascript">
+var g_Language = getCookie("g_Language");
+
+function $(id)
+{
+	return document.getElementById(id);
+}
+
+CreateXmlObject();
+
+function changecolor(obj,value)
+{
+	if(!value)
+	{	
+		obj.className = "menu color3";
+	}
+	else
+	{
+		obj.className = "menu color4";
+	}
+}
+
+var g_oldDiv = "ChannelInfoSetDiv";
+function OperateDiv(whichDiv)
+{
+	switch(whichDiv)
+	{
+		case "ChannelInfoSetDiv":
+			//请求获取通道信息
+            parent.detailFrame.SendGetChannelInfo();
+			break;
+		case "VideoOutParameterDiv":
+			//模拟输出
+            parent.detailFrame.SendGetVideoOut();
+			break;
+			
+		case "AudioInfoDiv":
+			//获取音频参数
+			parent.detailFrame.SendGetAudioInfo();
+			break;
+			
+		case "PtzParameterDiv":
+			//获取云台协议列表
+            parent.detailFrame.SendGetPtzProtocol();
+			break;
+			
+		case "NetWorkDiv":
+			//获取网络参数
+            parent.detailFrame.SendGetNetWorkInfo();
+			break;
+			
+		case "RtspDiv":
+			//获取RTSP参数
+            parent.detailFrame.SendGetRtspInfo();
+			break;
+			
+		case "NtpInfoDiv":
+			//NTP参数设置
+            parent.detailFrame.SendGetNtpInfo();
+			break;
+			
+		case "LiveHeartDiv":
+			//心跳包参数
+            parent.detailFrame.SendGetLiveHeartInfo();
+			break;
+			
+		case "WifiInfoDiv":
+			//wifi
+            parent.detailFrame.SendGetWifiInfo();
+			break;
+			
+		case "FtpInfoDiv":
+			//FTP参数设置
+			parent.detailFrame.SendGetFtpInfo();
+			break;
+			
+		case "CaptureDiv":
+			//抓拍参数
+			parent.detailFrame.SendGetCaptureInfo();
+			break;
+			
+		case "StorageProjectSetDiv":
+			//存储计划参数
+			parent.detailFrame.SendGetStorageProjectInfo();
+			break;
+		
+		case "AlarmInParameterDiv":
+			//获取报警输入参数
+			parent.detailFrame.SeAlarmInlChannel();
+			break;
+		
+		case "AlarmOutDiv":
+			//获取报警输出参数
+			parent.detailFrame.SelectAlarmOutChannel();
+			break;
+			
+		case "UserSetDiv":
+			//获取用户信息
+            parent.detailFrame.SendGetUserInfo();
+			break;
+		
+		case "AdvancedSetDiv":
+			//获取服务器时间
+            parent.detailFrame.SendGetTimeInfo();
+			break;
+		
+		case "DriveSetDiv":
+			//磁盘信息参数
+            parent.detailFrame.SendGetDriveInfo();
+			break;
+			
+		case "VideoPositionSetDiv":
+			//获取视频坐标参数
+            parent.detailFrame.SendGetVideoPositionInfo();
+			break;
+			
+		case "DeviceSetDiv":
+			//获取nvr设备信息;
+			parent.detailFrame.SendGetDeviceInfo();
+			break;
+			
+		case "LogDisplayDiv":
+			//获取日志
+            //parent.detailFrame.SendGetLogInfo();
+			parent.detailFrame.g_LogInfoObj = new parent.detailFrame.LogInfoObj();
+			parent.detailFrame.InitLogInfo(true);
+			break;
+			
+		case "DeviceStatusDiv":
+			//查看设备状态
+			parent.detailFrame.SendGetDeviceStatusInfo();
+			//parent.detailFrame.SendGetDeviceStatusInfotest();
+			break;
+			
+		default :
+			return false;
+	}
+	
+	//alert(g_oldDiv + "  " + whichDiv);
+	parent.detailFrame.document.getElementById(g_oldDiv).style.display = "none";
+	parent.detailFrame.document.getElementById(whichDiv).style.display = "";
+	//切换标签页的时候隐藏帮助信息的文档窗口
+	parent.detailFrame.document.getElementById("HelpInfoDiv").style.display = "none";
+	
+	g_oldDiv = whichDiv;
+}
+
+var g_Div = "ChannelParDiv";
+function ChangeDivList(whichDiv,page)
+{
+	parent.detailFrame.window.location.href = page;
+	
+	if(page == "ChannelPage.html")
+	{
+		g_oldDiv = "ChannelInfoSetDiv";
+	}
+	else if(page == "NetWorkPage.html")
+	{
+		g_oldDiv = "NetWorkDiv";
+	}
+	else if(page == "RecordPage.html")
+	{
+		g_oldDiv = "FtpInfoDiv";
+	}
+	else if(page == "AlarmPage.html")
+	{
+		g_oldDiv = "AlarmInParameterDiv";
+	}
+	else if (page == "SystemPage.html")
+	{
+		g_oldDiv = "UserSetDiv";
+	}
+	else
+	{
+	}
+		
+	$(g_Div).style.display = "none";
+	$(g_Div).style.height = "200px";
+	
+	$(whichDiv).style.display = "";
+	
+	g_Div = whichDiv;
+	
+	$("ChannelPic").style.backgroundPosition = '0% 0%';
+	$("NetworkPic").style.backgroundPosition = '0% 0%';
+	$("RecordPic").style.backgroundPosition = '0% 0%';
+	$("AlarmPic").style.backgroundPosition = '0% 0%';
+	$("SystemPic").style.backgroundPosition = '0% 0%';
+	
+	if(g_Div == "ChannelParDiv")
+	{
+		$("ChannelPic").style.backgroundPosition = '100% 0%';
+	}
+	else if(g_Div == "NetParDiv")
+	{
+		$("NetworkPic").style.backgroundPosition = '100% 0%';
+	}
+	else if(g_Div == "RecordParDiv")
+	{
+		$("RecordPic").style.backgroundPosition = '100% 0%';
+	}
+	else if(g_Div == "AlarmParDiv")
+	{
+		$("AlarmPic").style.backgroundPosition = '100% 0%';
+	}
+	else if(g_Div == "SystemParDiv")
+	{
+		$("SystemPic").style.backgroundPosition = '100% 0%';
+	}
+}
+
+function init()
+{
+	var clientW = parseInt(document.body.clientWidth);
+	var clientH = parseInt( document.documentElement.clientHeight);
+	//var clientH = document.body.clientHeight;
+	if( clientH < 600)
+	{
+		clientH = 600;
+	}
+	
+	if( clientW < 950)
+	{
+		clientW = 950;
+	}
+	
+	$("backgroundDiv").style.height = clientH + "px";
+	
+	if(g_Language == "English")
+	{
+		g_xmlDoc = LoadXML("file", "xml/English/leftFrame.xml");
+	}
+	else
+	{
+		g_xmlDoc = LoadXML("file", "xml/Chinese/leftFrame.xml");
+	}
+	
+	if( typeof(g_xmlDoc) == "object" )
+	{
+		$("channelPar").innerHTML = g_xmlDoc.getElementsByTagName("channelPar")[0].nodeTypedValue;
+		$("ChannelInfoSet").innerHTML = g_xmlDoc.getElementsByTagName("ChannelInfoSet")[0].nodeTypedValue;
+		$("VideoOutSet").innerHTML = g_xmlDoc.getElementsByTagName("VideoOutSet")[0].nodeTypedValue;
+		$("AudioParSet").innerHTML = g_xmlDoc.getElementsByTagName("AudioParSet")[0].nodeTypedValue;
+		$("PtzParSet").innerHTML = g_xmlDoc.getElementsByTagName("PtzParSet")[0].nodeTypedValue;
+		$("NetWorkPar").innerHTML = g_xmlDoc.getElementsByTagName("NetWorkPar")[0].nodeTypedValue;
+		$("NetWorkSet").innerHTML = g_xmlDoc.getElementsByTagName("NetWorkSet")[0].nodeTypedValue;
+		$("RtspParSet").innerHTML = g_xmlDoc.getElementsByTagName("RtspParSet")[0].nodeTypedValue;
+		$("NtpParSet").innerHTML = g_xmlDoc.getElementsByTagName("NtpParSet")[0].nodeTypedValue;
+		$("LiveHeartParSet").innerHTML = g_xmlDoc.getElementsByTagName("LiveHeartParSet")[0].nodeTypedValue;
+		$("RecordPar").innerHTML = g_xmlDoc.getElementsByTagName("RecordPar")[0].nodeTypedValue;
+		$("FtpParSet").innerHTML = g_xmlDoc.getElementsByTagName("FtpParSet")[0].nodeTypedValue;
+		$("CaptureParSet").innerHTML = g_xmlDoc.getElementsByTagName("CaptureParSet")[0].nodeTypedValue;
+		$("WifiSet").innerHTML = g_xmlDoc.getElementsByTagName("WifiSet")[0].nodeTypedValue;
+		$("AlarmPar").innerHTML = g_xmlDoc.getElementsByTagName("AlarmPar")[0].nodeTypedValue;
+		$("AlarmInSet").innerHTML = g_xmlDoc.getElementsByTagName("AlarmInSet")[0].nodeTypedValue;
+		$("AlarmOutSet").innerHTML = g_xmlDoc.getElementsByTagName("AlarmOutSet")[0].nodeTypedValue;
+		$("SystemPar").innerHTML = g_xmlDoc.getElementsByTagName("SystemPar")[0].nodeTypedValue;
+		$("UserInfoSet").innerHTML = g_xmlDoc.getElementsByTagName("UserInfoSet")[0].nodeTypedValue;
+		$("SystemAdvSet").innerHTML = g_xmlDoc.getElementsByTagName("SystemAdvSet")[0].nodeTypedValue;
+		$("StorageSet").innerHTML = g_xmlDoc.getElementsByTagName("StorageSet")[0].nodeTypedValue;
+		$("DriveInfoSet").innerHTML = g_xmlDoc.getElementsByTagName("DriveInfoSet")[0].nodeTypedValue;
+		$("VideoPositionSet").innerHTML = g_xmlDoc.getElementsByTagName("VideoPositionSet")[0].nodeTypedValue;
+		$("DeviceSet").innerHTML = g_xmlDoc.getElementsByTagName("DeviceSet")[0].nodeTypedValue;	
+		$("LogDisplay").innerHTML = g_xmlDoc.getElementsByTagName("LogDisplay")[0].nodeTypedValue;
+		$("DeviceStatus").innerHTML = g_xmlDoc.getElementsByTagName("DeviceStatus")[0].nodeTypedValue;
+	}
+}
+
+function ChangeTitalPic(Obj,value,who)
+{
+	if(value == 0 )		//mouseover
+	{
+		Obj.style.backgroundPosition = '100% 0%';
+		
+		switch(who)
+		{
+			case "channel":
+				$("ChannelPic").style.backgroundPosition = '100% 0%';
+				break;
+			
+			case "network":
+				$("NetworkPic").style.backgroundPosition = '100% 0%';
+				break;
+			
+			case "record":
+				$("RecordPic").style.backgroundPosition = '100% 0%';
+				break;
+				
+			case "alarm":
+				$("AlarmPic").style.backgroundPosition = '100% 0%';
+				break;
+				
+			case "system":
+				$("SystemPic").style.backgroundPosition = '100% 0%';
+				break;
+			
+			default:
+				break;
+		}
+	}
+	else if(value == 1 )		//onmouseout
+	{
+		Obj.style.backgroundPosition = '0% 0%';
+
+		$("ChannelPic").style.backgroundPosition = '0% 0%';
+		$("NetworkPic").style.backgroundPosition = '0% 0%';
+		$("RecordPic").style.backgroundPosition = '0% 0%';
+		$("AlarmPic").style.backgroundPosition = '0% 0%';
+		$("SystemPic").style.backgroundPosition = '0% 0%';
+		
+		if(g_Div == "ChannelParDiv")
+		{
+			$("ChannelPic").style.backgroundPosition = '100% 0%';
+		}
+		else if(g_Div == "NetParDiv")
+		{
+			$("NetworkPic").style.backgroundPosition = '100% 0%';
+		}
+		else if(g_Div == "RecordParDiv")
+		{
+			$("RecordPic").style.backgroundPosition = '100% 0%';
+		}
+		else if(g_Div == "AlarmParDiv")
+		{
+			$("AlarmPic").style.backgroundPosition = '100% 0%';
+		}
+		else if(g_Div == "SystemParDiv")
+		{
+			$("SystemPic").style.backgroundPosition = '100% 0%';
+		}
+		
+	}
+	else if(value == 2 )		//onmousedown
+	{
+		Obj.style.backgroundPosition = '100% 0%';
+		
+	}
+}
+
+//禁用鼠标右键
+document.oncontextmenu = function() 
+{ 
+	return false; 
+}
+
+</script>
+
+<body>
+        <div id=backgroundDiv class=background>
+            <div class=tital onmouseover="ChangeTitalPic(this,0,'channel');" onmouseout="ChangeTitalPic(this,1,'channel');" onmouseup="ChangeTitalPic(this,1,'channel');" onmousedown="ChangeTitalPic(this,2,'channel');" onclick="ChangeDivList('ChannelParDiv','ChannelPage.html');">
+                <div id=ChannelPic>
+                </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=channelPar>通道参数</span>
+            </div>
+            <div id=ChannelParDiv style="display:;">
+                <div class=menu style=display:; onclick="OperateDiv('ChannelInfoSetDiv');" onmouseout=changecolor(this,1); onmouseover=changecolor(this,0);>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=ChannelInfoSet>通道信息设置</span>
+                </div>
+                <div style=display:none; class=menu onclick="OperateDiv('VideoOutParameterDiv');" onmouseout=changecolor(this,1); onmouseover=changecolor(this,0);>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=VideoOutSet>模拟输出设置</span>
+                </div>
+                <div class=menu onclick="OperateDiv('AudioInfoDiv');" onmouseout=changecolor(this,1); onmouseover=changecolor(this,0);>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=AudioParSet>音频参数设置</span>
+                </div>
+                <div class=menu onclick="OperateDiv('PtzParameterDiv');" onmouseout=changecolor(this,1); onmouseover=changecolor(this,0);>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=PtzParSet>云台参数设置</span>
+                </div>
+            </div>
+            <div class=tital onmouseover="ChangeTitalPic(this,0,'network');" onmouseout="ChangeTitalPic(this,1,'network');" onmouseup="ChangeTitalPic(this,1,'network');" onmousedown="ChangeTitalPic(this,2,'network');" onclick="ChangeDivList('NetParDiv','NetWorkPage.html');">
+                <div id=NetworkPic>
+                </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=NetWorkPar>网络参数</span>
+            </div>
+            <div id=NetParDiv style="display:none;">
+                <div class=menu onclick="OperateDiv('NetWorkDiv');" onmouseout=changecolor(this,1); onmouseover=changecolor(this,0);>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=NetWorkSet>网络基本设置</span>
+                </div>
+                <div style="display:none;" class=menu onclick="OperateDiv('RtspDiv');" onmouseout=changecolor(this,1); onmouseover=changecolor(this,0);>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=RtspParSet>RTSP参数设置</span>
+                </div>
+                <div class=menu onclick="OperateDiv('NtpInfoDiv');" onmouseout=changecolor(this,1); onmouseover=changecolor(this,0);>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=NtpParSet>NTP参数设置</span>
+                </div>
+                <div class=menu onclick="OperateDiv('LiveHeartDiv');" onmouseout=changecolor(this,1); onmouseover=changecolor(this,0);>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=LiveHeartParSet>心跳包设置</span>
+                </div>
+                <div style=display:none; class=menu onclick="OperateDiv('WifiInfoDiv');" onmouseout=changecolor(this,1); onmouseover=changecolor(this,0);>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=WifiSet>WIFI参数设置</span>
+                </div>
+            </div>
+            <div class=tital onmouseover="ChangeTitalPic(this,0,'record');" onmouseout="ChangeTitalPic(this,1,'record');" onmouseup="ChangeTitalPic(this,1,'record');" onmousedown="ChangeTitalPic(this,2,'record');" onclick="ChangeDivList('RecordParDiv','RecordPage.html');">
+                <div id=RecordPic>
+                </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=RecordPar>录像参数</span>
+            </div>
+            <div id=RecordParDiv style="display:none;">
+                <div class=menu style="display:none;" onclick="OperateDiv('FtpInfoDiv');" onmouseout=changecolor(this,1); onmouseover=changecolor(this,0);>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=FtpParSet>FTP参数设置</span>
+                </div>
+                <div class=menu style="display:none;" onclick="OperateDiv('CaptureDiv');" onmouseout=changecolor(this,1); onmouseover=changecolor(this,0);>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=CaptureParSet>抓拍参数设置</span>
+                </div>
+                <div class=menu onclick="OperateDiv('StorageProjectSetDiv');" onmouseout=changecolor(this,1); onmouseover=changecolor(this,0);>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=StorageSet>存储计划设置</span>
+                </div>
+            </div>
+            <div class=tital onmouseover="ChangeTitalPic(this,0,'alarm');" onmouseout="ChangeTitalPic(this,1,'alarm');" onmouseup="ChangeTitalPic(this,1,'alarm');" onmousedown="ChangeTitalPic(this,2,'alarm');" onclick="ChangeDivList('AlarmParDiv','AlarmPage.html');">
+                <div id=AlarmPic>
+                </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=AlarmPar>报警参数</span>
+            </div>
+            <div id=AlarmParDiv style="display:none;">
+                <div class=menu onclick="OperateDiv('AlarmInParameterDiv');" onmouseout=changecolor(this,1); onmouseover=changecolor(this,0);>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=AlarmInSet>报警输入设置</span>
+                </div>
+                <div class=menu onclick="OperateDiv('AlarmOutDiv');" onmouseout=changecolor(this,1); onmouseover=changecolor(this,0);>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=AlarmOutSet>报警输出设置</span>
+                </div>
+            </div>
+            <div class=tital onmouseover="ChangeTitalPic(this,0,'system');" onmouseout="ChangeTitalPic(this,1,'system');" onmouseup="ChangeTitalPic(this,1,'system');" onmousedown="ChangeTitalPic(this,2,'system');" onclick="ChangeDivList('SystemParDiv','SystemPage.html');">
+                <div id=SystemPic>
+                </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=SystemPar>系统参数</span>
+            </div>
+            <div id=SystemParDiv style="display:none;">
+                <div class=menu onclick="OperateDiv('UserSetDiv');" onmouseout=changecolor(this,1); onmouseover=changecolor(this,0);>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=UserInfoSet>用户信息设置</span>
+                </div>
+                <div class=menu onclick="OperateDiv('AdvancedSetDiv');" onmouseout=changecolor(this,1); onmouseover=changecolor(this,0);>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=SystemAdvSet>系统高级设置</span>
+                </div>
+                <div class=menu onclick="OperateDiv('DriveSetDiv');" onmouseout=changecolor(this,1); onmouseover=changecolor(this,0);>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=DriveInfoSet>磁盘信息设置</span>
+                </div>
+                <div class=menu onclick="OperateDiv('VideoPositionSetDiv');" onmouseout=changecolor(this,1); onmouseover=changecolor(this,0);>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=VideoPositionSet>视频输出设置</span>
+                </div>
+				<div class=menu onclick="OperateDiv('DeviceSetDiv');" onmouseout=changecolor(this,1); onmouseover=changecolor(this,0);>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id=DeviceSet>系统信息设置</span>
+                </div>
+				<div class="menu" onclick="OperateDiv('LogDisplayDiv');" onmouseout="changecolor(this,1)" onmouseover=changecolor(this,0);>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="LogDisplay">系统日志查看</span>
+				</div>
+				<div class="menu" onclick="OperateDiv('DeviceStatusDiv');" onmouseout="changecolor(this,1)" onmouseover=changecolor(this,0);>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="DeviceStatus">设备状态查看</span>
+				</div>
+            </div>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    init();
+</script>

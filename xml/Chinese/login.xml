@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<soap:Header>
+		<RequestSOAPHeader xmlns="http://www.aipstar.com.cn/schema/ctcc/common/v2_1">
+			<CommandType xmlns="">EnglishLanguage</CommandType>
+		</RequestSOAPHeader>
+	</soap:Header>
+	<soap:Body>
+		<strSystemLogin>用户登录</strSystemLogin>
+		<strUsername>用户名</strUsername>
+		<strPassword>密&amp;nbsp;&amp;nbsp码</strPassword>
+		<strPort>端&amp;nbsp;&amp;nbsp口</strPort>
+		<btnSubmit>登录</btnSubmit>
+		<btnReset>重置</btnReset>
+		<strChinase>中文</strChinase>
+		<a_ParameterInvalid>您输入的数据有误!</a_ParameterInvalid>
+		<a_LoginFail>登录失败!</a_LoginFail>
+		<a_LoadXmlInfo>加载XML文件失败!</a_LoadXmlInfo>
+	</soap:Body>
+</soap:Envelope>

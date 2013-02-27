@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<soap:Header>
+		<RequestSOAPHeader xmlns="http://www.aipstar.com.cn/schema/ctcc/common/v2_1">
+			<CommandType xmlns="">EnglishLanguage</CommandType>
+		</RequestSOAPHeader>
+	</soap:Header>
+	<soap:Body>
+		<strSystemLogin>System Login</strSystemLogin>
+		<strUsername>Username</strUsername>
+		<strPassword>Password</strPassword>
+		<strPort>Port</strPort>
+		<btnSubmit>Login</btnSubmit>
+		<btnReset>Reset</btnReset>
+		<strChinase>Chinese</strChinase>
+		<a_ParameterInvalid>The parameter is invalid!</a_ParameterInvalid>
+		<a_LoginFail>Login Fail!</a_LoginFail>
+		<a_LoadXmlInfo>Load Xml Fail!</a_LoadXmlInfo>
+	</soap:Body>
+</soap:Envelope>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<soap:Header>
+		<RequestSOAPHeader xmlns="http://www.aipstar.com.cn/schema/ctcc/common/v2_1">
+			<CommandType xmlns="">EnglishLanguage</CommandType>
+		</RequestSOAPHeader>
+	</soap:Header>
+	<soap:Body> 
+		<CaptureDiv>
+			<CapturePar>Capture Set</CapturePar>
+			<CaptureAmount>Capture amount(1~5)</CaptureAmount>
+			<ShootInterval>Interval</ShootInterval>
+			<millisecond>millisecond</millisecond>
+			<CaptureHandleMode>Capture Handle</CaptureHandleMode>
+			<CaptureTypeOpt0>Save to local SD card</CaptureTypeOpt0>
+			<CaptureTypeOpt1>Upload to picture server</CaptureTypeOpt1>
+			<CaptureTypeOpt2>Save to local SD card and upload to FTP server</CaptureTypeOpt2>
+			<CaptureTypeOpt3>Save to local SD card and upload to picture server</CaptureTypeOpt3>
+			<spServer>Ftp Address</spServer>
+			<strPicSerAdd>Pic Address</strPicSerAdd>
+			<ServerPort>Port</ServerPort>
+			<strUserName>UserName</strUserName>
+			<strPassWord>Password</strPassWord>
+			<btnSaveCap>Submit</btnSaveCap>
+			<btnRefreshCap>Refresh</btnRefreshCap>
+			<spNote>Note: only from the stream is set to MJPEG compressed format, shot to function.</spNote>
+			<NoteSdShoot>Note: only from the stream is set to MJPEG compressed format and equipment in SD card has shot, can function.</NoteSdShoot>
+		</CaptureDiv>
+		
+		<StorageProjectSetDiv>
+			<StoragePro>Storage Set</StoragePro>
+			<ChooseRecordSetChannel>Record Channel</ChooseRecordSetChannel>
+			<RecordSetType>Mode</RecordSetType>
+			<BySchedule>Schedule</BySchedule>
+			<AllDay>Round-the-clock</AllDay>
+			<Close>Close</Close>
+			<SaveSDCard>The video file will be saved</SaveSDCard>
+			<strCopyChannel>Copy to</strCopyChannel>
+			<allchannel>All</allchannel>
+			<strFileSize>File Size</strFileSize>
+			<minute>(minute)</minute>
+			<SelectWeek>Week</SelectWeek>
+			<WeekOpt0>Monday</WeekOpt0>
+			<WeekOpt1>Tuesday</WeekOpt1>
+			<WeekOpt2>Wednesday</WeekOpt2>
+			<WeekOpt3>Thursday</WeekOpt3>
+			<WeekOpt4>Friday</WeekOpt4>
+			<WeekOpt5>Saturday</WeekOpt5>
+			<WeekOpt6>Sunday</WeekOpt6>
+			<strRedundantVideo>Redundant</strRedundantVideo>
+			<strSaveAudio>Audio</strSaveAudio>
+			<sSaveAudio>Here after the check, the screen of the storage of documents will be sound</sSaveAudio>
+			<strSaveFromStream>FromStream</strSaveFromStream>
+			<Segment>Time</Segment>
+			<StartTime>Start</StartTime>
+			<EndTime>End</EndTime>
+			<SegmentOne>Segment one</SegmentOne>
+			<HourOne>H</HourOne>
+			<MinOne>M</MinOne>
+			<HourTwo>H</HourTwo>
+			<MinTwo>M</MinTwo>
+			<SegmentTwo>Segment two</SegmentTwo>
+			<HourThree>H</HourThree>
+			<MinThree>M</MinThree>
+			<HourFour>H</HourFour>
+			<MinFour>M</MinFour>
+			<SegmentThree>Segment Three</SegmentThree>
+			<HourFive>H</HourFive>
+			<MinFive>M</MinFive>
+			<HourSix>H</HourSix>
+			<MinSix>M</MinSix>
+			<SegmentFour>Segment Four</SegmentFour>
+			<HourSeven>H</HourSeven>
+			<MinSeven>M</MinSeven>
+			<HourEight>H</HourEight>
+			<MinEight>M</MinEight>
+			<strSaveType>Type</strSaveType>
+			<SaveTypeTimeOpt0>Segment1</SaveTypeTimeOpt0>
+			<SaveTypeTimeOpt1>Segment2</SaveTypeTimeOpt1>
+			<SaveTypeTimeOpt2>Segment3</SaveTypeTimeOpt2>
+			<SaveTypeTimeOpt3>Segment4</SaveTypeTimeOpt3>
+			<SaveTypeTimeOpt4>All Day</SaveTypeTimeOpt4>
+			<SaveTypeOpt0>Timing</SaveTypeOpt0>
+			<SaveTypeOpt1>Motion</SaveTypeOpt1>
+			<SaveTypeOpt2>Alarm</SaveTypeOpt2>
+			<SaveTypeOpt3>Motion or Alarm</SaveTypeOpt3>
+			<SaveTypeOpt4>Motion and Alarm</SaveTypeOpt4>
+			<SaveTypeOpt5>Command</SaveTypeOpt5>
+			<SaveTypeOpt6>Intelligent</SaveTypeOpt6>
+			<CopyTo>Copy to</CopyTo>
+			<CopyWeekOpt0>Monday</CopyWeekOpt0>
+			<CopyWeekOpt1>Tuesday</CopyWeekOpt1>
+			<CopyWeekOpt2>Wednesday</CopyWeekOpt2>
+			<CopyWeekOpt3>Thursday</CopyWeekOpt3>
+			<CopyWeekOpt4>Friday</CopyWeekOpt4>
+			<CopyWeekOpt5>Saturday</CopyWeekOpt5>
+			<CopyWeekOpt6>Sunday</CopyWeekOpt6>
+			<CopyWeekOpt7>Everyday</CopyWeekOpt7>
+			<btnCopy>Copy</btnCopy>
+			<OutputDuration>Alarm Video time(Sec)</OutputDuration>
+			<DelayOpt0>Best</DelayOpt0>
+			<DelayTime>Prior time(Sec)</DelayTime>
+			<DelaySave>Save time(Day):</DelaySave>
+			<btnSaveStorage>Submit</btnSaveStorage>
+			<btnRefreshStorage>Refresh</btnRefreshStorage>
+			<btnShowStorageDetail>Check storage details</btnShowStorageDetail>
+			<sShowStorageDetail>Click here to view all of the channel storage project detailed list</sShowStorageDetail>
+			<yes>yes</yes>
+			<no>no</no>
+			<second>s</second>
+			<getDataWrong>Get data wrong</getDataWrong>
+		</StorageProjectSetDiv>
+		
+		<FtpInfoDiv>
+			<FtpPara>FTP Set</FtpPara>
+			<Enable>Enable</Enable>
+			<FTPServerAddress>Address</FTPServerAddress>
+			<FtpServerPort>Port</FtpServerPort>
+			<strFtpUserName>UserName</strFtpUserName>
+			<strFtpPassword>Password</strFtpPassword>
+			<strFtpFileSize>File Size</strFtpFileSize>
+			<Ftpminute>(minute)</Ftpminute>
+			<strFtpStorage>Storag Path</strFtpStorage>
+			<FtpSelectWeek>Week</FtpSelectWeek>
+			<FtpWeekOpt0>Monday</FtpWeekOpt0>
+			<FtpWeekOpt1>Tuesday</FtpWeekOpt1>
+			<FtpWeekOpt2>Wednesday</FtpWeekOpt2>
+			<FtpWeekOpt3>Thursday</FtpWeekOpt3>
+			<FtpWeekOpt4>Friday</FtpWeekOpt4>
+			<FtpWeekOpt5>Saturday</FtpWeekOpt5>
+			<FtpWeekOpt6>Sunday</FtpWeekOpt6>
+			<FtpCopyTo>Copy To</FtpCopyTo>
+			<FtpCopyWeekOpt7>Everyday</FtpCopyWeekOpt7>
+			<btnFtpCopy>Copy</btnFtpCopy>
+			<FtpSegment>Time</FtpSegment>
+			<FtpStartTime>Start</FtpStartTime>
+			<FtpEndTime>End</FtpEndTime>
+			<FtpSegmentOne>Segment One</FtpSegmentOne>
+			<FtpHourOne>H</FtpHourOne>
+			<FtpMinOne>M</FtpMinOne>
+			<FtpHourTwo>H</FtpHourTwo>
+			<FtpMinTwo>M</FtpMinTwo>
+			<FtpSegmentTwo>Segment Two</FtpSegmentTwo>
+			<FtpHourThree>H</FtpHourThree>
+			<FtpMinThree>M</FtpMinThree>
+			<FtpHourFour>H</FtpHourFour>
+			<FtpMinFour>M</FtpMinFour>
+			<FtpSegmentThree>Segment Three</FtpSegmentThree>
+			<FtpHourFive>H</FtpHourFive>
+			<FtpMinFive>M</FtpMinFive>
+			<FtpHourSix>H</FtpHourSix>
+			<FtpMinSix>M</FtpMinSix>
+			<FtpSegmentFour>Segment Four</FtpSegmentFour>
+			<FtpHourSeven>H</FtpHourSeven>
+			<FtpMinSeven>M</FtpMinSeven>
+			<FtpHourEight>H</FtpHourEight>
+			<FtpMinEight>M</FtpMinEight>
+			<btnSaveFtp>Submit</btnSaveFtp>
+			<btnRefreshFtp>Refresh</btnRefreshFtp>
+		</FtpInfoDiv>
+		
+		<WifiInfoDiv>
+			<strWifiSet>WIFI Setting</strWifiSet>
+			<strEnableWifi>WIFI</strEnableWifi>
+			<strWifiIpMethod>IP access method</strWifiIpMethod>
+			<WifiIpMethod0>Manual</WifiIpMethod0>
+			<WifiIpMethod1>Auto</WifiIpMethod1>
+			<strWifiIpAddress>IP</strWifiIpAddress>
+			<strWifiSubnetMask>Subnet Mask</strWifiSubnetMask>
+			<strWifiGateway>Gateway</strWifiGateway>
+			<strWifiNetworkName>SSID</strWifiNetworkName>
+			<strWifiNetworkKey>Key</strWifiNetworkKey>
+			<strWifiIdentityAuthentication>Identity authentication</strWifiIdentityAuthentication>
+			<WifiIdentityAuthentication0>Open</WifiIdentityAuthentication0>
+			<WifiIdentityAuthentication1>Sharing</WifiIdentityAuthentication1>
+			<strWifiEncryption>Encryption method</strWifiEncryption>
+			<WifiEncryption0>Disable</WifiEncryption0>
+			<strWifiKeyExpiredTime>Key expired time</strWifiKeyExpiredTime>
+			<strWifiUnit>S(0 for not expired)</strWifiUnit>
+			<btnSaveWifi>Submit</btnSaveWifi>
+			<btnRefreshWifi>Refresh</btnRefreshWifi>
+		</WifiInfoDiv>
+		
+		<a_succeed>Set Succeed!</a_succeed>
+		<a_faild>Set Fail!</a_faild>
+		<a_ParameterInvalid>The parameter is invalid!</a_ParameterInvalid>
+		<a_FtpAddress>Ftp Address</a_FtpAddress>
+		<s_PicServiceAddress>Pic Address</s_PicServiceAddress>
+	</soap:Body>
+</soap:Envelope>

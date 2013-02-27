@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<soap:Header>
+		<RequestSOAPHeader xmlns="http://www.aipstar.com.cn/schema/ctcc/common/v2_1">
+			<CommandType xmlns="">EnglishLanguage</CommandType>
+		</RequestSOAPHeader>
+	</soap:Header>
+	<soap:Body> 
+		<RtspDiv>
+			<RtspSet>RTSP设置</RtspSet>
+			<strEnableRtsp>是否启用Rtsp</strEnableRtsp>
+			<port>端口</port>
+			<strMainStream>主码流访问标识</strMainStream>
+			<SubStream>从码流访问标识</SubStream>
+			<strMode>模式</strMode>
+			<RtspModeOpt0>VLC兼容模式</RtspModeOpt0>
+			<RtspModeOpt1>QuickTime兼容模式</RtspModeOpt1>
+			<btnSaveRtsp>确定</btnSaveRtsp>
+			<btnRefreshRtsp>刷新</btnRefreshRtsp>
+		</RtspDiv>
+		
+		<NetWorkDiv>
+			<NetBasic>网络基本设置</NetBasic>
+			<NetworkParameter>网络接口参数设置</NetworkParameter>
+			<strUseDhcp>启用DHCP</strUseDhcp>
+			<sNetworkParameter>修改网络接口参数设置后，需在&quot;系统参数 >系统高级设置&quot;页面中保存设置并重启设备!</sNetworkParameter>
+			<IPAddress>IP 地址</IPAddress>
+			<SubnetMask>子网掩码</SubnetMask>
+			<strGateWay>网关</strGateWay>
+			<strDNS>DNS</strDNS>
+			<AlternateDNS>备用DNS</AlternateDNS>
+			<ManageCcenter>启用远程管理中心</ManageCcenter>
+			<sManageCenter>这里的远程管理中心配置与报警输入设置页面的上传中心设置项的值一致!</sManageCenter>
+			<strCenterIp>中心IP</strCenterIp>
+			<strCenterPort>中心端口</strCenterPort>
+			<strRemoteWebport>设置远程访问端口参数</strRemoteWebport>
+			<sRemoteWebport>注意:修改远程访问参数后，需在&quot;系统参数 >系统高级设置&quot;页面中保存设置并重启设备!&lt;br /&gt;如果您修改了端口,则须使用&quot;http://IP地址:端口号/&quot;格式的url才能再次进入本设置程序!</sRemoteWebport>
+			<strDataPort>数据端口</strDataPort>
+			<strWebPort>Web端口</strWebPort>
+			<DDNSSetting>DDNS设置</DDNSSetting>
+			<PreferredServerAddress>首选服务器地址</PreferredServerAddress>
+			<AlternateServerAddress>备用服务器地址</AlternateServerAddress>
+			<strUserName>用户名</strUserName>
+			<strPassWord>密码</strPassWord>
+			<DomainName>您注册的域名</DomainName>
+			<btnSaveNet>确定</btnSaveNet>
+			<btnRefreshNet>刷新</btnRefreshNet>
+			<strNote>注意:修改网络接口参数和远程访问参数后，需在&quot;高级设置&quot;中保存并重启。&lt;br /&gt;如果您修改了端口,则须使用 http://ip:port/ 格式的url才能再次打开本软件。</strNote>
+		</NetWorkDiv>
+		
+		<NtpInfoDiv>
+			<strNTPSet>NTP参数设置</strNTPSet>
+			<strParameterNTP>本页面设置NTP校时服务器基本参数。</strParameterNTP>
+			<Enable>启用Ntp</Enable>
+			<NTPServerAddress>NTP服务器地址</NTPServerAddress>
+			<sNtpAddress>注意:Ntp服务器IP与本机IP地址不能相同!</sNtpAddress>
+			<strTimeInterval>同步时间间隔(小时)</strTimeInterval>
+			<btnSaveNtp>确定</btnSaveNtp>
+			<btnRefreshNtp>刷新</btnRefreshNtp>
+		</NtpInfoDiv>
+		
+		<LiveHeartDiv>
+			<LiveHeartSet>心跳包参数设置</LiveHeartSet>
+			<strEnableLive>启用心跳包检测</strEnableLive>
+			<strLiveMode>心跳包发送模式</strLiveMode>
+			<strSendSpacingInterval>发送心跳间隔时间(秒)</strSendSpacingInterval>
+			<strServiceAds>远程管理主机地址</strServiceAds>
+			<strServicePort>远程管理主机端口号</strServicePort>
+			<btnSaveLiveHeart>确定</btnSaveLiveHeart>
+			<btnRefreshLiveHeart>刷新</btnRefreshLiveHeart>
+		</LiveHeartDiv>
+		
+		<WifiInfoDiv>
+			<strWifiSet>WIFI参数设置</strWifiSet>
+			<strEnableWifi>启用WIFI</strEnableWifi>
+			<strWifiIpMethod>IP获取方式</strWifiIpMethod>
+			<WifiIpMethod0>手动添加</WifiIpMethod0>
+			<WifiIpMethod1>自动获取</WifiIpMethod1>
+			<strWifiIpAddress>IP地址</strWifiIpAddress>
+			<strWifiSubnetMask>子网掩码</strWifiSubnetMask>
+			<strWifiGateway>网关</strWifiGateway>
+			<strWifiDns2>备用DNS</strWifiDns2>
+			<strWifiNetworkName>SSID号</strWifiNetworkName>
+			<strWifiNetworkKey>密钥</strWifiNetworkKey>
+			<strWifiIdentityAuthentication>身份认证方式</strWifiIdentityAuthentication>
+			<WifiIdentityAuthentication0>开放</WifiIdentityAuthentication0>
+			<WifiIdentityAuthentication1>共享</WifiIdentityAuthentication1>
+			<strWifiEncryption>数据加密方式</strWifiEncryption>
+			<WifiEncryption0>禁用</WifiEncryption0>
+			<strWifiKeyExpiredTime>密钥过期时间</strWifiKeyExpiredTime>
+			<strWifiUnit>秒(0为不过期)</strWifiUnit>
+			<btnSaveWifi>确定</btnSaveWifi>
+			<btnRefreshWifi>刷新</btnRefreshWifi>
+		</WifiInfoDiv>
+		
+		<a_ParameterInvalid>您输入的数据有误!</a_ParameterInvalid>
+		<a_NtpNote>Ntp服务器IP与本机IP不能相同</a_NtpNote>
+		<a_succeed>设置成功!</a_succeed>
+		<a_faild>设置失败!</a_faild>
+	</soap:Body>
+</soap:Envelope>

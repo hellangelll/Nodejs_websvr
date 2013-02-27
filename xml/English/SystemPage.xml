@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<soap:Header>
+		<RequestSOAPHeader xmlns="http://www.aipstar.com.cn/schema/ctcc/common/v2_1">
+			<CommandType xmlns="">EnglishLanguage</CommandType>
+		</RequestSOAPHeader>
+	</soap:Header>
+	<soap:Body> 
+		<UserSetDiv>
+			<UserInfoSet>User Set</UserInfoSet>
+			<UserList>User List</UserList>
+			<UserRights>User Rights</UserRights>
+			<RemotePTZ>Control PTZ</RemotePTZ>
+			<RemoteRecording>Recording</RemoteRecording>
+			<RemoteConfig>Config</RemoteConfig>
+			<RemoteCheckState>Check State and Logs</RemoteCheckState>
+			<RemoteAdvancedSetting>Setting (Upgrade, Reboot, Shut)</RemoteAdvancedSetting>
+			<DirectionalAudio>Bi-Directional Audio</DirectionalAudio>
+			<RemotePreView>PreView</RemotePreView>
+			<VideoPlayback>Video Playback</VideoPlayback>
+			<RemoteModifyUser>Modify User</RemoteModifyUser>
+			<RemoteModifyPassword>Modify Password</RemoteModifyPassword>
+			<btnAddUser>Add user</btnAddUser>
+			<btnDelUser>Del user</btnDelUser>
+			<btnModifyUser>Modify pwd</btnModifyUser>
+			<btnModifyRight>odify rights</btnModifyRight>
+			<btnRefreshUserInfo>Refresh</btnRefreshUserInfo>
+			<strAddUserName>UserName</strAddUserName>
+			<strAddPassword>Password</strAddPassword>
+			<AddConfirmPassword>Confirm</AddConfirmPassword>
+			<btnSaveAddUser>Submit</btnSaveAddUser>
+			<btnReturnAddUser>Back</btnReturnAddUser>
+			<strUserName>UserName</strUserName>
+			<OldPassword>Old password</OldPassword>
+			<NewPassword>New password</NewPassword>
+			<ConfirmPassword>Confirm password</ConfirmPassword>
+			<btnSaveMod>Submit</btnSaveMod>
+			<btnReturnMod>Back</btnReturnMod>
+		</UserSetDiv>
+		
+		<AdvancedSetDiv>
+			<SystemSet>Advanced Set</SystemSet>
+			<TimeSet>Time Set</TimeSet>
+			<strTimeSet>Before the system time set server, please determine synchronous way. If you choose and the machine synchronous, please make sure you system time correct. If you choose and management center synchronization, please determine to management center network Settings page the Settings</strTimeSet>
+			<strTimeZone>Time Zone</strTimeZone>
+			<timezone1>(GMT-12:00) International Date Line West</timezone1>
+			<timezone2>(GMT-11:00) Midway Island, Samoa</timezone2>
+			<timezone3>(GMT-10:00) Hawaii</timezone3>
+			<timezone4>(GMT-09:00) Alaska</timezone4>
+			<timezone5>(GMT-08:00) Pacific Time (US and Canada); Tijuana</timezone5>
+			<timezone6>(GMT-07:00) Arizona</timezone6>
+			<timezone7>(GMT-07:00) Chihuahua, La Paz, Mazatlan</timezone7>
+			<timezone8>(GMT-07:00) Mountain Time (US and Canada)</timezone8>
+			<timezone9>(GMT-06:00) Guadalajara, Mexico City, Monterrey</timezone9>
+			<timezone10>(GMT-06:00) Central Time (US and Canada)</timezone10>
+			<timezone11>(GMT-06:00) Central America</timezone11>
+			<timezone12>(GMT-06:00) Saskatchewan</timezone12>
+			<timezone13>(GMT-05:00) Indiana (East)</timezone13>
+			<timezone14>(GMT-05:00) Bogota, Lima, Quito</timezone14>
+			<timezone15>(GMT-05:00) Eastern Time (US and Canada)</timezone15>
+			<timezone16>(GMT-04:00) Caracas, La Paz</timezone16>
+			<timezone17>(GMT-04:00) Santiago</timezone17>
+			<timezone18>(GMT-04:00) Manaus</timezone18>
+			<timezone19>(GMT-04:00) Atlantic Time (Canada)</timezone19>
+			<timezone20>(GMT-03:00) Buenos Aires, Georgetown</timezone20>
+			<timezone21>(GMT-03:30) Newfoundland and Labrador</timezone21>
+			<timezone22>(GMT-03:00) Greenland</timezone22>
+			<timezone23>(GMT-03:00) Brasilia</timezone23>
+			<timezone24>(GMT-02:00) Mid-Atlantic</timezone24>
+			<timezone25>(GMT-01:00) Cape Verde Islands</timezone25>
+			<timezone26>(GMT-01:00) Azores</timezone26>
+			<timezone27>(GMT) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London</timezone27>
+			<timezone28>(GMT) Casablanca, Monrovia</timezone28>
+			<timezone29>(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague</timezone29>
+			<timezone30>(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb</timezone30>
+			<timezone31>(GMT+01:00) Brussels, Copenhagen, Madrid, Paris</timezone31>
+			<timezone32>(GMT+01:00) West Central Africa</timezone32>
+			<timezone33>(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna</timezone33>
+			<timezone34>(GMT+02:00) Minsk</timezone34>
+			<timezone35>(GMT+02:00) Cairo</timezone35>
+			<timezone36>(GMT+02:00) Helsinki, Kiev, Riga, Sofia, Tallinn, Vilnius</timezone36>
+			<timezone37>(GMT+02:00) Athens, Bucharest, Istanbul</timezone37>
+			<timezone38>(GMT+02:00) Jerusalem</timezone38>
+			<timezone39>(GMT+02:00) Windhoek</timezone39>
+			<timezone40>(GMT+02:00) Harare, Pretoria</timezone40>
+			<timezone41>(GMT+03:00) Kuwait, Riyadh</timezone41>
+			<timezone42>(GMT+03:00) Baghdad</timezone42>
+			<timezone43>(GMT+03:00) Nairobi</timezone43>
+			<timezone44>(GMT+03:30) Tehran</timezone44>
+			<timezone45>(GMT+03:00) Moscow, St. Petersburg, Volgograd</timezone45>
+			<timezone46>(GMT+04:30) Kabul</timezone46>
+			<timezone47>(GMT+04:00) Abu Dhabi, Muscat</timezone47>
+			<timezone48>(GMT+04:00) Baku</timezone48>
+			<timezone49>(GMT+04:00) Yerevan</timezone49>
+			<timezone50>(GMT+04:00) Tblisi</timezone50>
+			<timezone51>(GMT+05:00) Ekaterinburg</timezone51>
+			<timezone52>(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</timezone52>
+			<timezone53>(GMT+05:45) Kathmandu</timezone53>
+			<timezone54>(GMT+05:00) Islamabad, Karachi, Tashkent</timezone54>
+			<timezone55>(GMT+06:00) Astana, Dhaka</timezone55>
+			<timezone56>(GMT+06:30) Yangon (Rangoon)</timezone56>
+			<timezone57>(GMT+06:00) Almaty, Novosibirsk</timezone57>
+			<timezone58>(GMT+06:00) Sri Jayawardenepura</timezone58>
+			<timezone59>(GMT+07:00) Krasnoyarsk</timezone59>
+			<timezone60>(GMT+07:00) Bangkok, Hanoi, Jakarta</timezone60>
+			<timezone61>(GMT+08:00) Beijing, Chongqing, Hong Kong SAR, Urumqi</timezone61>
+			<timezone62>(GMT+08:00) Irkutsk, Ulaanbaatar</timezone62>
+			<timezone63>(GMT+08:00) Kuala Lumpur, Singapore</timezone63>
+			<timezone64>(GMT+08:00) Taipei</timezone64>
+			<timezone65>(GMT+08:00) Perth</timezone65>
+			<timezone66>(GMT+09:30) Darwin</timezone66>
+			<timezone67>(GMT+09:30) Adelaide</timezone67>
+			<timezone68>(GMT+09:00) Seoul</timezone68>
+			<timezone69>(GMT+09:00) Osaka, Sapporo, Tokyo</timezone69>
+			<timezone70>(GMT+09:00) Yakutsk</timezone70>
+			<timezone71>(GMT+10:00) Canberra, Melbourne, Sydney</timezone71>
+			<timezone72>(GMT+10:00) Brisbane</timezone72>
+			<timezone73>(GMT+10:00) Hobart</timezone73>
+			<timezone74>(GMT+10:00) Vladivostok</timezone74>
+			<timezone75>(GMT+10:00) Guam, Port Moresby</timezone75>
+			<timezone76>(GMT+11:00) Magadan, Solomon Islands, New Caledonia</timezone76>
+			<timezone77>(GMT+12:00) Fiji Islands, Kamchatka, Marshall Islands</timezone77>
+			<timezone78>(GMT+12:00) Auckland, Wellington</timezone78>
+			<timezone79>(GMT+13:00) Nuku'alofa</timezone79>
+			<strImgTimezone>When set time zone need to click with the synchronization immediately button to time synchronization</strImgTimezone>
+			<strServerTime>Server Time</strServerTime>
+			<btnSynchronization>Sync with local</btnSynchronization>
+			<btnrefresh0>Refresh</btnrefresh0>
+			<UpgradeFirmware>Upgrade the Firmware</UpgradeFirmware>
+			<btnUpgrade>Upgrade System</btnUpgrade>
+			<Note>Please choose the compatible upgrade software. During the upgrade process, never power off the device, or will cause serious effect.Be patient! The upgrade process will take some time. After the upgrade, the server will reboot automatically.</Note>
+			<YouNeedChoose>You need to choose the software which is compatible with the hardware to upgrade. During the upgrade process, please do not power off the device. It will take some time in this upgrade.  After the upgrade, it will reboot automatically.</YouNeedChoose>
+			<OtherSettings>Other Settings</OtherSettings>
+			<btnSave>Save</btnSave>
+			<SaveSettings>Save the settings before you quit.</SaveSettings>
+			<btnRestore>Restore</btnRestore>
+			<strRestore>Click this button will make equipment recovery factory Settings,&lt;font color=&quot;#FF0000&quot;&gt;Need to restart your device.&lt;/font&gt;</strRestore>
+			<btnRestart>Reboot</btnRestart>
+			<strRestart>Click this button will make server restart.</strRestart>
+			<btnShutdown>Shutdown</btnShutdown>
+			<vWeek0>Monday</vWeek0>
+			<vWeek1>Tuesday</vWeek1>
+			<vWeek2>Wednesday</vWeek2>
+			<vWeek3>Thursday</vWeek3>
+			<vWeek4>Friday</vWeek4>
+			<vWeek5>Saturday</vWeek5>
+			<vWeek6>Sunday</vWeek6>
+		</AdvancedSetDiv>
+		
+		<VideoPositionSetDiv>
+			<strVideoOut>VideoOutSet</strVideoOut>
+			<strEnableVGA>Enable VGA</strEnableVGA>
+			<strVgaType>Output</strVgaType>
+			<strOutPutMode>Output Mode</strOutPutMode>
+			<OutPutType0>VGA</OutPutType0>
+			<OutPutType1>YPbPr</OutPutType1>
+			<sOutputMode>Select one of VGA or YPbPr!</sOutputMode>
+			<strEnableVideoTransition>Enable Video Transition</strEnableVideoTransition>
+			<strVideoTransitionInterval>Video Transition Interval(s)</strVideoTransitionInterval>
+			<strEnableDecoderOutput>Enable Decoder Output</strEnableDecoderOutput>
+			<strEnableEnableOSD>Display OSD</strEnableEnableOSD>
+			<strOSDPositionX>X Position</strOSDPositionX>
+			<strOSDPositionY>Y Position</strOSDPositionY>
+			<sEnableEnableOSD>Here the OSD stack is to point to in the video preview screen, split-screen display modes, used to distinguish different channels of relevant information, the display is the content of the "channel parameters Settings" page "channel name"</sEnableEnableOSD>
+			<sEnableDecoderOutput>Check the parameters, the equipment will be external display device show the real-time video decoding!</sEnableDecoderOutput>
+			<strVideoPositionInfo>Video output area in the boundary of the display relative distance</strVideoPositionInfo>
+			<sVideoPosition>VGA and YPbPr two output corresponding output parameters of the model for the following two values!</sVideoPosition>
+			<strCoordinatex>Horizontal coordinate</strCoordinatex>
+			<strCoordinatey>Vertical coordinate</strCoordinatey>
+			<btnSaveVideoPosition>Save</btnSaveVideoPosition>
+			<btnRefreshVideoPosition>Refresh</btnRefreshVideoPosition>
+			<strPositionNote>Note: You should "save" the parameter in "Advaced" page when you modify the parameter.</strPositionNote>
+		</VideoPositionSetDiv>
+		
+		<DriveSetDiv>
+			<DriveInfo>Disk Set</DriveInfo>
+			<btnModify>Modify</btnModify>
+			<btnRefresh>Format</btnRefresh>
+			<strDeviceNote>Disc initialization is complete, and to obtain disk information, please wait a moment</strDeviceNote>
+			<strInitalizeDisk>Specified format disk, the initial program equipment can't have electricity to restart, the initial after the restart equipment!</strInitalizeDisk>
+			<DriveId>Disk ID</DriveId>
+			<DriveType>Disk Type</DriveType>
+			<DrivTotalSpace>Total</DrivTotalSpace>
+			<DrivUsefullSpace>Available</DrivUsefullSpace>
+			<DeviceReset>Initialize</DeviceReset>
+			<a_strInitialized>Initialized</a_strInitialized>
+			<a_strUninitialized>Uninitialized</a_strUninitialized>
+		</DriveSetDiv>
+		
+		<DeviceSetDiv>
+			<strDevice>System Set</strDevice>
+			<strName>Name:</strName>
+			<VideoFormat>Format:</VideoFormat>
+			<strDeviceType>Device type:</strDeviceType>
+			<SN>Product SN:</SN>
+			<strMACAddress>MAC Address:</strMACAddress>
+			<SoftwareVersion>Software Version:</SoftwareVersion>
+			<WebVersion>Web Version:</WebVersion>
+			<FirmwareVersion>Firmware Version:</FirmwareVersion>
+			<ChannelNumber>Channel Number:</ChannelNumber>
+			<btnSaveDevice>Setup</btnSaveDevice>
+			<btnRefreshDevice>Refresh</btnRefreshDevice>
+			<Note>Note:Fomat modification need to be saved and restarted in higher setup.</Note>
+		</DeviceSetDiv>
+		<LogDiv>
+			<strLogInfo>Log Info</strLogInfo>
+			<SearchTime>Time:</SearchTime>
+			<strStarTime>Start:</strStarTime>
+			<strStartHour>Hour</strStartHour>
+			<strStartMin>Minute</strStartMin>
+			<strEndTime>End:</strEndTime>
+			<strEndHour>Hour</strEndHour>
+			<strEndMin>Minute</strEndMin>
+			<strLogType>Log Type</strLogType>
+			<LogType0>system log</LogType0>
+			<LogType1>operate log</LogType1>
+			<LogType2>alarm log</LogType2>
+			<btnSearchLog>Search</btnSearchLog>
+			<a_LogTime>Time</a_LogTime>
+			<a_UserName>User</a_UserName>
+			<a_Address>IP</a_Address>
+			<a_LoginType>Login Type </a_LoginType>
+			<a_Info>Info</a_Info>
+			<a_remote>Remote</a_remote>
+			<a_local>Local</a_local>
+		</LogDiv>
+		
+		<a_NoPopedom>Sorry, you have no popedom!</a_NoPopedom>
+		<a_addUserSuc>Add user successfully!</a_addUserSuc>
+		<a_UserExists>Users already exists!</a_UserExists>
+		<a_UserExceed>The number of users have maximum limit!</a_UserExceed>
+		<a_addUserFail>Add user failed!</a_addUserFail>
+		<a_ChooseUser>Please select user!</a_ChooseUser>
+		<a_UserPopSuc>User permissions modify success!</a_UserPopSuc>
+		<a_PswDisaccord>Password is not consistent!</a_PswDisaccord>
+		<a_ModifyUserPswSuc>Modify user password success!</a_ModifyUserPswSuc>
+		<a_PswErr>The password is incorrect!</a_PswErr>
+		<a_SureDelUser>Are you sure to delete</a_SureDelUser>
+		<a_UserLogin>A user is logged in, cannot be deleted!</a_UserLogin>
+		<a_NotDelUser>Can't delete the user!</a_NotDelUser>
+		<a_DelUserSuc>Remove users successfully!</a_DelUserSuc>
+		<a_DelUserFail>Remove users fail!</a_DelUserFail>
+		<a_ParameterInvalid>The parameter is invalid!</a_ParameterInvalid>
+		<a_SureInitialize>Are you sure you want to initialize the hard disk ?</a_SureInitialize>
+		<a_ChooseDreve>Please select disk!</a_ChooseDreve>
+		<a_InitializeSucceed>Initialization Succeed, Please restart the device!</a_InitializeSucceed>
+		<a_InitializeFail>Initialization Fail</a_InitializeFail>
+		<a_succeed>Set Succeed!</a_succeed>
+		<a_faild>Set Fail!</a_faild>
+		<a_confirmReboot>Confirm to restart?</a_confirmReboot>
+		<a_confirmShutdown>Confirm to shutdown?</a_confirmShutdown>
+		<a_confirmRestore>Confirm to restore?</a_confirmRestore>
+		<a_waitfor>Wait a moment,system restarted</a_waitfor>
+		<a_waitforDevice>Please wait a moment, disk is initialized</a_waitforDevice>
+		<a_selfClose>Equipment has been shut down, please you close the current program manual!</a_selfClose>
+		<a_notRightClose>Sorry, you do not have permission to do it, please contact the system administrator!</a_notRightClose>
+		
+		<strDeviceStatus>Device Status</strDeviceStatus>
+		<strChannelStatus>Channel Status</strChannelStatus>
+		<sStreamStatus>Real time stream already exceed system's limitation,please check your carame parameter!</sStreamStatus>
+		<a_statusChannelName>Channgel Name</a_statusChannelName>
+		<a_statusChannelIP>Channel IP</a_statusChannelIP>
+		<a_statusStorage>Storage Status</a_statusStorage>
+		<a_statusStream>Stream status</a_statusStream>
+		<a_satusEnable>Enable</a_satusEnable>
+		<a_stausDisable>Disable</a_stausDisable>
+	</soap:Body>
+</soap:Envelope>

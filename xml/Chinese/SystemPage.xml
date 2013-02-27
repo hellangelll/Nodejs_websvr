@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<soap:Header>
+		<RequestSOAPHeader xmlns="http://www.aipstar.com.cn/schema/ctcc/common/v2_1">
+			<CommandType xmlns="">EnglishLanguage</CommandType>
+		</RequestSOAPHeader>
+	</soap:Header>
+	<soap:Body> 
+		<UserSetDiv>
+			<UserInfoSet>用户信息设置</UserInfoSet>
+			<UserList>用户列表</UserList>
+			<UserRights>用户权限列表</UserRights>
+			<RemotePTZ>云台控制</RemotePTZ>
+			<RemoteRecording>手动录像</RemoteRecording>
+			<RemoteConfig>设置参数</RemoteConfig>
+			<RemoteCheckState>查看状态、日志</RemoteCheckState>
+			<RemoteAdvancedSetting>高级操作(升级、重启、关机...)</RemoteAdvancedSetting>
+			<DirectionalAudio>发起语音对讲</DirectionalAudio>
+			<RemotePreView>视频预览</RemotePreView>
+			<VideoPlayback>录像回放</VideoPlayback>
+			<RemoteModifyUser>修改用户</RemoteModifyUser>
+			<RemoteModifyPassword>修改用户自己的密码</RemoteModifyPassword>
+			<btnAddUser>添加用户</btnAddUser>
+			<btnDelUser>删除用户</btnDelUser>
+			<btnModifyUser>修改密码</btnModifyUser>
+			<btnModifyRight>修改权限</btnModifyRight>
+			<btnRefreshUserInfo>刷新</btnRefreshUserInfo>
+			<strAddUserName>用&amp;nbsp;户&amp;nbsp;名</strAddUserName>
+			<strAddPassword>密&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;码</strAddPassword>
+			<AddConfirmPassword>密码确认</AddConfirmPassword>
+			<btnSaveAddUser>确定</btnSaveAddUser>
+			<btnReturnAddUser>返回</btnReturnAddUser>
+			<strUserName>用&amp;nbsp;&amp;nbsp;&amp;nbsp;户&amp;nbsp;&amp;nbsp;&amp;nbsp;名</strUserName>
+			<OldPassword>旧&amp;nbsp;&amp;nbsp;&amp;nbsp;密&amp;nbsp;&amp;nbsp;&amp;nbsp;码</OldPassword>
+			<NewPassword>新&amp;nbsp;&amp;nbsp;&amp;nbsp;密&amp;nbsp;&amp;nbsp;&amp;nbsp;码</NewPassword>
+			<ConfirmPassword>新密码确认</ConfirmPassword>
+			<btnSaveMod>确定</btnSaveMod>
+			<btnReturnMod>返回</btnReturnMod>
+		</UserSetDiv>
+		
+		<AdvancedSetDiv>
+			<SystemSet>系统高级设置</SystemSet>
+			<TimeSet>时间设置</TimeSet>
+			<strTimeSet>设置服务器的系统时间前，请确定同步方式.如果您选择与本机同步,请确定您系统时间正确.如果您选择与管理中心同步,请确定&quot;网路设置&quot;页对管理中心的设置</strTimeSet>
+			<strTimeZone>时&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;区</strTimeZone>
+			<timezone1>(GMT-12:00) 国际日期变更线以西</timezone1>
+			<timezone2>(GMT-11:00) 中途岛、萨摩亚</timezone2>
+			<timezone3>(GMT-10:00) 夏威夷</timezone3>
+			<timezone4>(GMT-09:00) 阿拉斯加</timezone4>
+			<timezone5>(GMT-08:00) 太平洋时间(美国和加拿大);蒂华纳</timezone5>
+			<timezone6>(GMT-07:00) 亚利桑那州</timezone6>
+			<timezone7>(GMT-07:00) 拉帕兹、马扎特兰</timezone7>
+			<timezone8>(GMT-07:00) 山区时间(美国和加拿大)</timezone8>
+			<timezone9>(GMT-06:00) 瓜达拉哈拉,墨西哥城,Monterrey</timezone9>
+			<timezone10>(GMT-06:00) 中部时间(美国和加拿大)</timezone10>
+			<timezone11>(GMT-06:00) 中美洲</timezone11>
+			<timezone12>(GMT-06:00) 萨斯喀彻温省</timezone12>
+			<timezone13>(GMT-05:00) 印地安那州(东)</timezone13>
+			<timezone14>(GMT-05:00) 波哥大,利马,基多</timezone14>
+			<timezone15>(GMT-05:00) 东部时间(美国和加拿大)</timezone15>
+			<timezone16>(GMT-04:00) 加拉加斯,拉巴斯</timezone16>
+			<timezone17>(GMT-04:00) 圣地亚哥</timezone17>
+			<timezone18>(GMT-04:00) 玛瑙斯</timezone18>
+			<timezone19>(GMT-04:00) 大西洋时间(加拿大)</timezone19>
+			<timezone20>(GMT-03:00) 布宜诺斯艾利斯,乔治城</timezone20>
+			<timezone21>(GMT-03:30) 纽芬兰,拉布拉多</timezone21>
+			<timezone22>(GMT-03:00) 格陵兰</timezone22>
+			<timezone23>(GMT-03:00) 巴西利亚</timezone23>
+			<timezone24>(GMT-02:00) 中大西洋</timezone24>
+			<timezone25>(GMT-01:00) 佛得角群岛</timezone25>
+			<timezone26>(GMT-01:00) 亚速尔群岛</timezone26>
+			<timezone27>(GMT) 格林威治标准时间 : 都柏林,爱丁堡,里斯本,伦敦</timezone27>
+			<timezone28>(GMT) 卡萨布兰卡市,蒙罗维亚</timezone28>
+			<timezone29>(GMT+01:00) 贝尔格莱德,伯拉第斯拉瓦,布达佩斯,卢布尔雅那,布拉格</timezone29>
+			<timezone30>(GMT+01:00) 萨拉热窝,斯科普里,华沙,萨格勒布</timezone30>
+			<timezone31>(GMT+01:00) 布鲁塞尔,哥本哈根,马德里,巴黎</timezone31>
+			<timezone32>(GMT+01:00) 非洲西部</timezone32>
+			<timezone33>(GMT+01:00) 阿姆斯特丹,柏林,伯尔尼,罗马,斯德哥尔摩,维也纳</timezone33>
+			<timezone34>(GMT+02:00) 明斯克</timezone34>
+			<timezone35>(GMT+02:00) 开罗</timezone35>
+			<timezone36>(GMT+02:00) 赫尔辛基,基辅,里加,索非亚,塔林,维尔纽斯</timezone36>
+			<timezone37>(GMT+02:00) 雅典,布加勒斯特,伊斯坦布尔</timezone37>
+			<timezone38>(GMT+02:00) 耶路撒冷</timezone38>
+			<timezone39>(GMT+02:00) 温特和克</timezone39>
+			<timezone40>(GMT+02:00) 哈拉雷,比勒陀利亚[南非</timezone40>
+			<timezone41>(GMT+03:00) 科威特,利雅得</timezone41>
+			<timezone42>(GMT+03:00) 巴格达</timezone42>
+			<timezone43>(GMT+03:00) 内罗比</timezone43>
+			<timezone44>(GMT+03:30) 德黑兰</timezone44>
+			<timezone45>(GMT+03:00) 莫斯科,圣彼得斯堡,伏尔加格勒</timezone45>
+			<timezone46>(GMT+04:30) 喀布尔</timezone46>
+			<timezone47>(GMT+04:00) 阿布扎比,马斯喀特</timezone47>
+			<timezone48>(GMT+04:00) 巴库</timezone48>
+			<timezone49>(GMT+04:00) 耶烈万</timezone49>
+			<timezone50>(GMT+04:00) 第比利斯</timezone50>
+			<timezone51>(GMT+05:00) 叶卡捷琳堡</timezone51>
+			<timezone52>(GMT+05:30) 金奈,加尔各答,孟买,新德里</timezone52>
+			<timezone53>(GMT+05:45) 加德满都</timezone53>
+			<timezone54>(GMT+05:00) 伊斯兰堡,卡拉奇,塔什干</timezone54>
+			<timezone55>(GMT+06:00) 阿斯塔纳,达卡</timezone55>
+			<timezone56>(GMT+06:30) 仰光</timezone56>
+			<timezone57>(GMT+06:00) 阿拉木图,新西伯利亚</timezone57>
+			<timezone58>(GMT+06:00) 斯里兰卡</timezone58>
+			<timezone59>(GMT+07:00) 克拉斯诺雅茨克</timezone59>
+			<timezone60>(GMT+07:00) 曼谷,河内,雅加达</timezone60>
+			<timezone61>(GMT+08:00) 北京,重庆,香港特别行政区,乌鲁木齐</timezone61>
+			<timezone62>(GMT+08:00) 伊尔库茨克,乌兰巴托</timezone62>
+			<timezone63>(GMT+08:00) 吉隆坡,新加坡</timezone63>
+			<timezone64>(GMT+08:00) 台北</timezone64>
+			<timezone65>(GMT+08:00) 佩斯</timezone65>
+			<timezone66>(GMT+09:30) 澳大利亚</timezone66>
+			<timezone67>(GMT+09:30) 阿德莱德</timezone67>
+			<timezone68>(GMT+09:00) 首尔</timezone68>
+			<timezone69>(GMT+09:00) 大阪, 札幌, 东京</timezone69>
+			<timezone70>(GMT+09:00) 雅库茨克</timezone70>
+			<timezone71>(GMT+10:00) 堪培拉,墨尔本,悉尼</timezone71>
+			<timezone72>(GMT+10:00) 布里斯班</timezone72>
+			<timezone73>(GMT+10:00) 霍巴特</timezone73>
+			<timezone74>(GMT+10:00) 海参崴</timezone74>
+			<timezone75>(GMT+10:00) 关岛,莫尔兹比港</timezone75>
+			<timezone76>(GMT+11:00) 马加丹,所罗门群岛,新喀里多尼亚</timezone76>
+			<timezone77>(GMT+12:00) 斐济群岛,堪察加半岛,马绍尔群岛</timezone77>
+			<timezone78>(GMT+12:00) 奥克兰,惠灵顿</timezone78>
+			<timezone79>(GMT+13:00) 努库阿洛法</timezone79>
+			<strImgTimezone>设置时区时需要点击&quot;立即与本机同步&quot;按钮进行时间同步</strImgTimezone>
+			<strServerTime>服务器时间</strServerTime>
+			<btnSynchronization>立即与本机同步</btnSynchronization>
+			<btnrefresh0>刷新</btnrefresh0>
+			<UpgradeFirmware>升级固件(通过升级服务器软件，您将获得新的功能)</UpgradeFirmware>
+			<btnUpgrade>升级系统</btnUpgrade>
+			<Note>注意：升级请选择与硬件版本兼容的软件.升级过程不能关闭本机电源。否则可能产生严重后果。</Note>
+			<YouNeedChoose>升级过程需要一段时间,请耐心等待,当升级结束后，服务器系统会自动重新启动。</YouNeedChoose>
+			<OtherSettings>其它高级设置</OtherSettings>
+			<btnSave>保存设置</btnSave>
+			<SaveSettings>点击此按钮将保存设备当前设置,设备关机以及重启不丢失信息。</SaveSettings>
+			<btnRestore>恢复出厂设置</btnRestore>
+			<strRestore>点击此按钮将使设备恢复出厂设置,&lt;font color=&quot;#FF0000&quot;&gt;需要重启设备。&lt;/font&gt;</strRestore>
+			<btnRestart>重启</btnRestart>
+			<strRestart>点击此按钮将使服务器重新启动。</strRestart>
+			<btnShutdown>关机</btnShutdown>
+			<vWeek0>星期一</vWeek0>
+			<vWeek1>星期二</vWeek1>
+			<vWeek2>星期三</vWeek2>
+			<vWeek3>星期四</vWeek3>
+			<vWeek4>星期五</vWeek4>
+			<vWeek5>星期六</vWeek5>
+			<vWeek6>星期日</vWeek6>
+		</AdvancedSetDiv>
+		
+		<VideoPositionSetDiv>
+			<strVideoOut>视频显示设置</strVideoOut>
+			<strEnableVGA>启用VGA输出</strEnableVGA>
+			<strVgaType>输出分辨率</strVgaType>
+			<strOutPutMode>输出模式选择</strOutPutMode>
+			<OutPutType0>启用VGA</OutPutType0>
+			<OutPutType1>启用YPbPr</OutPutType1>
+			<sOutputMode>VGA和YPbPr两个模式中,同时只能有一个输出模式生效!</sOutputMode>
+			<strEnableVideoTransition>启用视频循切</strEnableVideoTransition>
+			<strVideoTransitionInterval>视频循切间隔时间(秒)</strVideoTransitionInterval>
+			<strEnableDecoderOutput>启用解码输出</strEnableDecoderOutput>
+			<strEnableEnableOSD>显示OSD叠加</strEnableEnableOSD>
+			<strOSDPositionX>X坐标</strOSDPositionX>
+			<strOSDPositionY>Y坐标</strOSDPositionY>
+			<sEnableEnableOSD>此处的OSD叠加是指的在视频预览界面中,分屏显示模式下,用来区分不同通道的相关信息,其显示的内容是"通道参数设置"页面的"通道名称"</sEnableEnableOSD>
+			<sEnableDecoderOutput>勾选此参数后,设备才会在外接显示设备上解码显示实时视频!</sEnableDecoderOutput>
+			<strVideoPositionInfo>视频输出区域相对于显示器边界的距离</strVideoPositionInfo>
+			<sVideoPosition>VGA和YPbPr两种输出模式的对应输出参数都为下面的两个值!</sVideoPosition>
+			<strCoordinatex>上下边界距离</strCoordinatex>
+			<strCoordinatey>左右边界距离</strCoordinatey>
+			<btnSaveVideoPosition>确定</btnSaveVideoPosition>
+			<btnRefreshVideoPosition>刷新</btnRefreshVideoPosition>
+			<strPositionNote>注意:修改该参数后，需在&quot;高级设置&quot;中保存并重启。</strPositionNote>
+		</VideoPositionSetDiv>
+		
+		<DriveSetDiv>
+			<DriveInfo>磁盘信息设置</DriveInfo>
+			<btnModify>修改</btnModify>
+			<btnRefresh>初始化磁盘</btnRefresh>
+			<strDeviceNote>磁盘初始化完成,正在重新获取磁盘信息,请稍等!</strDeviceNote>
+			<strInitalizeDisk>格式化指定磁盘,初始化过程序中设备不能断电重启,初始化完成之后如果还需要初始化其它磁盘,请稍微等待几秒钟之后再初始化&lt;hr /&gt;硬盘初始化操作完成之后,需要您重新启动设备!</strInitalizeDisk>
+			<DriveId>磁盘ID</DriveId>
+			<DriveType>磁盘类型</DriveType>
+			<DrivTotalSpace>磁盘总空间</DrivTotalSpace>
+			<DrivUsefullSpace>磁盘可用空间</DrivUsefullSpace>
+			<DeviceReset>初始化状态</DeviceReset>
+			<a_strInitialized>已初始化</a_strInitialized>
+			<a_strUninitialized>未初始化</a_strUninitialized>
+		</DriveSetDiv>
+		
+		<DeviceSetDiv>
+			<strDevice>系统信息设置</strDevice>
+			<strName>名&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;称:</strName>
+			<VideoFormat>制&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;式:</VideoFormat>
+			<strDeviceType>设备类型:</strDeviceType>
+			<SN>产品序列号:</SN>
+			<strMACAddress>设备MAC地址:</strMACAddress>
+			<SoftwareVersion>软件版本:</SoftwareVersion>
+			<WebVersion>Web版本:</WebVersion>
+			<FirmwareVersion>硬件版本:</FirmwareVersion>
+			<ChannelNumber>通道数:</ChannelNumber>
+			<btnSaveDevice>设置</btnSaveDevice>
+			<btnRefreshDevice>刷新</btnRefreshDevice>
+			<Note>注意:修改制式要在高级设置中保存并重启。</Note>
+		</DeviceSetDiv>
+		<LogDiv>
+			<strLogInfo>日志信息查询</strLogInfo>
+			<SearchTime>搜索日期:</SearchTime>
+			<strStarTime>开始时间:</strStarTime>
+			<strStartHour>时</strStartHour>
+			<strStartMin>分</strStartMin>
+			<strEndTime>结束时间:</strEndTime>
+			<strEndHour>时</strEndHour>
+			<strEndMin>分</strEndMin>
+			<strLogType>日志类型</strLogType>
+			<LogType0>系统日志</LogType0>
+			<LogType1>操作日志</LogType1>
+			<LogType2>报警日志</LogType2>
+			<btnSearchLog>搜索</btnSearchLog>
+			<a_LogTime>时间</a_LogTime>
+			<a_UserName>操作用户</a_UserName>
+			<a_Address>主机地址</a_Address>
+			<a_LoginType>登录方式 </a_LoginType>
+			<a_Info>日志内容</a_Info>
+			<a_remote>远程登录</a_remote>
+			<a_local>本地登录</a_local>
+		</LogDiv>
+		
+		<a_NoPopedom>没有权限,请与管理员联系!</a_NoPopedom>
+		<a_addUserSuc>添加用户成功!</a_addUserSuc>
+		<a_UserExists>用户已经存在!</a_UserExists>
+		<a_UserExceed>用户数量已经超过最大数量限制!</a_UserExceed>
+		<a_addUserFail>添加用户失败!</a_addUserFail>
+		<a_ChooseUser>请选择用户!</a_ChooseUser>
+		<a_UserPopSuc>用户权限修改成功!</a_UserPopSuc>
+		<a_PswDisaccord>密码不一致!</a_PswDisaccord>
+		<a_ModifyUserPswSuc>修改用户密码成功!</a_ModifyUserPswSuc>
+		<a_PswErr>密码不正确!</a_PswErr>
+		<a_SureDelUser>确定要删除用户</a_SureDelUser>
+		<a_UserLogin>用户已经登录,不能删除!</a_UserLogin>
+		<a_NotDelUser>不能删除该用户!</a_NotDelUser>
+		<a_DelUserSuc>删除用户成功!</a_DelUserSuc>
+		<a_DelUserFail>删除用户失败!</a_DelUserFail>
+		<a_ParameterInvalid>您输入的数据有误!</a_ParameterInvalid>
+		<a_SureInitialize>您确定要初始化该硬盘?</a_SureInitialize>
+		<a_ChooseDreve>请先选择磁盘!</a_ChooseDreve>
+		<a_InitializeSucceed>该磁盘初始化完成,如果您还需要初始化其它磁盘,请等待5-10秒之后再进行操作,如果您已经完成了所有设备的初始化请您手动重启设备!</a_InitializeSucceed>
+		<a_InitializeFail>磁盘初始化失败</a_InitializeFail>
+		<a_succeed>设置成功!</a_succeed>
+		<a_faild>设置失败!</a_faild>
+		<a_confirmReboot>确认要重启设备?</a_confirmReboot>
+		<a_confirmShutdown>确认要关闭设备?</a_confirmShutdown>
+		<a_confirmRestore>确认要恢复出厂设置?</a_confirmRestore>
+		<a_waitfor>请稍等,设备正在重启</a_waitfor>
+		<a_waitforDevice>请稍等,磁盘正在初始化</a_waitforDevice>
+		<a_selfClose>设备已经关闭,请您手动关闭当前程序!</a_selfClose>
+		<a_notRightClose>对不起,您没有权限执行该项操作,请联系系统管理员!</a_notRightClose>
+		
+		<strDeviceStatus>设备状态查看</strDeviceStatus>
+		<strChannelStatus>通道状态</strChannelStatus>
+		<sStreamStatus>您当前的实时码流已经超过系统极限,请检查前端摄像机的通道配置!</sStreamStatus>
+		<a_statusChannelName>通道名</a_statusChannelName>
+		<a_statusChannelIP>通道IP</a_statusChannelIP>
+		<a_statusStorage>存储状态</a_statusStorage>
+		<a_statusStream>码流状态</a_statusStream>
+		<a_satusEnable>启用</a_satusEnable>
+		<a_stausDisable>未启用</a_stausDisable>
+	</soap:Body>
+</soap:Envelope>

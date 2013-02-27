@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<soap:Header>
+		<RequestSOAPHeader xmlns="http://www.aipstar.com.cn/schema/ctcc/common/v2_1">
+			<CommandType xmlns="">EnglishLanguage</CommandType>
+		</RequestSOAPHeader>
+	</soap:Header>
+	<soap:Body> 
+		<PTZDiv>
+			<PtzParameter>Ptz Set</PtzParameter>
+			<strChooseChannel>Channel</strChooseChannel>
+			<Address>Address</Address>
+			<strBaudRate>BaudRate</strBaudRate>
+			<Protocol>Protocol</Protocol>
+			<strDataBit>DataBit</strDataBit>
+			<ParityBit>Parity</ParityBit>
+			<ParityOpt0>No</ParityOpt0>
+			<ParityOpt1>Odd</ParityOpt1>
+			<ParityOpt2>Even</ParityOpt2>
+			<btnSavePtz>Submit</btnSavePtz>
+			<btnRefreshPtz>Refresh</btnRefreshPtz>
+		</PTZDiv>
+		
+		<VideoOutDiv>
+			<strVideoOutSet>VideoOutSet</strVideoOutSet>
+		</VideoOutDiv>
+		
+		<AudioInfoDiv>
+			<AudioParameter>Audio Set</AudioParameter>
+			<AudiAmplification>Amplification</AudiAmplification>
+			<Intercom>Intercom</Intercom>
+			<NetTalkOpt0>Disabled</NetTalkOpt0>
+			<NetTalkOpt1>Enable</NetTalkOpt1>
+			<SpeechMode>Audio Mode</SpeechMode>
+			<AudioMode0>Left Channel</AudioMode0>
+			<AudioMode1>Right Channel</AudioMode1>
+			<AudioMode2>Stereo</AudioMode2>
+			<SpeechFormat>Speech Format</SpeechFormat>
+			<btnSaveAudio>Submit</btnSaveAudio>
+			<btnRefreshAudio>Refresh</btnRefreshAudio>
+		</AudioInfoDiv>
+		
+		<ChannelSetDiv>
+			<ChannelParameter>Channel Set</ChannelParameter>
+			<btnSaveChannel>Modify</btnSaveChannel>
+			<btnRefreshChannel>Refresh</btnRefreshChannel>
+			<strNote>Note: modify channel parameters in the system, need to save the senior set and restart your will take effect.</strNote>
+			<ChannelName>Name</ChannelName>
+			<ChannelAddress>Address</ChannelAddress>
+			<ChannelPort>Port</ChannelPort>
+			<ChannelUsername>Username</ChannelUsername>
+			<ChannelPassword>Password</ChannelPassword>
+			<ChannelSubStream>SubStream</ChannelSubStream>
+			<ChannelEnable>Enable</ChannelEnable>
+		</ChannelSetDiv>
+		
+		<a_succeed>Set Succeed!</a_succeed>
+		<a_faild>Set Fail!</a_faild>
+	</soap:Body>
+</soap:Envelope>
+
+

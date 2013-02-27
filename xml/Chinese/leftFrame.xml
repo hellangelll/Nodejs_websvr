@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<soap:Header>
+		<RequestSOAPHeader xmlns="http://www.aipstar.com.cn/schema/ctcc/common/v2_1">
+			<CommandType xmlns="">EnglishLanguage</CommandType>
+		</RequestSOAPHeader>
+	</soap:Header>
+	<soap:Body>
+		<channelPar>通道参数</channelPar>
+		<ChannelInfoSet>通道信息设置</ChannelInfoSet>
+		<VideoOutSet>模拟输出设置</VideoOutSet>
+		<AudioParSet>音频参数设置</AudioParSet>
+		<PtzParSet>云台参数设置</PtzParSet>
+		<NetWorkPar>网络参数</NetWorkPar>
+		<NetWorkSet>网络基本设置</NetWorkSet>
+		<RtspParSet>RTSP参数设置</RtspParSet>
+		<NtpParSet>NTP参数设置</NtpParSet>
+		<LiveHeartParSet>心跳包设置</LiveHeartParSet>
+		<RecordPar>录像参数</RecordPar>
+		<FtpParSet>FTP参数设置</FtpParSet>
+		<CaptureParSet>抓拍参数设置</CaptureParSet>
+		<WifiSet>WIFI参数设置</WifiSet>
+		<AlarmPar>报警参数</AlarmPar>
+		<AlarmInSet>报警输入设置</AlarmInSet>
+		<AlarmOutSet>报警输出设置</AlarmOutSet>
+		<SystemPar>系统参数</SystemPar>
+		<UserInfoSet>用户信息设置</UserInfoSet>
+		<SystemAdvSet>系统高级设置</SystemAdvSet>
+		<StorageSet>存储计划设置</StorageSet>
+		<DriveInfoSet>磁盘信息设置</DriveInfoSet>
+		<VideoPositionSet>视频显示设置</VideoPositionSet>
+		<DeviceSet>系统信息设置</DeviceSet>
+		<LogDisplay>系统日志查看</LogDisplay>
+		<DeviceStatus>设备状态查看</DeviceStatus>
+	</soap:Body>
+</soap:Envelope>

@@ -1,0 +1,911 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <title>详细设置</title>
+    </head>
+    <link href="css/detail.css" rel="stylesheet" type="text/css" />
+    <script src="js/detail/CheckIp.js" type="text/javascript">
+        //检测IP合法性
+    </script>
+    <script src="js/detail/CheckGateWay.js" type="text/javascript">
+        //检测网关合法性
+    </script>
+    <script src="js/xmlPort/XmlPort.js" type="text/javascript">
+        //XML数据接口
+    </script>
+    <!--<script src="js/CookieOperate.js" type="text/javascript">					//Cookie操作函数</script>
+    <script src="js/xmlPort/CreateXmlObject.js" type="text/javascript">			//创建XML对象接口</script>
+    <script src="js/xmlPort/NetInfo.js" type="text/javascript">					//网络参数获取接口</script>
+    <script src="js/xmlPort/NtpInfo.js" type="text/javascript">					//NTP参数接口</script>
+    <script src="js/xmlPort/LiveHeartInfo.js" type="text/javascript">			//心跳包信息接口</script>
+    <script src="js/xmlPort/WifiInfo.js" type="text/javascript">				//WIfi参数接口</script>-->
+    <script src="js/detail/NetWorkPage.js" type="text/javascript">
+        //页面主程序函数
+    </script>
+    <script type="text/javascript">
+        
+        var g_Language = getCookie("g_Language");
+        var g_UserName = getCookie("g_UserName");
+        var g_Password = getCookie("g_Password");
+        var g_ServerPort = getCookie("g_ServerPort");
+        var g_ServerIp = getCookie("g_ServerIp");
+        var g_UserRight = getCookie("g_UserRight");
+        var g_connectPassword = getCookie("g_connectPassword");
+        if (typeof(g_UserName) == "object" || typeof(g_Password) == "object" || typeof(g_ServerIp) == "object" || typeof(g_ServerPort) == "object" || typeof(g_UserRight) == "object" || typeof(g_connectPassword) == "object") {
+            window.location.href = "login.html";
+        }
+        var g_CurrentChannelNum = 0;
+        
+        function JsMain()
+		{
+            //创建xml对象
+            CreateXmlObject();
+            
+			//初始化页面语言包
+			SetTheNetWorkPageLanguage();
+	
+            //获取RTSP参数
+            ///SendGetRtspInfo();
+            
+            //获取网络参数
+            SendGetNetWorkInfo();
+            
+            //NTP参数设置
+            ///SendGetNtpInfo();
+            
+            //心跳包参数
+            ///SendGetLiveHeartInfo();
+            
+            //wifi
+            //SendGetWifiInfo(); 
+        }
+		
+		function SetTheNetWorkPageLanguage()
+		{
+			if (g_Language == "English") {
+                g_xmlDoc = LoadXML("file", "xml/English/NetWorkPage.xml");
+            }
+            else {
+                g_xmlDoc = LoadXML("file", "xml/Chinese/NetWorkPage.xml");
+            }
+            
+            if (typeof(g_xmlDoc) == "object") {
+                $("RtspSet").innerHTML = g_xmlDoc.getElementsByTagName("RtspSet")[0].nodeTypedValue;
+                $("strEnableRtsp").innerHTML = g_xmlDoc.getElementsByTagName("strEnableRtsp")[0].nodeTypedValue;
+                $("port").innerHTML = g_xmlDoc.getElementsByTagName("port")[0].nodeTypedValue;
+                $("strMainStream").innerHTML = g_xmlDoc.getElementsByTagName("strMainStream")[0].nodeTypedValue;
+                $("SubStream").innerHTML = g_xmlDoc.getElementsByTagName("SubStream")[0].nodeTypedValue;
+                $("strMode").innerHTML = g_xmlDoc.getElementsByTagName("strMode")[0].nodeTypedValue;
+                $("RtspMode").options[0].text = g_xmlDoc.getElementsByTagName("RtspModeOpt0")[0].nodeTypedValue;
+                $("RtspMode").options[1].text = g_xmlDoc.getElementsByTagName("RtspModeOpt1")[0].nodeTypedValue;
+                $("btnSaveRtsp").value = g_xmlDoc.getElementsByTagName("btnSaveRtsp")[0].nodeTypedValue;
+                $("btnRefreshRtsp").value = g_xmlDoc.getElementsByTagName("btnRefreshRtsp")[0].nodeTypedValue;
+                
+                
+                
+                
+                $("NetBasic").innerHTML = g_xmlDoc.getElementsByTagName("NetBasic")[0].nodeTypedValue;
+                $("NetworkParameter").innerHTML = g_xmlDoc.getElementsByTagName("NetworkParameter")[0].nodeTypedValue;
+				$("strUseDhcp").innerHTML = g_xmlDoc.getElementsByTagName("strUseDhcp")[0].nodeTypedValue;
+				g_sNetworkParameter = g_xmlDoc.getElementsByTagName("sNetworkParameter")[0].nodeTypedValue;
+                $("IPAddress").innerHTML = g_xmlDoc.getElementsByTagName("IPAddress")[0].nodeTypedValue;
+                $("SubnetMask").innerHTML = g_xmlDoc.getElementsByTagName("SubnetMask")[0].nodeTypedValue;
+                $("strGateWay").innerHTML = g_xmlDoc.getElementsByTagName("strGateWay")[0].nodeTypedValue;
+                $("AlternateDNS").innerHTML = g_xmlDoc.getElementsByTagName("AlternateDNS")[0].nodeTypedValue;
+                $("ManageCcenter").innerHTML = g_xmlDoc.getElementsByTagName("ManageCcenter")[0].nodeTypedValue;
+				g_sManageCenter = g_xmlDoc.getElementsByTagName("sManageCenter")[0].nodeTypedValue;
+                $("strCenterIp").innerHTML = g_xmlDoc.getElementsByTagName("strCenterIp")[0].nodeTypedValue;
+                $("strCenterPort").innerHTML = g_xmlDoc.getElementsByTagName("strCenterPort")[0].nodeTypedValue;
+                $("strRemoteWebport").innerHTML = g_xmlDoc.getElementsByTagName("strRemoteWebport")[0].nodeTypedValue;
+				g_sRemoteWebport = g_xmlDoc.getElementsByTagName("sRemoteWebport")[0].nodeTypedValue;
+                $("strDataPort").innerHTML = g_xmlDoc.getElementsByTagName("strDataPort")[0].nodeTypedValue;
+                $("strWebPort").innerHTML = g_xmlDoc.getElementsByTagName("strWebPort")[0].nodeTypedValue;
+                $("DDNSSetting").innerHTML = g_xmlDoc.getElementsByTagName("DDNSSetting")[0].nodeTypedValue;
+                $("PreferredServerAddress").innerHTML = g_xmlDoc.getElementsByTagName("PreferredServerAddress")[0].nodeTypedValue;
+                $("AlternateServerAddress").innerHTML = g_xmlDoc.getElementsByTagName("AlternateServerAddress")[0].nodeTypedValue;
+                $("strUserName").innerHTML = g_xmlDoc.getElementsByTagName("strUserName")[0].nodeTypedValue;
+                $("strPassWord").innerHTML = g_xmlDoc.getElementsByTagName("strPassWord")[0].nodeTypedValue;
+                $("DomainName").innerHTML = g_xmlDoc.getElementsByTagName("DomainName")[0].nodeTypedValue;
+                $("btnSaveNet").value = g_xmlDoc.getElementsByTagName("btnSaveNet")[0].nodeTypedValue;
+                $("btnRefreshNet").value = g_xmlDoc.getElementsByTagName("btnRefreshNet")[0].nodeTypedValue;
+                $("strNote").innerHTML = g_xmlDoc.getElementsByTagName("strNote")[0].nodeTypedValue;
+                
+                
+            
+                
+                
+                $("strNTPSet").innerHTML = g_xmlDoc.getElementsByTagName("strNTPSet")[0].nodeTypedValue;
+                $("strParameterNTP").innerHTML = g_xmlDoc.getElementsByTagName("strParameterNTP")[0].nodeTypedValue;
+                $("Enable").innerHTML = g_xmlDoc.getElementsByTagName("Enable")[0].nodeTypedValue;
+                $("NTPServerAddress").innerHTML = g_xmlDoc.getElementsByTagName("NTPServerAddress")[0].nodeTypedValue;
+				g_sNtpAddress = g_xmlDoc.getElementsByTagName("sNtpAddress")[0].nodeTypedValue;
+                $("strTimeInterval").innerHTML = g_xmlDoc.getElementsByTagName("strTimeInterval")[0].nodeTypedValue;
+                $("btnSaveNtp").value = g_xmlDoc.getElementsByTagName("btnSaveNtp")[0].nodeTypedValue;
+                $("btnRefreshNtp").value = g_xmlDoc.getElementsByTagName("btnRefreshNtp")[0].nodeTypedValue;
+                
+                
+                
+                
+                $("LiveHeartSet").innerHTML = g_xmlDoc.getElementsByTagName("LiveHeartSet")[0].nodeTypedValue;
+                $("strEnableLive").innerHTML = g_xmlDoc.getElementsByTagName("strEnableLive")[0].nodeTypedValue;
+                $("strLiveMode").innerHTML = g_xmlDoc.getElementsByTagName("strLiveMode")[0].nodeTypedValue;
+                $("strSendSpacingInterval").innerHTML = g_xmlDoc.getElementsByTagName("strSendSpacingInterval")[0].nodeTypedValue;
+                $("strServiceAds").innerHTML = g_xmlDoc.getElementsByTagName("strServiceAds")[0].nodeTypedValue;
+                $("strServicePort").innerHTML = g_xmlDoc.getElementsByTagName("strServicePort")[0].nodeTypedValue;
+                $("btnSaveLiveHeart").value = g_xmlDoc.getElementsByTagName("btnSaveLiveHeart")[0].nodeTypedValue;
+                $("btnRefreshLiveHeart").value = g_xmlDoc.getElementsByTagName("btnRefreshLiveHeart")[0].nodeTypedValue;
+                
+              
+                
+                
+                $("strWifiSet").innerHTML = g_xmlDoc.getElementsByTagName("strWifiSet")[0].nodeTypedValue;
+                $("strEnableWifi").innerHTML = g_xmlDoc.getElementsByTagName("strEnableWifi")[0].nodeTypedValue;
+                $("strWifiIpMethod").innerHTML = g_xmlDoc.getElementsByTagName("strWifiIpMethod")[0].nodeTypedValue;
+                $("WifiIpMethod").options[0].text = g_xmlDoc.getElementsByTagName("WifiIpMethod0")[0].nodeTypedValue;
+                $("WifiIpMethod").options[1].text = g_xmlDoc.getElementsByTagName("WifiIpMethod1")[0].nodeTypedValue;
+                $("strWifiIpAddress").innerHTML = g_xmlDoc.getElementsByTagName("strWifiIpAddress")[0].nodeTypedValue;
+                $("strWifiSubnetMask").innerHTML = g_xmlDoc.getElementsByTagName("strWifiSubnetMask")[0].nodeTypedValue;
+                $("strWifiGateway").innerHTML = g_xmlDoc.getElementsByTagName("strWifiGateway")[0].nodeTypedValue;
+                $("strWifiDns2").innerHTML = g_xmlDoc.getElementsByTagName("strWifiDns2")[0].nodeTypedValue;
+                $("strWifiNetworkName").innerHTML = g_xmlDoc.getElementsByTagName("strWifiNetworkName")[0].nodeTypedValue;
+                $("strWifiNetworkKey").innerHTML = g_xmlDoc.getElementsByTagName("strWifiNetworkKey")[0].nodeTypedValue;
+                $("strWifiIdentityAuthentication").innerHTML = g_xmlDoc.getElementsByTagName("strWifiIdentityAuthentication")[0].nodeTypedValue;
+                $("WifiIdentityAuthentication").options[0].text = g_xmlDoc.getElementsByTagName("WifiIdentityAuthentication0")[0].nodeTypedValue;
+                $("WifiIdentityAuthentication").options[1].text = g_xmlDoc.getElementsByTagName("WifiIdentityAuthentication1")[0].nodeTypedValue;
+                $("strWifiEncryption ").innerHTML = g_xmlDoc.getElementsByTagName("strWifiEncryption ")[0].nodeTypedValue;
+                $("WifiEncryption").options[0].text = g_xmlDoc.getElementsByTagName("WifiEncryption0")[0].nodeTypedValue;
+                $("strWifiKeyExpiredTime").innerHTML = g_xmlDoc.getElementsByTagName("strWifiKeyExpiredTime")[0].nodeTypedValue;
+                $("strWifiUnit").innerHTML = g_xmlDoc.getElementsByTagName("strWifiUnit")[0].nodeTypedValue;
+                $("btnSaveWifi").value = g_xmlDoc.getElementsByTagName("btnSaveWifi")[0].nodeTypedValue;
+                $("btnRefreshWifi").value = g_xmlDoc.getElementsByTagName("btnRefreshWifi")[0].nodeTypedValue;
+                
+                      
+                
+                a_ParameterInvalid = g_xmlDoc.getElementsByTagName("a_ParameterInvalid")[0].nodeTypedValue;
+				a_NtpNote = g_xmlDoc.getElementsByTagName("a_NtpNote")[0].nodeTypedValue;
+                a_succeed = g_xmlDoc.getElementsByTagName("a_succeed")[0].nodeTypedValue;
+                a_faild = g_xmlDoc.getElementsByTagName("a_faild")[0].nodeTypedValue;
+            }
+		}
+        
+    </script>
+    <body>
+        <div id="backgroundDiv" height="100%" width="100%">
+            <!-------------------------------RtspDiv start------------------------------------------------------------------->
+            <div id="RtspDiv" style="display:none;">
+                <table border="0" cellpadding="0" cellspacing="0" widht="100%">
+                    <tr>
+                        <td height="10">&nbsp;
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-size:20px;">
+                            <span id="RtspSet">RTSP设置</span>&nbsp;&nbsp;&nbsp; <img src="images/line.png" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="20">&nbsp;
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table id="tbMain" align="center" cellspacing="0" width="520">
+                                <tr>
+                                    <td>
+                                        <table cellspacing="0" width="100%">
+                                            <tr>
+                                                <td>
+                                                    <input id="EnableRtsp" name="EnableRtsp" onclick="SetRtsp();" type="checkbox" /><span id="strEnableRtsp">是否启用Rtsp</span>
+                                                </td>
+                                                <td>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" height="20">&nbsp;
+                                                    
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="right" height="30">
+                                                    <span id="port">端口</span>:
+                                                </td>
+                                                <td align="left">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="RtspPort" name="RtspPort" type="text" value="" />
+                                                </td>
+                                            </tr>
+                                            <tr style="display:;">
+                                                <td align="right" height="30">
+                                                    <span id="strMainStream">主码流访问标识</span>:
+                                                </td>
+                                                <td align="left">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="MainStream" name="MainStream" type="text" value="" />
+                                                </td>
+                                            </tr>
+                                            <tr style="display:;">
+                                                <td align="right" height="30">
+                                                    <span id="SubStream">从码流访问标识</span>:
+                                                </td>
+                                                <td align="left">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;<input id="MinorStream" name="MinorStream" type="text" value="" />
+                                                </td>
+                                            </tr>
+                                            <tr style="display:none;">
+                                                <td align="right" height="30">
+                                                    <span id="strMode">模式</span>:
+                                                </td>
+                                                <td align="left">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <select id="RtspMode" name="RtspMode">
+                                                        <option value="0">VLC兼容模式</option>
+                                                        <option value="1">QuickTime兼容模式</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="20">
+                                                </td>
+                                                <td>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr height="30">
+                                    <td align="center" class="csBgStyle">
+                                        <input id="btnSaveRtsp" class="button" onclick="SendSetRtspInfo();" type="button" value="确定" />&nbsp;&nbsp;&nbsp;&nbsp;<input id="btnRefreshRtsp" class="button" onclick="SendGetRtspInfo();" type="button" value="刷新" />&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+			<!-------------------------------RtspDiv end--------------------------------------------------------------------->
+			
+			<!-------------------------------NetWorkDiv start---------------------------------------------------------------->
+            <div id="NetWorkDiv" style="display:;">
+                <table border="0" cellpadding="0" cellspacing="0" widht="100%">
+                    <tr>
+                        <td height="10">&nbsp;
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-size:20px;">
+                            <span id="NetBasic">网络基本设置</span>&nbsp;&nbsp;&nbsp; <img src="images/line.png" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="20">&nbsp;
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <table id="tbMain" align="center" cellspacing="-2" class="csForeBg" width="520">
+                                <!--tr for ip-->
+                                <tr>
+                                    <td class="csBgStyle">
+                                        <table cellspacing="0" class="csForeBg" width="100%">
+                                            <tr>
+                                                <td>
+                                                    <table align="center" cellspacing="0" class="csForeBg" width="90%">
+                                                        <tr>
+                                                            <td align="left">
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																<span id="NetworkParameter">网络接口参数设置</span>
+																<img onclick="ShowHelpInfoDiv('imgNetworkParameter');" style="height:15px; width:15px; vertical-align:middle; cursor:help; margin-left:2px;" src="images/helpico.gif" />
+																&nbsp;&nbsp;
+																<input type="checkbox" style="display:none;" id="UseDhcp" onclick="RefreshNetwork()" />
+																<span style="display:none;" id="strUseDhcp">启用DHCP</span>
+                                                            </td>
+                                                        </tr>
+                                                        <!--table for content--->
+                                                        <tr>
+                                                            <td>
+                                                                <table cellpadding="0" cellspacing="1" class="csNetworkTable" width="90%">
+                                                                    <tr>
+                                                                        <td align="right" class="csForeBg" width="40%">
+                                                                            <span id="IPAddress">IP 地址</span>:&nbsp;&nbsp;&nbsp;
+                                                                        </td>
+                                                                        <td align="left" class="csForeBg">
+                                                                            &nbsp;&nbsp;&nbsp;<input id="Ip" name="Ip" type="text" value="" />&nbsp;&nbsp;
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="right" class="csForeBg" width="40%">
+                                                                            <span id="SubnetMask">子网掩码</span>:&nbsp;&nbsp;&nbsp;
+                                                                        </td>
+                                                                        <td align="left" class="csForeBg">
+                                                                            &nbsp;&nbsp;&nbsp;<input id="Mask" name="Mask" type="text" value="" />&nbsp;&nbsp;
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="right" class="csForeBg" width="40%">
+                                                                            <span id="strGateWay">网关</span>:&nbsp;&nbsp;&nbsp;
+                                                                        </td>
+                                                                        <td align="left" class="csForeBg">
+                                                                            &nbsp;&nbsp;&nbsp;<input id="GateWay" name="GateWay" type="text" value="" />&nbsp;&nbsp;
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="right" class="csForeBg" width="40%">
+                                                                            <span id="strDNS">DNS</span>:&nbsp;&nbsp;&nbsp;
+                                                                        </td>
+                                                                        <td align="left" class="csForeBg">
+                                                                            &nbsp;&nbsp;&nbsp;<input id="DNS" name="DNS" style="width: 150px;" type="text" value="" />&nbsp;&nbsp;
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="right" class="csForeBg" width="40%">
+                                                                            <span id="AlternateDNS">备用DNS</span>:&nbsp;&nbsp;&nbsp;
+                                                                        </td>
+                                                                        <td align="left" class="csForeBg">
+                                                                            &nbsp;&nbsp;&nbsp;<input id="DNS2" name="DNS2" type="text" value="" />&nbsp;&nbsp;
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                            </tr>
+                                            <tr>
+                                                <td height="5">
+                                                    <hr width="80%" />
+                                                </td>
+                                            </tr><!-------------tr for manage center------------->
+                                            <tr>
+                                                <td>
+                                                    <table align="center" cellspacing="0" width="90%">
+                                                        <tr>
+                                                            <td align="left">
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																<input id="EnableCenter" checked="" name="EnableCenter" onclick="RefreshCenter();" type="checkbox" />
+																<span id="ManageCcenter">启用远程管理中心</span>
+																<img onclick="ShowHelpInfoDiv('imgManageCenter');" style="height:15px; width:15px; vertical-align:middle; cursor:help; margin-left:2px;" src="images/helpico.gif" />
+                                                                <br/>
+                                                            </td>
+                                                            <td>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <table cellpadding="0" border="0" cellspacing="0" class="csNetworkTable" width="90%">
+                                                                    <tr>
+                                                                        <td align="right" class="csForeBg" width="40%">
+                                                                            <span id="strCenterIp">中心IP</span>:&nbsp;&nbsp;&nbsp;
+                                                                        </td>
+                                                                        <td align="left" class="csForeBg">
+                                                                            &nbsp;&nbsp;&nbsp;<input id="CenterIp" name="CenterIp" type="text" value="" />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="right" class="csForeBg" width="40%">
+                                                                            <span id="strCenterPort">中心端口</span>:&nbsp;&nbsp;&nbsp;
+                                                                        </td>
+                                                                        <td align="left" class="csForeBg">
+                                                                            &nbsp;&nbsp;&nbsp;<input id="CenterPort" name="CenterPort" type="text" value="" />
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="5">
+                                                    <hr width="80%" />
+                                                </td>
+                                            </tr><!-------------tr for manage center------------->
+                                            <tr>
+                                                <td>
+                                                    <table align="center" cellspacing="0" class="csForeBg" width="90%">
+                                                        <tr>
+                                                            <td align="left">
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																<span id="strRemoteWebport">设置远程访问端口参数</span>
+																<img onclick="ShowHelpInfoDiv('imgRemoteWebport');" style="height:15px; width:15px; vertical-align:middle; cursor:help; margin-left:2px;" src="images/helpico.gif" />
+                                                            </td>
+                                                            <td>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <!---tabel start -->
+                                                                <table cellpadding="0" cellspacing="1" class="csNetworkTable" width="90%">
+                                                                    <tr>
+                                                                        <td align="right" class="csForeBg" width="40%">
+                                                                            <span id="strDataPort">数据端口</span>:&nbsp;&nbsp;&nbsp;
+                                                                        </td>
+                                                                        <td align="left" class="csForeBg">
+                                                                            &nbsp;&nbsp;&nbsp;<input id="DataPort" name="DataPort" type="text" value="" />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="right" class="csForeBg" width="40%">
+                                                                            <span id="strWebPort">Web端口</span>:&nbsp;&nbsp;&nbsp;
+                                                                        </td>
+                                                                        <td align="left" class="csForeBg">
+                                                                            &nbsp;&nbsp;&nbsp;<input id="Webport" name="Webport" type="text" value="" />
+                                                                        </td>
+                                                                    </tr>
+                                                                </table><!---end -->
+                                                            </td>
+                                                            <td>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <!----------------tr for PPOE SET -------------------->
+                                            <tr disabled="disabled" style="display: none">
+                                                <td>
+                                                    <table cellspacing="0" width="90%">
+                                                        <tr>
+                                                            <td colspan="4">
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="EnablePPPOE" checked="" name="EnablePPPOE" onclick="RefreshPPPOE();" type="checkbox" /><span id="PPPoEDial">PPPoE拨号</span>
+                                                                <span id="PPPoEDialAccount">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                                    PPPoE拨号账号:</span>
+                                                                <input id="PPPOEUser" name="PPPOEUser" type="text" value="" /><span id="PPPoEDialPwd">&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                                    PPPoE拨号密码:</span>
+                                                                <input id="PPPOEPwd" name="PPPOEPwd" type="password" value="" />
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="5">
+                                                    <hr width="80%" />
+                                                </td>
+                                            </tr>
+											<!------------------tr for DDNS ------------------------------>
+                                            <tr style="display:none;">
+                                                <td>
+                                                    <table align="center" cellspacing="0" class="csForeBg" width="90%">
+                                                        <tr>
+                                                            <td align="left">
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="EnableDDNS" name="EnableDDNS" onclick="RefreshDDNS();" type="checkbox" /><span id="DDNSSetting">DDNS设置</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <table cellspacing="1" class="csNetworkTable" width="90%">
+                                                                    <tr>
+                                                                        <td align="right" class="csForeBg" width="40%">
+                                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span id="PreferredServerAddress">首选服务器地址</span>:&nbsp;&nbsp;&nbsp;
+                                                                        </td>
+                                                                        <td align="left" class="csForeBg">
+                                                                            &nbsp;&nbsp;&nbsp;<input id="DDNSName" name="DDNSName" type="text" value="" />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="right" class="csForeBg" width="40%">
+                                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span id="AlternateServerAddress">备用服务器地址</span>:&nbsp;&nbsp;&nbsp;
+                                                                        </td>
+                                                                        <td align="left" class="csForeBg">
+                                                                            &nbsp;&nbsp;&nbsp;<input id="DDNSName2" name="DDNSName2" type="text" value="" />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="right" class="csForeBg" width="40%">
+                                                                            <span id="strUserName">用户名</span>:&nbsp;&nbsp;&nbsp;
+                                                                        </td>
+                                                                        <td align="left" class="csForeBg">
+                                                                            &nbsp;&nbsp;&nbsp;<input id="DDNSUser" name="DDNSUser" type="text" value="" />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="right" class="csForeBg" width="40%">
+                                                                            <span id="strPassWord">密码</span>:&nbsp;&nbsp;&nbsp;
+                                                                        </td>
+                                                                        <td align="left" class="csForeBg">
+                                                                            &nbsp;&nbsp;&nbsp;<input id="DDNSPwd" name="DDNSPwd" type="password" value="" />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="right" class="csForeBg" width="40%">
+                                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span id="DomainName">您注册的域名</span>:&nbsp;&nbsp;&nbsp;
+                                                                        </td>
+                                                                        <td align="left" class="csForeBg">
+                                                                            &nbsp;&nbsp;&nbsp;<input id="DDNSHost" name="DDNSHost" type="text" value="" />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr style="display: none">
+                                                                        <td align="right" class="csForeBg" width="40%">
+                                                                            <span id="">&nbsp; </span>&nbsp;
+                                                                        </td>
+                                                                        <td align="left" class="csForeBg">
+                                                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                            <select id="ConnectInterval" name="ConnectInterval">
+                                                                                <option value="1">1</option>
+                                                                                <option value="2">2</option>
+                                                                                <option value="3">3</option>
+                                                                                <option value="4">4</option>
+                                                                                <option value="5">5</option>
+                                                                                <option value="6">6</option>
+                                                                                <option value="7">7</option>
+                                                                                <option value="8">8</option>
+                                                                                <option value="9">9</option>
+                                                                                <option value="10">10</option>
+                                                                            </select>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!----------------------tr fro sumbit ------------------------->
+                                <tr height="30">
+                                    <td align="center" class="csBgStyle">
+                                        <input id="btnSaveNet" class="button" onclick="SendSetNetWorkInfo();" type="button" value="确定" />&nbsp;&nbsp;<input id="btnRefreshNet" class="button" onclick="SendGetNetWorkInfo();" type="button" value="刷新" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" height="40">
+                                        <font color="#FF0000">
+                                            <span id="strNote">注意:修改网络接口参数和远程访问参数后，需在&quot;高级设置&quot;中保存并重启。
+                                                <br/>
+                                                如果您修改了端口,则须使用 http://ip:port/ 格式的url才能再次打开本软件。
+                                            </span>
+                                        </font>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-------------------------------NetWorkDiv end------------------------------------------------------------------><!--------------------------------NtpInfoDiv start--------------------------------------------------------------->
+            <div id="NtpInfoDiv" style="display:none;">
+                <table border="0" cellpadding="0" cellspacing="0" widht="100%">
+                    <tr>
+                        <td height="10">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-size:20px;">
+                            <span id="strNTPSet">NTP参数设置</span>&nbsp;&nbsp;<img src="images/line.png" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="20">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table id="tbMain" align="center" cellspacing="0" width="520">
+                                <tr>
+                                    <td>
+                                        <table cellspacing="0" width="100%">
+                                            <tr>
+                                                <td align="left" colspan="3">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="strParameterNTP">本页面设置NTP校时服务器基本参数。</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="left" colspan="3" height="10">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="left" colspan="3">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="EnableNtp" checked="checked" name="EnableNtp" onclick="SetNtp();" type="checkbox" /><span id="Enable">启用Ntp</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="10%">
+                                                </td>
+                                                <td align="right">
+                                                    <span id="NTPServerAddress">NTP服务器地址</span>:&nbsp;
+                                                </td>
+                                                <td align="left">
+                                                    <input id="NtpAddress" maxlength="127" name="NtpAddress" size="20" type="text" value="" onkeyup="CheckTheNtpValue();" />
+													<img onclick="ShowHelpInfoDiv('imgNtpAddress');" style="height:15px; width:15px; vertical-align:middle; cursor:help; margin-left:2px;" src="images/helpico.gif" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="10%">
+                                                </td>
+                                                <td align="right">
+                                                    <span id="strTimeInterval">同步时间间隔(小时)</span>:&nbsp;
+                                                </td>
+                                                <td align="left">
+                                                    <select id="TimeInterval" name="TimeInterval">
+                                                        <option value="60">1</option>
+                                                        <option value="240">4</option>
+														<option value="600">10</option>
+														<option value="1080">18</option>
+														<option value="1440">24</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="20">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr height="30">
+                                    <td align="center" class="csBgStyle" colspan="2">
+                                        <input id="btnSaveNtp" class="button" onclick="SendSetNtpInfo();" type="button" value="确定" />&nbsp;&nbsp;&nbsp;&nbsp;<input id="btnRefreshNtp" class="button" name="btnRefresh" onclick="SendGetNtpInfo();" type="button" value="刷新" />&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div><!--------------------------------NtpInfoDiv end-----------------------------------------------------------------><!--------------------------------LiveHeartDiv start--------------------------------------------------------------->
+            <div id="LiveHeartDiv" style="display:none;">
+                <table border="0" cellpadding="0" cellspacing="0" widht="100%">
+                    <tr>
+                        <td height="10">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-size:20px;">
+                            <span id="LiveHeartSet">心跳包参数设置</span>&nbsp;&nbsp;<img src="images/line.png" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="20">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table id="tbMain" align="center" cellspacing="0" width="520">
+                                <tr>
+                                    <td>
+                                        <table cellspacing="0" width="100%" height="200">
+                                            <tr>
+                                                <td align="left" colspan="3">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="EnableLiveHeart" checked="checked" name="EnableLiveHeart" onclick="SetLiveHeart();" type="checkbox" /><span id="strEnableLive">启用心跳包检测</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="5%">
+                                                </td>
+                                                <td align="right">
+                                                    <span id="strLiveMode">心跳包发送模式</span>:&nbsp;
+                                                </td>
+                                                <td align="left">
+                                                    <select id="LiveMode">
+                                                        <option value="0">UDP</option>
+                                                        <option value="1">TCP/IP</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="5%">
+                                                </td>
+                                                <td align="right">
+                                                    <span id="strSendSpacingInterval">发送心跳间隔时间(秒)</span>:&nbsp;
+                                                </td>
+                                                <td align="left">
+                                                    <select id="SpacingInterval">
+                                                        <option value="10">10</option>
+                                                        <option value="30">30</option>
+                                                        <option value="60">60</option>
+                                                        <option value="120">120</option>
+                                                        <option value="300">300</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="5%">
+                                                </td>
+                                                <td align="right">
+                                                    <span id="strServiceAds">远程管理主机地址</span>:&nbsp;
+                                                </td>
+                                                <td align="left">
+                                                    <input id="ServiceAds" name="ServiceAds" size="20" type="text" value="" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="5%">
+                                                </td>
+                                                <td align="right">
+                                                    <span id="strServicePort">远程管理主机端口号</span>:&nbsp;
+                                                </td>
+                                                <td align="left">
+                                                    <input id="ServicePort" name="ServicePort" size="20" type="text" value="" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="20">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr height="30">
+                                    <td align="center">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="btnSaveLiveHeart" class="button" onclick="SendSetLiveHeartInfo();" type="button" value="确定" />&nbsp;&nbsp;&nbsp;&nbsp;<input id="btnRefreshLiveHeart" class="button" name="btnRefresh" onclick="SendGetLiveHeartInfo();" type="button" value="刷新" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div><!--------------------------------LiveHeartDiv end---------------------------------------------------------------><!-------------------------------WifiInfoDiv start---------------------------------------------------------------->
+            <div id="WifiInfoDiv" style="display:none;">
+                <table border="0" cellpadding="0" cellspacing="0" widht="100%">
+                    <tr>
+                        <td height="10">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-size:20px;">
+                            <span id="strWifiSet">WIFI参数设置</span>&nbsp;&nbsp;&nbsp;<img src="images/line.png" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="20">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="40">
+                            <input type="checkbox" id="EnableWifi" onclick="SetWifi();"/><span id="strEnableWifi">启用WIFI</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <table id="tbMain" align="center" cellspacing="-2" width="520">
+                                <tr>
+                                    <td>
+                                        <table align="center" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td align="right">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp; <span id="strWifiIpMethod">IP获取方式</span>:
+                                                </td>
+                                                <td align="left">
+                                                    &nbsp;
+                                                    <select id="WifiIpMethod" onchange="SetWifi();">
+                                                        <option value="0">手动添加</option>
+                                                        <option value="1">自动获取</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="right">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp; <span id="strWifiIpAddress">IP地址</span>:
+                                                </td>
+                                                <td align="left">
+                                                    &nbsp;<input type="text" id="WifiIpAddress" value="" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="right">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp; <span id="strWifiSubnetMask">子网掩码</span>:
+                                                </td>
+                                                <td align="left">
+                                                    &nbsp;<input type="text" id="WifiSubnetMask" value="" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="right">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;<span id="strWifiGateway">网关</span>:
+                                                </td>
+                                                <td align="left">
+                                                    &nbsp;<input type="text" id="WifiGateway" value="" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="right">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;<span id="strWifiDns1">DNS</span>:
+                                                </td>
+                                                <td align="left">
+                                                    &nbsp;<input type="text" id="WifiDns1"  value="" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="right">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;<span id="strWifiDns2">备用DNS</span>:
+                                                </td>
+                                                <td align="left">
+                                                    &nbsp;<input type="text" id="WifiDns2"  value="" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="10" colspan="2">
+                                                    <hr width="80%" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="right">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;<span id="strWifiNetworkName">SSID号</span>:
+                                                </td>
+                                                <td align="left">
+                                                    &nbsp;<input type="text" id="WifiNetworkName" value="" maxlength="32"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="right">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;<span id="strWifiNetworkKey">密钥</span>:
+                                                </td>
+                                                <td align="left">
+                                                    &nbsp;<input type="text" id="WifiNetworkKey" value="" maxlength="32" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="right">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp; <span id="strWifiIdentityAuthentication">身份认证方式</span>:
+                                                </td>
+                                                <td align="left">
+                                                    &nbsp;
+                                                    <select id="WifiIdentityAuthentication">
+                                                        <option value="0">开放</option>
+                                                        <option value="1">共享</option>
+                                                        <option value="2">WPA</option>
+                                                        <option value="3">WPA-PSK</option>
+                                                        <option value="4">WPA2</option>
+                                                        <option value="5">WPA2-PSK</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="right">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp; <span id="strWifiEncryption ">数据加密方式</span>:
+                                                </td>
+                                                <td align="left">
+                                                    &nbsp;
+                                                    <select id="WifiEncryption">
+                                                        <option value="0">禁用</option>
+                                                        <option value="1">WEP</option>
+                                                        <option value="2">TKIP</option>
+                                                        <option value="3">AES</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="right">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;<span id="strWifiKeyExpiredTime">密钥过期时间</span>:
+                                                </td>
+                                                <td align="left">
+                                                    &nbsp;<input type="text" id="WifiKeyExpiredTime" value="0" /><span id="strWifiUnit">秒(0为不过期)</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr height="50">
+                        <td align="center">
+                            <input id="btnSaveWifi" class="button" onclick="SendSetWifiInfo();" type="button" value="确定" />&nbsp;&nbsp;&nbsp;&nbsp;<input id="btnRefreshWifi" class="button" onclick="SendGetWifiInfo();" type="button" value="刷新">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+			<!-------------------------------WifiInfoDiv end---------------------------------------------------------------->
+			<div id="HelpInfoDiv" onmouseout="ChangelTheHelpDivFalg(1);" onmouseover="ChangelTheHelpDivFalg(0);" style="position:absolute; overflow:auto; height:160px; width:300px; display:none;">
+				<iframe style= "position:absolute;left:0;top:0;width:100%;height:100%;z-index:-1;scrolling:no;" frameborder="0"> </iframe>
+				<div id="HelpInfoDivShow"></div>
+			</div>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    JsMain();
+</script>

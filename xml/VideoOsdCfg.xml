@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="gbk" ?>
+<Envelope>
+	<Header>
+		<cmd>VideoOsdCfg</cmd>
+		<cmd_type>set</cmd_type>
+		<err_flag>0</err_flag>
+		<channel>0</channel>
+	</Header>
+	<Body>
+		<tmVideoOsdCfg_t>
+			<sChanName>amera-1</sChanName>
+			<wShowNameTopLeftX>10</wShowNameTopLeftX>
+			<wShowNameTopLeftY>10</wShowNameTopLeftY>
+			<byShowChanName>1</byShowChanName>
+			<byNameCoordinateMode>0</byNameCoordinateMode>
+			<byShowTime>1</byShowTime>
+			<wShowTimeTopLeftX>10</wShowTimeTopLeftX>
+			<wShowTimeTopLeftY>10</wShowTimeTopLeftY>
+			<byTimeType>0</byTimeType>
+			<byShowWeek>1</byShowWeek>
+			<byWeekType>0</byWeekType>
+			<byTimeCoordinateMode>3</byTimeCoordinateMode>
+			<byOsdAttrib>1</byOsdAttrib>
+			<byFontMode>0</byFontMode>
+			<byAlignMode>0</byAlignMode>
+			<sShowText>Camera-1</sShowText>
+			<wShowTextTopLeftX>10</wShowTextTopLeftX>
+			<wShowTextTopLeftY>10</wShowTextTopLeftY>
+			<byShowText>0</byShowText>
+			<byTextCoordinateMode>0</byTextCoordinateMode>
+		</tmVideoOsdCfg_t>
+	</Body>
+</Envelope>

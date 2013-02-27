@@ -1,0 +1,1078 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <title>详细设置</title>
+    </head>
+    <link href="css/detail.css" rel="stylesheet" type="text/css" />
+    <script src="js/md5.js" type="text/javascript">
+        //MD5加密算法
+    </script>
+    <script src="js/xmlPort/XmlPort.js" type="text/javascript">//XML数据接口		</script>
+    <!--<script src="js/CookieOperate.js" type="text/javascript">					//Cookie操作函数</script>
+    <script src="js/xmlPort/CreateXmlObject.js" type="text/javascript">			//创建XML对象接口</script>
+    <script src="js/xmlPort/UserInfo.js" type="text/javascript">				//用户信息获取接口</script>
+    <script src="js/xmlPort/UserCfg.js" type="text/javascript">					//用户信息设置接口</script>
+    <script src="js/xmlPort/TimeInfo.js" type="text/javascript">				//服务器时间接口</script>
+    <script src="js/xmlPort/SaveConfig.js" type="text/javascript">				//保存设置接口</script>
+    <script src="js/xmlPort/Reboot.js" type="text/javascript">					//重启设置接口</script>
+    <script src="js/xmlPort/Restore.js" type="text/javascript">					//恢复出厂设置接口</script>
+    <script src="js/xmlPort/DriveInfo.js" type="text/javascript">				//磁盘参数接口</script>-->
+    <script src="js/detail/SystemPage.js" type="text/javascript">
+        //页面主程序函数
+    </script>
+    <script type="text/javascript">
+        
+        var g_Language = getCookie("g_Language");
+        var g_UserName = getCookie("g_UserName");
+        var g_Password = getCookie("g_Password");
+        var g_ServerPort = getCookie("g_ServerPort");
+        var g_ServerIp = getCookie("g_ServerIp");
+        var g_UserRight = getCookie("g_UserRight");
+        var g_connectPassword = getCookie("g_connectPassword");
+        if (typeof(g_UserName) == "object" || typeof(g_Password) == "object" || typeof(g_ServerIp) == "object" || typeof(g_ServerPort) == "object" || typeof(g_UserRight) == "object" || typeof(g_connectPassword) == "object") {
+            window.location.href = "login.html";
+        }
+        var g_CurrentChannelNum = 0, g_vWeek;
+        
+		var g_arrResolution = new Array();
+		g_arrResolution[0] = "480pRGB";
+		g_arrResolution[1] = "576pRGB";
+		g_arrResolution[2] = "720pRGB";
+		g_arrResolution[3] = "1080pRGB";
+		g_arrResolution[4] = "1080iRGB";
+		g_arrResolution[5] = "720p50RGB";
+		g_arrResolution[6] = "1080p50RGB";
+		g_arrResolution[7] = "1080p30RGB";
+		g_arrResolution[8] = "1080p25RGB";
+		g_arrResolution[9] = "640x480";
+		g_arrResolution[10] = "800x600";
+		g_arrResolution[11] = "1024x768";
+		g_arrResolution[12] = "1280x768";
+		g_arrResolution[13] = "1280x1024";
+		g_arrResolution[14] = "1440x900";
+		g_arrResolution[15] = "1920x1200";
+		
+        function JsMain(){
+        
+            //创建xml对象
+            CreateXmlObject();
+			
+			//初始日志查询的时间
+			SetSearchDate();
+            
+            //获取用户信息
+            SendGetUserInfo();
+            
+            //获取视频坐标参数
+            ///SendGetVideoPositionInfo();
+            
+            //获取服务器时间
+            ///SendGetTimeInfo();
+            
+            //磁盘信息参数
+           	//SendGetDriveInfo();
+			
+			//获取nvr设备信息;
+			///SendGetDeviceInfo();
+			
+			for(var i=0; i<g_arrResolution.length; i++)
+			{
+				//document.getElementById("VGAType").options[i] = new Option(g_arrResolution[i],g_arrResolution[i]);
+			}
+			
+			$("VGAType").options[0] = new Option(g_arrResolution[5],g_arrResolution[5]);
+			$("VGAType").options[1] = new Option(g_arrResolution[11],g_arrResolution[11]);
+        }
+		
+		function InitTheSystemPageLanguage()
+		{
+			if (g_Language == "English") {
+                g_xmlDoc = LoadXML("file", "xml/English/SystemPage.xml");
+            }
+            else {
+                g_xmlDoc = LoadXML("file", "xml/Chinese/SystemPage.xml");
+            }
+            
+            if (typeof(g_xmlDoc) == "object") {
+                $("UserInfoSet").innerHTML = g_xmlDoc.getElementsByTagName("UserInfoSet")[0].nodeTypedValue;
+                $("UserList").innerHTML = g_xmlDoc.getElementsByTagName("UserList")[0].nodeTypedValue;
+                $("UserRights").innerHTML = g_xmlDoc.getElementsByTagName("UserRights")[0].nodeTypedValue;
+                $("RemotePTZ").innerHTML = g_xmlDoc.getElementsByTagName("RemotePTZ")[0].nodeTypedValue;
+                $("RemoteRecording").innerHTML = g_xmlDoc.getElementsByTagName("RemoteRecording")[0].nodeTypedValue;
+                $("RemoteConfig").innerHTML = g_xmlDoc.getElementsByTagName("RemoteConfig")[0].nodeTypedValue;
+                $("RemoteCheckState").innerHTML = g_xmlDoc.getElementsByTagName("RemoteCheckState")[0].nodeTypedValue;
+                $("RemoteAdvancedSetting").innerHTML = g_xmlDoc.getElementsByTagName("RemoteAdvancedSetting")[0].nodeTypedValue;
+                $("DirectionalAudio").innerHTML = g_xmlDoc.getElementsByTagName("DirectionalAudio")[0].nodeTypedValue;
+                $("RemotePreView").innerHTML = g_xmlDoc.getElementsByTagName("RemotePreView")[0].nodeTypedValue;
+				$("RemoteModifyUser").innerHTML = g_xmlDoc.getElementsByTagName("RemoteModifyUser")[0].nodeTypedValue;
+                $("VideoPlayback").innerHTML = g_xmlDoc.getElementsByTagName("VideoPlayback")[0].nodeTypedValue;
+                $("RemoteModifyPassword").innerHTML = g_xmlDoc.getElementsByTagName("RemoteModifyPassword")[0].nodeTypedValue;
+                $("btnAddUser").value = g_xmlDoc.getElementsByTagName("btnAddUser")[0].nodeTypedValue;
+                $("btnDelUser").value = g_xmlDoc.getElementsByTagName("btnDelUser")[0].nodeTypedValue;
+                $("btnModifyUser").value = g_xmlDoc.getElementsByTagName("btnModifyUser")[0].nodeTypedValue;
+                $("btnModifyRight").value = g_xmlDoc.getElementsByTagName("btnModifyRight")[0].nodeTypedValue;
+                $("btnRefreshUserInfo").value = g_xmlDoc.getElementsByTagName("btnRefreshUserInfo")[0].nodeTypedValue;
+                $("strAddUserName").innerHTML = g_xmlDoc.getElementsByTagName("strAddUserName")[0].nodeTypedValue;
+                $("strAddPassword").innerHTML = g_xmlDoc.getElementsByTagName("strAddPassword")[0].nodeTypedValue;
+                $("AddConfirmPassword").innerHTML = g_xmlDoc.getElementsByTagName("AddConfirmPassword")[0].nodeTypedValue;
+                $("btnSaveAddUser").value = g_xmlDoc.getElementsByTagName("btnSaveAddUser")[0].nodeTypedValue;
+                $("btnReturnAddUser").value = g_xmlDoc.getElementsByTagName("btnReturnAddUser")[0].nodeTypedValue;
+                $("strUserName").innerHTML = g_xmlDoc.getElementsByTagName("strUserName")[0].nodeTypedValue;
+                $("OldPassword").innerHTML = g_xmlDoc.getElementsByTagName("OldPassword")[0].nodeTypedValue;
+                $("NewPassword").innerHTML = g_xmlDoc.getElementsByTagName("NewPassword")[0].nodeTypedValue;
+                $("ConfirmPassword").innerHTML = g_xmlDoc.getElementsByTagName("ConfirmPassword")[0].nodeTypedValue;
+                $("btnSaveMod").value = g_xmlDoc.getElementsByTagName("btnSaveMod")[0].nodeTypedValue;
+                $("btnReturnMod").value = g_xmlDoc.getElementsByTagName("btnReturnMod")[0].nodeTypedValue;
+                
+                
+                
+              	//$("strEnableVGA").innerHTML = g_xmlDoc.getElementsByTagName("strEnableVGA")[0].nodeTypedValue;
+				$("strVgaType").innerHTML = g_xmlDoc.getElementsByTagName("strVgaType")[0].nodeTypedValue;
+				$("strVideoOut").innerHTML = g_xmlDoc.getElementsByTagName("strVideoOut")[0].nodeTypedValue;
+				$("strOutPutMode").innerHTML = g_xmlDoc.getElementsByTagName("strOutPutMode")[0].nodeTypedValue;
+				$("OutPutType").options[0].text = g_xmlDoc.getElementsByTagName("OutPutType0")[0].nodeTypedValue;
+				$("OutPutType").options[1].text = g_xmlDoc.getElementsByTagName("OutPutType1")[0].nodeTypedValue;
+				g_sOutputMode = g_xmlDoc.getElementsByTagName("sOutputMode")[0].nodeTypedValue;
+				$("strVideoTransitionInterval").innerHTML = g_xmlDoc.getElementsByTagName("strVideoTransitionInterval")[0].nodeTypedValue;
+				$("strEnableDecoderOutput").innerHTML = g_xmlDoc.getElementsByTagName("strEnableDecoderOutput")[0].nodeTypedValue;
+				$("strEnableEnableOSD").innerHTML = g_xmlDoc.getElementsByTagName("strEnableEnableOSD")[0].nodeTypedValue;
+				$("strOSDPositionX").innerHTML = g_xmlDoc.getElementsByTagName("strOSDPositionX")[0].nodeTypedValue;
+				$("strOSDPositionY").innerHTML = g_xmlDoc.getElementsByTagName("strOSDPositionY")[0].nodeTypedValue;
+				$("strEnableVideoTransition").innerHTML = g_xmlDoc.getElementsByTagName("strEnableVideoTransition")[0].nodeTypedValue;
+                $("strVideoPositionInfo").innerHTML = g_xmlDoc.getElementsByTagName("strVideoPositionInfo")[0].nodeTypedValue;
+				g_sVideoPosition = g_xmlDoc.getElementsByTagName("sVideoPosition")[0].nodeTypedValue;
+				g_sEnableDecoderOutput = g_xmlDoc.getElementsByTagName("sEnableDecoderOutput")[0].nodeTypedValue;
+				g_sEnableEnableOSD = g_xmlDoc.getElementsByTagName("sEnableEnableOSD")[0].nodeTypedValue;
+                $("strCoordinatex").innerHTML = g_xmlDoc.getElementsByTagName("strCoordinatex")[0].nodeTypedValue;
+                $("strCoordinatey").innerHTML = g_xmlDoc.getElementsByTagName("strCoordinatey")[0].nodeTypedValue;
+                $("btnSaveVideoPosition").value = g_xmlDoc.getElementsByTagName("btnSaveVideoPosition")[0].nodeTypedValue;
+                $("btnRefreshVideoPosition").value = g_xmlDoc.getElementsByTagName("btnRefreshVideoPosition")[0].nodeTypedValue;
+                $("strPositionNote").innerHTML = g_xmlDoc.getElementsByTagName("strPositionNote")[0].nodeTypedValue;
+                
+                
+                $("SystemSet").innerHTML = g_xmlDoc.getElementsByTagName("SystemSet")[0].nodeTypedValue;
+                $("TimeSet").innerHTML = g_xmlDoc.getElementsByTagName("TimeSet")[0].nodeTypedValue;
+                g_sTimeSet = g_xmlDoc.getElementsByTagName("strTimeSet")[0].nodeTypedValue;
+                $("strTimeZone").innerHTML = g_xmlDoc.getElementsByTagName("strTimeZone")[0].nodeTypedValue;
+                for (var i = 0; i < 79; i++) {
+                    $("timezone").options[i].text = g_xmlDoc.getElementsByTagName("timezone" + (i + 1))[0].nodeTypedValue;
+                }
+                $("strServerTime").innerHTML = g_xmlDoc.getElementsByTagName("strServerTime")[0].nodeTypedValue;
+				g_sImgTimezone = g_xmlDoc.getElementsByTagName("strImgTimezone")[0].nodeTypedValue;
+                $("btnSynchronization").value = g_xmlDoc.getElementsByTagName("btnSynchronization")[0].nodeTypedValue;
+                $("btnrefresh0").value = g_xmlDoc.getElementsByTagName("btnrefresh0")[0].nodeTypedValue;
+                $("UpgradeFirmware").innerHTML = g_xmlDoc.getElementsByTagName("UpgradeFirmware")[0].nodeTypedValue;
+                $("btnUpgrade").value = g_xmlDoc.getElementsByTagName("btnUpgrade")[0].nodeTypedValue;
+                g_sUpDateInfo = g_xmlDoc.getElementsByTagName("Note")[0].nodeTypedValue;
+                g_sYouNeedChoose = g_xmlDoc.getElementsByTagName("YouNeedChoose")[0].nodeTypedValue;
+                $("OtherSettings").innerHTML = g_xmlDoc.getElementsByTagName("OtherSettings")[0].nodeTypedValue;
+                $("btnSave").value = g_xmlDoc.getElementsByTagName("btnSave")[0].nodeTypedValue;
+                g_sSaveSetting = g_xmlDoc.getElementsByTagName("SaveSettings")[0].nodeTypedValue;
+                $("btnRestore").value = g_xmlDoc.getElementsByTagName("btnRestore")[0].nodeTypedValue;
+                g_sRestore = g_xmlDoc.getElementsByTagName("strRestore")[0].nodeTypedValue;
+                $("btnRestart").value = g_xmlDoc.getElementsByTagName("btnRestart")[0].nodeTypedValue;
+				$("btnShutdown").value = g_xmlDoc.getElementsByTagName("btnShutdown")[0].nodeTypedValue;
+                g_sRestart = g_xmlDoc.getElementsByTagName("strRestart")[0].nodeTypedValue;
+				
+				
+				
+				$("strDevice").innerHTML = g_xmlDoc.getElementsByTagName("strDevice")[0].nodeTypedValue;
+				$("strName").innerHTML = g_xmlDoc.getElementsByTagName("strName")[0].nodeTypedValue;
+				$("VideoFormat").innerHTML = g_xmlDoc.getElementsByTagName("VideoFormat")[0].nodeTypedValue;
+				$("strDeviceType").innerHTML = g_xmlDoc.getElementsByTagName("strDeviceType")[0].nodeTypedValue;
+				$("SN").innerHTML = g_xmlDoc.getElementsByTagName("SN")[0].nodeTypedValue;
+				$("strMACAddress").innerHTML = g_xmlDoc.getElementsByTagName("strMACAddress")[0].nodeTypedValue;
+				$("SoftwareVersion").innerHTML = g_xmlDoc.getElementsByTagName("SoftwareVersion")[0].nodeTypedValue;
+				$("WebVersion").innerHTML = g_xmlDoc.getElementsByTagName("WebVersion")[0].nodeTypedValue;
+				$("FirmwareVersion").innerHTML = g_xmlDoc.getElementsByTagName("FirmwareVersion")[0].nodeTypedValue;
+				$("ChannelNumber").innerHTML = g_xmlDoc.getElementsByTagName("ChannelNumber")[0].nodeTypedValue;
+				$("btnSaveDevice").value = g_xmlDoc.getElementsByTagName("btnSaveDevice")[0].nodeTypedValue;
+				$("btnRefreshDevice").value= g_xmlDoc.getElementsByTagName("btnRefreshDevice")[0].nodeTypedValue;
+				$("Note").innerHTML = g_xmlDoc.getElementsByTagName("Note")[0].nodeTypedValue;
+				
+				
+				
+				
+				$("DriveInfo").innerHTML = g_xmlDoc.getElementsByTagName("DriveInfo")[0].nodeTypedValue;
+                $("btnModify").value = g_xmlDoc.getElementsByTagName("btnModify")[0].nodeTypedValue;
+                $("btnRefresh").value = g_xmlDoc.getElementsByTagName("btnRefresh")[0].nodeTypedValue;
+				$("strDeviceNote").innerHTML = g_xmlDoc.getElementsByTagName("strDeviceNote")[0].nodeTypedValue;
+				g_sInitalizeDisk = g_xmlDoc.getElementsByTagName("strInitalizeDisk")[0].nodeTypedValue;
+                a_DriveId = g_xmlDoc.getElementsByTagName("DriveId")[0].nodeTypedValue;
+                a_DriveType = g_xmlDoc.getElementsByTagName("DriveType")[0].nodeTypedValue;
+                a_DrivTotalSpace = g_xmlDoc.getElementsByTagName("DrivTotalSpace")[0].nodeTypedValue;
+                a_DrivUsefullSpace = g_xmlDoc.getElementsByTagName("DrivUsefullSpace")[0].nodeTypedValue;
+                a_DeviceReset = g_xmlDoc.getElementsByTagName("DeviceReset")[0].nodeTypedValue;
+				
+				
+                
+                vWeek0 = g_xmlDoc.getElementsByTagName("vWeek0")[0].nodeTypedValue;
+                vWeek1 = g_xmlDoc.getElementsByTagName("vWeek1")[0].nodeTypedValue;
+                vWeek2 = g_xmlDoc.getElementsByTagName("vWeek2")[0].nodeTypedValue;
+                vWeek3 = g_xmlDoc.getElementsByTagName("vWeek3")[0].nodeTypedValue;
+                vWeek4 = g_xmlDoc.getElementsByTagName("vWeek4")[0].nodeTypedValue;
+                vWeek5 = g_xmlDoc.getElementsByTagName("vWeek5")[0].nodeTypedValue;
+                vWeek6 = g_xmlDoc.getElementsByTagName("vWeek6")[0].nodeTypedValue;
+                g_vWeek = new Array(vWeek6, vWeek0, vWeek1, vWeek2, vWeek3, vWeek4, vWeek5);
+				
+				
+				   
+                
+				$("strLogInfo").innerHTML	= g_xmlDoc.getElementsByTagName("LogDiv/strLogInfo")[0].nodeTypedValue;
+				$("SearchTime").innerHTML = g_xmlDoc.getElementsByTagName("SearchTime")[0].nodeTypedValue;
+				$("strStarTime").innerHTML = g_xmlDoc.getElementsByTagName("strStarTime")[0].nodeTypedValue;
+				$("strStartHour").innerHTML = g_xmlDoc.getElementsByTagName("strStartHour")[0].nodeTypedValue;
+				$("strStartMin").innerHTML = g_xmlDoc.getElementsByTagName("strStartMin")[0].nodeTypedValue;
+				$("strEndTime").innerHTML = g_xmlDoc.getElementsByTagName("strEndTime")[0].nodeTypedValue;
+				$("strEndHour").innerHTML = g_xmlDoc.getElementsByTagName("strEndHour")[0].nodeTypedValue;
+				$("strEndMin").innerHTML = g_xmlDoc.getElementsByTagName("strEndMin")[0].nodeTypedValue;
+				$("strLogType").innerHTML = g_xmlDoc.getElementsByTagName("strLogType")[0].nodeTypedValue;
+				$("LogType").options[0].text = g_xmlDoc.getElementsByTagName("LogType0")[0].nodeTypedValue;
+				$("LogType").options[1].text = g_xmlDoc.getElementsByTagName("LogType1")[0].nodeTypedValue;
+				$("LogType").options[2].text = g_xmlDoc.getElementsByTagName("LogType2")[0].nodeTypedValue;
+				$("btnSearchLog").value = g_xmlDoc.getElementsByTagName("btnSearchLog")[0].nodeTypedValue;
+				a_LogTime					= g_xmlDoc.getElementsByTagName("LogDiv/a_LogTime")[0].nodeTypedValue;
+				a_UserName					= g_xmlDoc.getElementsByTagName("LogDiv/a_UserName")[0].nodeTypedValue;
+				a_Address					= g_xmlDoc.getElementsByTagName("LogDiv/a_Address")[0].nodeTypedValue;
+				a_LoginType					= g_xmlDoc.getElementsByTagName("LogDiv/a_LoginType")[0].nodeTypedValue;
+				a_Info						= g_xmlDoc.getElementsByTagName("LogDiv/a_Info")[0].nodeTypedValue;
+				a_local						= g_xmlDoc.getElementsByTagName("LogDiv/a_local")[0].nodeTypedValue;
+				a_remote					= g_xmlDoc.getElementsByTagName("LogDiv/a_remote")[0].nodeTypedValue;
+                a_strInitialized = g_xmlDoc.getElementsByTagName("a_strInitialized")[0].nodeTypedValue;
+                a_strUninitialized = g_xmlDoc.getElementsByTagName("a_strUninitialized")[0].nodeTypedValue;
+				
+				
+                
+                a_NoPopedom = g_xmlDoc.getElementsByTagName("a_NoPopedom")[0].nodeTypedValue;
+                a_addUserSuc = g_xmlDoc.getElementsByTagName("a_addUserSuc")[0].nodeTypedValue;
+                a_UserExists = g_xmlDoc.getElementsByTagName("a_UserExists")[0].nodeTypedValue;
+                a_UserExceed = g_xmlDoc.getElementsByTagName("a_UserExceed")[0].nodeTypedValue;
+                a_addUserFail = g_xmlDoc.getElementsByTagName("a_addUserFail")[0].nodeTypedValue;
+                a_ChooseUser = g_xmlDoc.getElementsByTagName("a_ChooseUser")[0].nodeTypedValue;
+                a_UserPopSuc = g_xmlDoc.getElementsByTagName("a_UserPopSuc")[0].nodeTypedValue;
+                a_PswDisaccord = g_xmlDoc.getElementsByTagName("a_PswDisaccord")[0].nodeTypedValue;
+                a_ModifyUserPswSuc = g_xmlDoc.getElementsByTagName("a_ModifyUserPswSuc")[0].nodeTypedValue;
+                a_PswErr = g_xmlDoc.getElementsByTagName("a_PswErr")[0].nodeTypedValue;
+                a_SureDelUser = g_xmlDoc.getElementsByTagName("a_SureDelUser")[0].nodeTypedValue;
+                a_UserLogin = g_xmlDoc.getElementsByTagName("a_UserLogin")[0].nodeTypedValue;
+                a_NotDelUser = g_xmlDoc.getElementsByTagName("a_NotDelUser")[0].nodeTypedValue;
+                a_DelUserSuc = g_xmlDoc.getElementsByTagName("a_DelUserSuc")[0].nodeTypedValue;
+                a_DelUserFail = g_xmlDoc.getElementsByTagName("a_DelUserFail")[0].nodeTypedValue;
+                a_ParameterInvalid = g_xmlDoc.getElementsByTagName("a_ParameterInvalid")[0].nodeTypedValue;
+                a_SureInitialize = g_xmlDoc.getElementsByTagName("a_SureInitialize")[0].nodeTypedValue;
+                a_ChooseDreve = g_xmlDoc.getElementsByTagName("a_ChooseDreve")[0].nodeTypedValue;
+                a_InitializeSucceed = g_xmlDoc.getElementsByTagName("a_InitializeSucceed")[0].nodeTypedValue;
+                a_InitializeFail = g_xmlDoc.getElementsByTagName("a_InitializeFail")[0].nodeTypedValue;
+                a_succeed = g_xmlDoc.getElementsByTagName("a_succeed")[0].nodeTypedValue;
+                a_faild = g_xmlDoc.getElementsByTagName("a_faild")[0].nodeTypedValue;
+                a_confirmReboot = g_xmlDoc.getElementsByTagName("a_confirmReboot")[0].nodeTypedValue;
+				a_confirmShutdown = g_xmlDoc.getElementsByTagName("a_confirmShutdown")[0].nodeTypedValue;
+                a_confirmRestore = g_xmlDoc.getElementsByTagName("a_confirmRestore")[0].nodeTypedValue;
+                a_waitfor = g_xmlDoc.getElementsByTagName("a_waitfor")[0].nodeTypedValue;
+				a_waitforDevice = g_xmlDoc.getElementsByTagName("a_waitforDevice")[0].nodeTypedValue;
+				a_selfClose = g_xmlDoc.getElementsByTagName("a_selfClose")[0].nodeTypedValue;
+				a_notRightClose = g_xmlDoc.getElementsByTagName("a_notRightClose")[0].nodeTypedValue;
+				
+				
+				$("strDeviceStatus").innerHTML = g_xmlDoc.getElementsByTagName("strDeviceStatus")[0].nodeTypedValue;
+				$("strChannelStatus").innerHTML = g_xmlDoc.getElementsByTagName("strChannelStatus")[0].nodeTypedValue;
+				g_sStreamStatus = g_xmlDoc.getElementsByTagName("sStreamStatus")[0].nodeTypedValue;
+				a_statusChannelName = g_xmlDoc.getElementsByTagName("a_statusChannelName")[0].nodeTypedValue;
+				a_statusChannelIP = g_xmlDoc.getElementsByTagName("a_statusChannelIP")[0].nodeTypedValue;
+				a_statusStorage = g_xmlDoc.getElementsByTagName("a_statusStorage")[0].nodeTypedValue;
+				a_statusStream = g_xmlDoc.getElementsByTagName("a_statusStream")[0].nodeTypedValue;
+				a_satusEnable = g_xmlDoc.getElementsByTagName("a_satusEnable")[0].nodeTypedValue;
+				a_stausDisable = g_xmlDoc.getElementsByTagName("a_stausDisable")[0].nodeTypedValue;
+            }
+		}
+        
+    </script>
+
+<body>
+<div id="backgroundDiv" height="100%" width="100%">
+
+    <!-------------------------------UserSetDiv start-------------------------------------------------------------------------->
+    <div id="UserSetDiv" style="display:;">
+        <table border="0" cellpadding="0" cellspacing="0" widht="100%">
+            <tr>
+                <td height="10">&nbsp;</td>
+            </tr>
+            <tr>
+                <td style="font-size:20px;">
+                <span id="UserInfoSet">用户信息设置</span>&nbsp;&nbsp;&nbsp; <img src="images/line.png" /></td>
+            </tr>
+            <tr>
+                <td height="20">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <table id="UserListTable" style="display:;" align="center" cellspacing="0" height="405" width="520">
+                        <input id="currentuser" name="currentuser" type="hidden" value="" />
+                        <input id="currentopt" name="currentopt" type="hidden" value="" />
+                        <input id="currentindex" name="currentindex" type="hidden" value="" />
+                        <input id="currentuserpassword" name="currentuserpassword" type="hidden" value="" />
+                        <tr>
+                            <td class="csBgStyle">
+                            <table cellspacing="0" border="1" height="300" width="520">
+                                <tr valign="middle">
+                                    <td height="366" valign="top" width="25%">
+                                    <div id="AddUserListDiv">
+                                        
+                                    </div>
+                                    </td>
+                                    <td class="csUserSetLeft" valign="top" width="75%">
+                                    <table align="left" class="csForeBg" width="100%">
+                                        <tr valign="bottom">
+                                            <td align="center" valign="bottom">
+                                            <span id="UserRights">用户权限列表</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left">
+                                            <input id="PTZ" name="PTZ" type="checkbox" /><span id="RemotePTZ">云台控制</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left">
+                                            <input id="RECORD" name="RECORD" type="checkbox" /><span id="RemoteRecording">手动录像</span></td>
+                                        </tr>
+										<tr>
+                                            <td align="left">
+                                            <input id="PLAYBACK" name="PLAYBACK" type="checkbox" /><span id="VideoPlayback">录像回放</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left">
+                                            <input id="SET" name="SET" type="checkbox" /><span id="RemoteConfig">设置参数</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left">
+                                            <input id="STATE" name="STATE" type="checkbox" /><span id="RemoteCheckState">查看状态、日志</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left">
+                                            <input id="ADVANCE" name="ADVANCE" type="checkbox" /><span id="RemoteAdvancedSetting">高级操作(升级、重启、关机...)</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left">
+                                            <input id="NETTALK" name="NETTALK" type="checkbox" /><span id="DirectionalAudio">发起语音对讲</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left">
+                                            <input id="VIEW" name="VIEW" type="checkbox" /><span id="RemotePreView">远程预览</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left">
+                                            <input id="MODIUSER" name="MODIUSER" type="checkbox" /><span id="RemoteModifyUser">修改用户</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left">
+                                            <input id="MODIPWD" name="MODIPWD" type="checkbox" /><span id="RemoteModifyPassword">修改用户自己的密码</span></td>
+                                        </tr>
+                                    </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center"colspan="2" height="31">
+                            <input id="btnAddUser" class="button" onclick="AddUser();" type="button" value="添加用户" />&nbsp;&nbsp;
+                            <input id="btnDelUser" class="button" disabled="disabled" onclick="DelUser();" type="button" value="删除用户" />&nbsp;&nbsp;
+                            <input id="btnModifyUser" class="button" disabled="disabled" onclick="CheckModifyPwd();" type="button" value="修改密码" />&nbsp;
+                            <input id="btnModifyRight" class="button" disabled="disabled" onclick="ModifyRight();" type="button" value="修改权限" />&nbsp;
+                            <input id="btnRefreshUserInfo" class="button" onclick="SendGetUserInfo();" type="button" value="刷新" />
+                            </td>
+                        </tr>
+                    </table>
+                    <!-------添加用户------>
+                    <table style="display:none;" id="addUserTable" cellspacing="0" height="160" width="400">
+                        <tr>
+                            <td height="50">&nbsp;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                <table>
+                                    <tr>
+                                        <td><span id="strAddUserName">用 户 名</span>:</td>
+                                        <td>
+                                        <input id="AddUserUserName" name="AddUserUserName" onkeyup="value=value.replace(/[\u4E00-\u9FA5]/g,'')" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span id="strAddPassword">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</span>:</td>
+                                        <td>
+                                        <input id="AddUserPassword" name="AddUserPassword" type="password" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span id="AddConfirmPassword">密码确认</span>:</td>
+                                        <td>
+                                        <input id="AddUserPassword2" name="AddUserPassword2" type="password" /></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr height="20">
+                            <td align="center"colspan="2">
+                            <input id="btnSaveAddUser" class="button" onclick="AddUserInfo();" type="button" value="确定" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input id="btnReturnAddUser" class="button" onclick="ReturnUserListTable();" type="button" value="返回" />
+                            </td>
+                        </tr>
+                    </table>
+                    <!------修改密码------>
+                    <table cellspacing="0" width="520" id="ModifyPwdTable" style="display:none;">
+                    <tr>
+                        <td height="50">&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                        <table>
+                            <tr>
+                                <td><span id="strUserName">用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名</span>:</td>
+                                <td>
+                                <input id="MUserName" disabled="disabled" name="MUserName"  type="text" value="" /></td>
+                            </tr>
+                            <tr>
+                                <td><span id="OldPassword">旧&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;码</span>:</td>
+                                <td>
+                                <input id="MPasswordOld" name="MPasswordOld" type="password" /></td>
+                            </tr>
+                            <tr>
+                                <td><span id="NewPassword">新&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;码</span>:</td>
+                                <td>
+                                <input id="MPasswordNew" name="MPasswordNew" type="password" /></td>
+                            </tr>
+                            <tr>
+                                <td><span id="ConfirmPassword">新密码确认</span>:</td>
+                                <td>
+                                <input id="MPasswordRepeat" name="MPasswordRepeat" type="password" /></td>
+                            </tr>
+                        </table>
+                        </td>
+                    </tr>
+                    <tr height="30">
+                        <td align="center" class="csBgStyle" colspan="2">
+                        <input id="btnSaveMod" class="button" onclick="ModifyPwdInfo();" type="button" value="确定" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input id="btnReturnMod" class="button" onclick="ReturnUserListTable();" type="button" value="返回" />
+                        </td>
+                    </tr>
+                </table>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-------------------------------UserSetDiv end---------------------------------------------------------------------------->
+   
+    <!--------------------------------AdvancedSetDiv start--------------------------------------------------------------------->
+    <div id="AdvancedSetDiv" style="display:none;">
+    	<table border="0" cellpadding="0" cellspacing="0" widht="100%">
+            <tr>
+                <td height="10">&nbsp;</td>
+            </tr>
+            <tr>
+                <td style="font-size:20px;">
+               <span id="SystemSet">系统高级设置</span>&nbsp;&nbsp;<img src="images/line.png" /></td>
+            </tr>
+            <tr>
+                <td height="20">&nbsp;</td>
+            </tr>
+            <tr>
+            	<td>
+                	<form action="@@request['SCRIPT_NAME']?TokenId=411913956&amp;FileName=/41191356" enctype="multipart/form-data" method="POST">
+                        <table align="center">
+                            <br />
+                            <tr>
+                                <td>
+                                <!--时间设置-->
+                                <table class="csTableBoder" width="100%">
+                                    <tr>
+                                        <td colspan="2"><span id="TimeSet">时间设置</span>
+										<img onclick="ShowHelpInfoDiv('imgTimeSet');" style="height:15px; width:15px; vertical-align:middle; cursor:help; margin-left:2px;" src="images/helpico.gif" />
+										</td>
+                                    </tr>
+                                   
+                                    <tr>
+                                        <td><span id="strTimeZone">时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区</span>:</td>
+                                        <td><select id="timezone" name="timezone">
+                                        <option value="-12">(GMT-12:00) International Date Line West</option>
+                                        <option value="-11">(GMT-11:00) Midway Island, Samoa</option>
+                                        <option value="-10">(GMT-10:00) Hawaii</option>
+                                        <option value="-9">(GMT-09:00) Alaska</option>
+                                        <option value="-8">(GMT-08:00) Pacific Time (US and Canada) Tijuana</option>
+                                        <option value="-7">(GMT-07:00) Arizona</option>
+                                        <option value="-7">(GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
+                                        <option value="-7">(GMT-07:00) Mountain Time (US and Canada)</option>
+                                        <option value="-6">(GMT-06:00) Guadalajara, Mexico City,Monterrey</option>
+                                        <option value="-6">(GMT-06:00) Central Time (US and Canada)</option>
+                                        <option value="-6">(GMT-06:00) Central America</option>
+                                        <option value="-6">(GMT-06:00) Saskatchewan</option>
+                                        <option value="-5">(GMT-05:00) Indiana (East)</option>
+                                        <option value="-5">(GMT-05:00) Bogota, Lima, Quito</option>
+                                        <option value="-5">(GMT-05:00) Eastern Time (US and Canada)</option>
+                                        <option value="-4">(GMT-04:00) Caracas, La Paz</option>
+                                        <option value="-4">(GMT-04:00) Santiago</option>
+                                        <option value="-4">(GMT -04:00) Manaus</option>
+                                        <option value="-4">(GMT-04:00) Atlantic Time (Canada)</option>
+                                        <option value="-3">(GMT-03:00) Buenos Aires, Georgetown</option>
+                                        <option value="-3">(GMT-03:30) Newfoundland and Labrador</option>
+                                        <option value="-3">(GMT-03:00) Greenland</option>
+                                        <option value="-3">(GMT-03:00) Brasilia</option>
+                                        <option value="-2">(GMT-02:00) Mid-Atlantic</option>
+                                        <option value="-1">(GMT-01:00) Cape Verde Islands</option>
+                                        <option value="-1">(GMT-01:00) Azores</option>
+                                        <option value="0">(GMT) Greenwich Mean Time : Dublin, Edinburgh,Lisbon, London</option>
+                                        <option value="0">(GMT) Casablanca, Monrovia</option>
+                                        <option value="1">(GMT+01:00) Belgrade, Bratislava, Budapest,Ljubljana, Prague</option>
+                                        <option value="1">(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb</option>
+                                        <option value="1">(GMT+01:00) Brussels, Copenhagen, Madrid,Paris</option>
+                                        <option value="1">(GMT+01:00) West Central Africa</option>
+                                        <option value="1">(GMT+01:00) Amsterdam, Berlin, Bern, Rome,Stockholm, Vienna</option>
+                                        <option value="2">(GMT+02:00) Minsk</option>
+                                        <option value="2">(GMT+02:00) Cairo</option>
+                                        <option value="2">(GMT+02:00) Helsinki, Kiev, Riga, Sofia,Tallinn, Vilnius</option>
+                                        <option value="2">(GMT+02:00) Athens, Bucharest, Istanbul</option>
+                                        <option value="2">(GMT+02:00) Jerusalem</option>
+                                        <option value="2">(GMT +02:00) Windhoek</option>
+                                        <option value="2">(GMT+02:00) Harare, Pretoria</option>
+                                        <option value="3">(GMT+03:00) Kuwait, Riyadh</option>
+                                        <option value="3">(GMT+03:00) Baghdad</option>
+                                        <option value="3">(GMT+03:00) Nairobi</option>
+                                        <option value="3">(GMT+03:30) Tehran</option>
+                                        <option value="3">(GMT+03:00) Moscow, St. Petersburg, Volgograd</option>
+                                        <option value="4">(GMT+04:30) Kabul</option>
+                                        <option value="4">(GMT+04:00) Abu Dhabi, Muscat</option>
+                                        <option value="4">(GMT +04:00) Baku</option>
+                                        <option value="4">(GMT+04:00) Yerevan</option>
+                                        <option value="4">(GMT +04:00) Tblisi</option>
+                                        <option value="5">(GMT+05:00) Ekaterinburg</option>
+                                        <option value="5">(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
+                                        <option value="5">(GMT+05:45) Kathmandu</option>
+                                        <option value="5">(GMT+05:00) Islamabad, Karachi, Tashkent</option>
+                                        <option value="6">(GMT+06:00) Astana, Dhaka</option>
+                                        <option value="6">(GMT+06:30) Yangon (Rangoon)</option>
+                                        <option value="6">(GMT+06:00) Almaty, Novosibirsk</option>
+                                        <option value="6">(GMT+06:00) Sri Jayawardenepura</option>
+                                        <option value="7">(GMT+07:00) Krasnoyarsk</option>
+                                        <option value="7">(GMT+07:00) Bangkok, Hanoi, Jakarta</option>
+                                        <option value="8">(GMT+08:00) Beijing, Chongqing, Hong KongSAR, Urumqi</option>
+                                        <option value="8">(GMT+08:00) Irkutsk, Ulaanbaatar</option>
+                                        <option value="8">(GMT+08:00) Kuala Lumpur, Singapore</option>
+                                        <option value="8">(GMT+08:00) Taipei</option>
+                                        <option value="8">(GMT+08:00) Perth</option>
+                                        <option value="9">(GMT+09:30) Darwin</option>
+                                        <option value="9">(GMT+09:30) Adelaide</option>
+                                        <option value="9">(GMT+09:00) Seoul</option>
+                                        <option value="9">(GMT+09:00) Osaka, Sapporo, Tokyo</option>
+                                        <option value="9">(GMT+09:00) Yakutsk</option>
+                                        <option value="10">(GMT+10:00) Canberra, Melbourne, Sydney</option>
+                                        <option value="10">(GMT+10:00) Brisbane</option>
+                                        <option value="10">(GMT+10:00) Hobart</option>
+                                        <option value="10">(GMT+10:00) Vladivostok</option>
+                                        <option value="10">(GMT+10:00) Guam, Port Moresby</option>
+                                        <option value="11">(GMT+11:00) Magadan, Solomon Islands,New Caledonia</option>
+                                        <option value="12">(GMT+12:00) Fiji Islands, Kamchatka,Marshall Islands</option>
+                                        <option value="12">(GMT+12:00) Auckland, Wellington</option>
+                                        <option value="13">(GMT+13:00) Nuku&#39;alofa</option>
+                                        </select>
+										<img onclick="ShowHelpInfoDiv('imgSetTimeZone');" style="height:15px; width:15px; vertical-align:middle; cursor:help; margin-left:2px;" src="images/helpico.gif" />
+										</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span id="strServerTime">服务器时间</span>:</td>
+                                        <td>
+                                        <input id="ServerTime" name="ServerTime" size="30" readonly="readonly" type="text" value="" />&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input id="btnSynchronization" class="button" onclick="SendSetTimeInfo();" type="button" value="立即与本机同步" />
+                                        <input id="btnrefresh0" class="button" onclick="SendGetTimeInfo()" style="width: 80px;" type="button" value="刷新" />
+                                        </td>
+                                    </tr>
+                                </table>
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td>
+                                	<hr />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <table width="100%">
+                                    <tr>
+                                        <td width="742"><span id="UpgradeFirmware">升级固件(通过升级服务器软件，您将获得新的功能)</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        <input id="uploadFile" name="uploadFile" style="display: none" type="file" />
+                                        <input id="btnUpgrade" class="button" onclick="UpGradeSystem();" style="width: 120px;" type="button" value="升级系统" />
+										<img onclick="ShowHelpInfoDiv('imgUpDate');" style="height:15px; width:15px; vertical-align:middle; cursor:help; margin-left:2px;" src="images/helpico.gif" />
+										</td>
+                                    </tr>
+                                </table>
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td>
+                                	<hr />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <table class="csTableBoder" width="100%">
+                                    <tr>
+                                        <td><span id="OtherSettings">其它高级设置</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td height="30">
+                                        <input id="btnSave" class="button" name="btnSave" onclick="SendSaveConfig();" type="button" value="保存设置" />
+										<img onclick="ShowHelpInfoDiv('imgSavaSetting');" style="height:15px; width:15px; vertical-align:middle; cursor:help; margin-left:2px;" src="images/helpico.gif" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td height="30">
+                                        <input id="btnRestore" class="button" name="btnRestore" onclick="SendSetRestore();" type="button" value="恢复出厂设置" />
+										<img onclick="ShowHelpInfoDiv('imgRestore');" style="height:15px; width:15px; vertical-align:middle; cursor:help; margin-left:2px;" src="images/helpico.gif" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td height="30">
+                                        <input id="btnRestart" class="button" name="btnRestart" onclick="SendSetReboot();" type="button" value="重启" />
+										<img onclick="ShowHelpInfoDiv('imgRestart');" style="height:15px; width:15px; vertical-align:middle; cursor:help; margin-left:2px;" src="images/helpico.gif" />
+                                        </td>
+                                    </tr>
+									<tr>
+                                        <td height="30">
+                                        <input id="btnShutdown" class="button" name="btnShutdown" onclick="SendSetShutdown();" style="width: 120px;" type="button" value="关机" />
+										<img onclick="ShowHelpInfoDiv('imgShutdown');" style="display:none; height:15px; width:15px; vertical-align:middle; cursor:help; margin-left:2px;" src="images/helpico.gif" />
+                                        </td>
+                                    </tr>
+                                </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!--------------------------------AdvancedSetDiv ens----------------------------------------------------------------------->
+
+	<!--------------------------------DriveSetDiv start------------------------------------------------------------------------>
+    <div id="DriveSetDiv"  style=" display:none;">
+    	<table border="0" cellpadding="0" cellspacing="0" widht="100%">
+        	 <tr>
+                <td height="10">&nbsp;</td>
+            </tr>
+            <tr>
+                <td style="font-size:20px;">
+               <span id="DriveInfo">磁盘信息设置</span>&nbsp;&nbsp;<img src="images/line.png" /></td>
+            </tr>
+            <tr>
+                <td height="20">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                	<table cellspacing="0" height="100" width="520">
+                        
+                        <tr>
+                            <td id="trDriveInfo"></td>
+                        </tr>
+                        <tr height="20">
+                            <td align="center">
+                            <div style="float: ;">
+                                <input id="btnModify" class="button" disabled="disabled" onclick="" style="display: none;" type="button" value="修改" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input id="btnRefresh" style="width:80px;" class="button"  onclick="SendSetDriveInfo();" type="button" value="初始化磁盘" />
+								<img onclick="ShowHelpInfoDiv('imgInitalizeDisk');" style="height:15px; width:15px; vertical-align:middle; cursor:help; margin-left:2px;" src="images/helpico.gif" />
+                            </div>
+                            </td>
+                        </tr>
+						<tr>
+							<td id="strDeviceNote" style="display:none; color:red;">
+								磁盘初始化完成,正在重新获取磁盘信息,请稍等!
+							</td>
+						</tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!--------------------------------DriveSetDiv end-------------------------------------------------------------------------->
+	
+	<!--------------------------------VideoPositionSetDiv start---------------------------------------------------------------->
+    <div id=VideoPositionSetDiv style="margin:0 0 0 100px; height:100%; width:100%; display:none;">
+        <table border=0 cellpadding=0 cellspacing=0 widht=100%>
+            <tr>
+                <td height=10>&nbsp;
+                    
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size:20px;">
+                    <span id="strVideoOut">视频显示设置</span>&nbsp;&nbsp;&nbsp; <img src="images/line.png" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                    	<tr>
+                    		 <td width="30">&nbsp;
+                                
+                            </td>
+                    		<td colspan="2" style="height:100px;">
+								<span id="strOutPutMode">输出模式选择</span>:
+								<select id="OutPutType" onchange="ChangeTheVga();">
+									<option value="0">启用VGA输出</option>
+									<option value="1">启用YPbPr输出</option>
+								</select>
+								<img onclick="ShowHelpInfoDiv('imgOutputMode');" style="height:15px; width:15px; vertical-align:middle; cursor:help; margin-left:2px;" src="images/helpico.gif" />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<span id="strVgaType" style="display:none;">输出分辨率</span>
+								<select id="VGAType">
+									<option value="480pRGB">480pRGB</option>
+								</select>
+                    		</td>
+                    	</tr>
+						<tr>
+							<td colspan=3>
+								<hr />
+							</td>
+						</tr>
+						<tr>
+							<td width="10">&nbsp;
+								
+							</td>
+							<td colspan="2">
+								<span id="strEnableVideoTransition">启用视频循切</span>&nbsp;
+								<input type="checkbox" onclick="ChangeTheVideoSwitch();" id="EnableVideoTransition" />
+							</td>
+						</tr>
+						<tr>
+							<td width="30">
+								
+							</td>
+							<td align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<span id="strVideoTransitionInterval">视频循切间隔时间(秒)</span>:
+							</td>
+							<td>&nbsp;
+								<input id="VideoTransitionInterval" type="text" maxlength="3" style="width:120px;" /> (10-255)
+							</td>
+						</tr>
+						<tr>
+							<td colspan=3>
+								<hr />
+							</td>
+						</tr>
+						<tr>
+							<td width="10">&nbsp;
+								
+							</td>
+							<td colspan="2">
+								<span id="strEnableDecoderOutput">启用解码输出</span>&nbsp;
+								<input type="checkbox" id="EnableDecoderOutput" />
+								<img onclick="ShowHelpInfoDiv('imgEnableDecoderOutput');" style="height:15px; width:15px; vertical-align:middle; cursor:help; margin-left:2px;" src="images/helpico.gif" />
+							</td>
+						</tr>
+						<tr>
+							<td colspan=3>
+								<hr />
+							</td>
+						</tr>
+						<tr>
+							<td width="10">&nbsp;
+								
+							</td>
+							<td colspan="2">
+								<span id="strEnableEnableOSD">启用OSD叠加</span>&nbsp;
+								<input type="checkbox" onclick="ChangeTheEnableOSD();" id="EnableOSD" />
+								<img onclick="ShowHelpInfoDiv('imgEnableEnableOSD');" style="height:15px; width:15px; vertical-align:middle; cursor:help; margin-left:2px;" src="images/helpico.gif" />
+							</td>
+						</tr>
+						 <tr>
+                            <td width=30>&nbsp;
+                                
+                            </td>
+                            <td align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span id="strOSDPositionX">X坐标</span>:
+                            </td>
+                            <td>&nbsp;
+                                <input id="OSDPositionX" type="text" maxlength="4" style="width:120px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width=30>&nbsp;
+                                
+                            </td>
+                            <td align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span id="strOSDPositionY">Y坐标</span>:
+                            </td>
+                            <td>&nbsp;
+                                <input id="OSDPositionY" type="text" maxlength="4" style="width:120px;" />
+                            </td>
+                        </tr>
+						<tr>
+							<td colspan=3>
+								<hr />
+							</td>
+						</tr>
+                        <tr>
+                            <td width=10>&nbsp;
+                                
+                            </td>
+                            <td colspan=2>
+                                <span id="strVideoPositionInfo">视频输出区域相对于显示器边界的距离</span>
+								<img onclick="ShowHelpInfoDiv('imgVideoPosition');" style="height:15px; width:15px; vertical-align:middle; cursor:help; margin-left:2px;" src="images/helpico.gif" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width=30>&nbsp;
+                                
+                            </td>
+                            <td align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span id="strCoordinatex">上下边界距离</span>:
+                            </td>
+                            <td>&nbsp;
+                                <input id="CoordinateX" type="text" maxlength="2" style="width:120px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width=30>&nbsp;
+                                
+                            </td>
+                            <td align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span id="strCoordinatey">左右边界距离</span>:
+                            </td>
+                            <td>&nbsp;
+                                <input id="CoordinateY" type="text" maxlength="2" style="width:120px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="30">&nbsp;
+                                
+                            </td>
+                            <td colspan="2" align="center" height="50">
+                                <input id="btnSaveVideoPosition" class="button" onclick="SendSetVideoPositionInfo();" type="button" value="确定" />&nbsp;&nbsp;&nbsp;&nbsp;
+								<input id="btnRefreshVideoPosition" class="button" onclick="SendGetVideoPositionInfo();" type="button" value="刷新" />
+                            </td>
+                        </tr>
+                        <tr>
+                        	<td width="30">&nbsp;
+                                
+                            </td>
+                        	<td colspan="2">
+                            	<font color="#FF0000"><span id="strPositionNote">注意:修改该参数后，需在&quot;高级设置&quot;中保存并重启。</span></font>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+	<!--------------------------------VideoPositionSetDiv end------------------------------------------------------------------>
+	
+	<!--------------------------------Device info div start-------------------------------------------------------------------->
+    <div id="DeviceSetDiv" style="margin:0 0 0 100px; height:100%; width:100%; display:none;">
+    	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+    		 <tr>
+                <td height=10>&nbsp;
+                    
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size:20px;">
+                    <span id="strDevice">系统信息设置</span>&nbsp;&nbsp;&nbsp; <img src="images/line.png" />
+                </td>
+            </tr>
+            <tr>
+                <td height=20>&nbsp;
+                    
+                </td>
+            </tr>
+            <tr>
+            	<td align="left">
+                	<table cellpadding="0" cellspacing="0" border="0" width="40%" height="250">
+                    	<tr>
+                        	<td align="right">
+                            	<span id="strName">名&nbsp;&nbsp;&nbsp;&nbsp;称:</span>
+                            </td>
+                            <td>&nbsp;&nbsp;
+                            	<input type="text" name="ServerName"  id="ServerName" maxlength="20" value="" />
+                            </td>
+                        </tr>
+                        <tr style="display:none;">
+                            <td align="right">
+                            	<span id="VideoFormat">制&nbsp;&nbsp;&nbsp;&nbsp;式:</span>
+                            </td>
+                            <td>&nbsp;&nbsp;
+                            	<select name="vdeostand"  id="vdeostand"><option value="0">PAL</option><option value="1">NTSC</option></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td  align="right"><span id="strDeviceType">设备类型:</span></td><td>&nbsp;&nbsp;<span id="spDeviceType"></span></td>
+                        </tr>
+                        <tr>
+                            <td  align="right"><span id="SN">产品序列号:</span></td><td>&nbsp;&nbsp;<span id="spDeviceSerialNumber"></span></td>
+                        </tr>
+                        <tr>
+                            <td  align="right"><span id="strMACAddress">设备MAC地址:</span></td><td>&nbsp;&nbsp;<span id="DeviceMAC"></span></td>
+                        </tr>
+                        <tr>
+                            <td  align="right"><span id="SoftwareVersion">软件版本:</span></td><td>&nbsp;&nbsp;<span  id="SoftVersion"></span></td>
+                        </tr>
+                        <tr>
+                            <td  align="right"><span id="WebVersion">Web版本:</span></td><td>&nbsp;&nbsp;<span id="VersionWeb"></span></td>
+                        </tr>
+                        <tr>
+                            <td  align="right"><span id="FirmwareVersion">硬件版本:</span></td><td>&nbsp;&nbsp;<span id="HardwareVersion"></span></td>
+                        </tr>
+                        <tr>
+                            <td  align="right"><span id="ChannelNumber">通道数:</span></td><td>&nbsp;&nbsp;<span id="ChannelCount"></span></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr height="50">
+                <td height="51" align="left">
+                <input style="margin-left:120px;" type="button" value="设置" id="btnSaveDevice" onclick="SendSetDeviceInfo();" class="button"  /> &nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="刷新" id="btnRefreshDevice" onclick="SendGetDeviceInfo();" class="button" /></td>
+   			</tr>
+            <tr id="trNote">
+                <td colspan="2"  align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#FF0000" > <span id="Note">注意:修改制式要在高级设置中保存并重启。</span></font></td>
+            </tr>
+        </table>
+    </div>
+    <!--------------------------------Device info div end---------------------------------------------------------------------->
+    
+	<!--------------------------------LogDisplayDiv start------------------------------------------------------------------------>
+    <div id="LogDisplayDiv"  style="display:none;">
+    	<table border="0" cellpadding="0" cellspacing="0" widht="100%">
+        	 <tr>
+                <td height="10">&nbsp;</td>
+            </tr>
+            <tr>
+                <td style="font-size:20px;">
+               <span id="strLogInfo">日志信息查询</span>&nbsp;&nbsp;<img src="images/line.png" /></td>
+            </tr>
+			<tr>
+				<td>
+					<table  border="0" cellpadding="0" cellspacing="0" widht="100%">
+						<tr>
+							<td height="20">&nbsp;
+								
+							</td>
+						</tr>
+						<tr>
+	                        <td>
+	                            <span id="SearchTime">搜索日期: </span>
+	                        </td>
+	                        <td>
+	                            <input id="SearchDate" type="text" onfocus="javascript:if(g_Language=='English'){setdayE(this)}else{setdayC(this)};" />&nbsp;
+	                        </td>
+							<td style="display:none;">
+	                            <span id="strStarTime">开始时间:</span>
+	                        </td>
+	                        <td style="display:none;">
+	                            <select id="StartHour1" name="StartHour1"></select>
+								<span id="strStartHour">时</span>
+								<select id="StartMin1" name="StartMin1"></select>
+								<span id="strStartMin">分</span>&nbsp;
+	                        </td>
+							<td style="display:none;">
+	                            <span id="strEndTime">结束时间:</span>
+	                        </td>
+	                        <td style="display:none;">
+	                            <select id="StopHour1" name="StopHour1"></select>
+								<span id="strEndHour">时</span>
+								<select id="StopMin1" name="StopMin1"></select>
+								<span id="strEndMin">分</span>
+	                        </td>
+							<td colspan="6">
+								<span id="strLogType">日志类型</span>:
+								<select id="LogType" style="width:100px;">
+									<option value="0">系统日志</option>
+									<option value="1">操作日志</option>
+									<option value="2">报警日志</option>
+								</select>&nbsp;
+								<input id="btnSearchLog" type="button" class="button" style="width:120px;" onclick="SearchLog(true);" value="搜索" />
+							</td>
+	                    </tr>
+					</table>
+				</td>
+			</tr>
+            <tr>
+                <td height="20">&nbsp;</td>
+            </tr>
+            <tr>
+	            <td colspan="5" width="%100" height="%100" id="LogInfo">
+	            </td>
+            </tr>
+        </table>
+    </div>
+    <!--------------------------------LogDisplayDiv end-------------------------------------------------------------------------->
+	
+	<!--------------------------------DeviceStatusDiv start------------------------------------------------------------------------>
+    <div id="DeviceStatusDiv"  style="margin:0 0 0 100px; height:100%; width:100%; display:none;">
+    	<table border="0" cellpadding="0" cellspacing="0" widht="100%">
+        	 <tr>
+                <td height="10">&nbsp;</td>
+            </tr>
+            <tr>
+                <td style="font-size:20px;">
+               <span id="strDeviceStatus">设备状态查看</span>&nbsp;&nbsp;<img src="images/line.png" /></td>
+            </tr>
+            <tr>
+                <td height="20">&nbsp;</td>
+            </tr>
+            <tr>
+	            <td width="%100" height="%100">
+	            	<fieldset style="width:850px;">
+						<legend id="strChannelStatus" align="left" style="height:10px">通道状态</legend>
+						<div style="margin:20px;" id="ChannelStatusDiv">
+							&nbsp;
+						</div>
+					</fieldset>
+	            </td>
+            </tr>
+        </table>
+    </div>
+    <!--------------------------------DeviceStatusDiv end-------------------------------------------------------------------------->
+	
+    <div id="ActionDiv" style="position:absolute; display:none; margin:20px 0 0 0;">
+        <table class=csForeBg style="border: solid 1px #3D4045" width=650>
+            <tr>
+                <td>
+                    <table width=100%>
+                        <tr>
+                            <td align=center>&nbsp;
+                                
+                            </td>
+                        </tr>
+						<tr>
+							<td align="center">
+								<img src="images/wait.gif" />
+							</td>
+						</tr>
+                        <tr>
+                            <td align="center">
+                                <span id="waitfor">请稍等,设备正在重启</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center">&nbsp;
+                                
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+	
+	<div id="HelpInfoDiv" onmouseout="ChangelTheHelpDivFalg(1);" onmouseover="ChangelTheHelpDivFalg(0);" style="position:absolute; overflow:auto; height:160px; width:300px; display:none;">
+		<iframe style= "position:absolute;left:0;top:0;width:100%;height:100%;z-index:-1;scrolling:no;" frameborder="0"> </iframe>
+		<div id="HelpInfoDivShow"></div>
+	</div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    JsMain();
+</script>
+<script src="js/meizzDate.js" type="text/javascript">//日历控件</script>

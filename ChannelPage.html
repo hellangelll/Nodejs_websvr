@@ -1,0 +1,469 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <title>详细设置</title>
+    </head>
+    <link href="css/detail.css" rel="stylesheet" type="text/css" />
+    <script src="js/xmlPort/XmlPort.js" type="text/javascript">
+        //XML数据接口
+    </script>
+    <!--<script src="js/CookieOperate.js" type="text/javascript">					//Cookie操作函数</script>
+    <script src="js/xmlPort/CreateXmlObject.js" type="text/javascript">			//创建XML对象接口</script>
+    <script src="js/xmlPort/ChannelInfo.js" type="text/javascript">			//通道信息获取接口</script>
+    <script src="js/xmlPort/GetPtzProtocol.js" type="text/javascript">			//云台协议列表获取接口</script>
+    <script src="js/xmlPort/PtzDecoderInfo.js" type="text/javascript">			//云台参数接口</script>
+    <script src="js/xmlPort/AudioInfo.js" type="text/javascript">				//音频参数接口</script>
+    <script src="js/xmlPort/VideoOut.js" type="text/javascript">				//模拟输出接口</script>-->
+    <script src="js/detail/ChannelPage.js" type="text/javascript">
+        //页面主程序函数
+    </script>
+    <script type="text/javascript">
+        
+        var g_Language = getCookie("g_Language");
+        var g_UserName = getCookie("g_UserName");
+        var g_Password = getCookie("g_Password");
+        var g_ServerPort = getCookie("g_ServerPort");
+        var g_ServerIp = getCookie("g_ServerIp");
+        var g_UserRight = getCookie("g_UserRight");
+        var g_connectPassword = getCookie("g_connectPassword");
+        if (typeof(g_UserName) == "object" || typeof(g_Password) == "object" || typeof(g_ServerIp) == "object" || typeof(g_ServerPort) == "object" || typeof(g_UserRight) == "object" || typeof(g_connectPassword) == "object") {
+            window.location.href = "login.html";
+        }
+        var g_CurrentChannelNum = 0, a_succeed, a_faild;
+        
+        function JsMain()
+		{
+            //给云台地址selcet赋初值
+            for (var i = 0; i < 255; i++) {
+                document.getElementById("PTZAddress").options[i] = new Option(i, i);
+            }
+            
+            //创建xml对象
+            CreateXmlObject();
+            
+			//初始化页面语言包
+			SetTheChannelPageLanguage();
+			
+            //请求获取通道信息
+            SendGetChannelInfo();
+            
+            //获取云台协议列表
+            //SendGetPtzProtocol();
+            
+            //获取音频参数
+            //SendGetAudioInfo();
+            
+            //模拟输出
+            //SendGetVideoOut();
+        }
+		
+		function SetTheChannelPageLanguage()
+		{
+			if (g_Language == "English") {
+                g_xmlDoc = LoadXML("file", "xml/English/ChannelPage.xml");
+            }
+            else {
+                g_xmlDoc = LoadXML("file", "xml/Chinese/ChannelPage.xml");
+            }
+            
+            if (typeof(g_xmlDoc) == "object") {
+                $("PtzParameter").innerHTML = g_xmlDoc.getElementsByTagName("PtzParameter")[0].nodeTypedValue;
+                $("strChooseChannel").innerHTML = g_xmlDoc.getElementsByTagName("strChooseChannel")[0].nodeTypedValue;
+				$("strAudioChooseChannel").innerHTML = g_xmlDoc.getElementsByTagName("strChooseChannel")[0].nodeTypedValue;
+                $("Address").innerHTML = g_xmlDoc.getElementsByTagName("Address")[0].nodeTypedValue;
+                $("strBaudRate").innerHTML = g_xmlDoc.getElementsByTagName("strBaudRate")[0].nodeTypedValue;
+                $("Protocol").innerHTML = g_xmlDoc.getElementsByTagName("Protocol")[0].nodeTypedValue;
+                $("strDataBit").innerHTML = g_xmlDoc.getElementsByTagName("strDataBit")[0].nodeTypedValue;
+                $("ParityBit").innerHTML = g_xmlDoc.getElementsByTagName("ParityBit")[0].nodeTypedValue;
+                $("Parity").options[0].text = g_xmlDoc.getElementsByTagName("ParityOpt0")[0].nodeTypedValue;
+                $("Parity").options[1].text = g_xmlDoc.getElementsByTagName("ParityOpt1")[0].nodeTypedValue;
+                $("Parity").options[2].text = g_xmlDoc.getElementsByTagName("ParityOpt2")[0].nodeTypedValue;
+                $("btnSavePtz").value = g_xmlDoc.getElementsByTagName("btnSavePtz")[0].nodeTypedValue;
+                $("btnRefreshPtz").value = g_xmlDoc.getElementsByTagName("btnRefreshPtz")[0].nodeTypedValue;
+                  
+                
+                
+                $("AudioParameter").innerHTML = g_xmlDoc.getElementsByTagName("AudioParameter")[0].nodeTypedValue;
+                $("AudiAmplification").innerHTML = g_xmlDoc.getElementsByTagName("AudiAmplification")[0].nodeTypedValue;
+                $("Intercom").innerHTML = g_xmlDoc.getElementsByTagName("Intercom")[0].nodeTypedValue;
+                $("NetTalk").options[0].text = g_xmlDoc.getElementsByTagName("NetTalkOpt0")[0].nodeTypedValue;
+                $("NetTalk").options[1].text = g_xmlDoc.getElementsByTagName("NetTalkOpt1")[0].nodeTypedValue;
+                $("SpeechMode").innerHTML = g_xmlDoc.getElementsByTagName("SpeechMode")[0].nodeTypedValue;
+                $("AudioMode").options[0].text = g_xmlDoc.getElementsByTagName("AudioMode0")[0].nodeTypedValue;
+                $("AudioMode").options[1].text = g_xmlDoc.getElementsByTagName("AudioMode1")[0].nodeTypedValue;
+                $("AudioMode").options[2].text = g_xmlDoc.getElementsByTagName("AudioMode2")[0].nodeTypedValue;
+                $("SpeechFormat").innerHTML = g_xmlDoc.getElementsByTagName("SpeechFormat")[0].nodeTypedValue;
+                $("btnSaveAudio").value = g_xmlDoc.getElementsByTagName("btnSaveAudio")[0].nodeTypedValue;
+                $("btnRefreshAudio").value = g_xmlDoc.getElementsByTagName("btnRefreshAudio")[0].nodeTypedValue;
+                
+     
+                
+                $("ChannelParameter").innerHTML = g_xmlDoc.getElementsByTagName("ChannelParameter")[0].nodeTypedValue;
+                $("btnSaveChannel").value = g_xmlDoc.getElementsByTagName("btnSaveChannel")[0].nodeTypedValue;
+                $("btnRefreshChannel").value = g_xmlDoc.getElementsByTagName("btnRefreshChannel")[0].nodeTypedValue;
+				$("strNote").innerHTML = g_xmlDoc.getElementsByTagName("strNote")[0].nodeTypedValue;
+                
+                a_ChannelName = g_xmlDoc.getElementsByTagName("ChannelName")[0].nodeTypedValue;
+                a_ChannelAddress = g_xmlDoc.getElementsByTagName("ChannelAddress")[0].nodeTypedValue;
+                a_ChannelPort = g_xmlDoc.getElementsByTagName("ChannelPort")[0].nodeTypedValue;
+                a_ChannelUsername = g_xmlDoc.getElementsByTagName("ChannelUsername")[0].nodeTypedValue;
+                a_ChannelPassword = g_xmlDoc.getElementsByTagName("ChannelPassword")[0].nodeTypedValue;
+                a_ChannelSubStream = g_xmlDoc.getElementsByTagName("ChannelSubStream")[0].nodeTypedValue;
+                a_ChannelEnable = g_xmlDoc.getElementsByTagName("ChannelEnable")[0].nodeTypedValue;
+                a_succeed = g_xmlDoc.getElementsByTagName("a_succeed")[0].nodeTypedValue;
+                a_faild = g_xmlDoc.getElementsByTagName("a_faild")[0].nodeTypedValue;
+            }
+		}
+        
+    </script>
+    <body>
+        <div id="backgroundDiv" height="100%" width="100%">
+            <!-------------------------------PTZ Div start------------------------------------------------------>
+            <div id="PtzParameterDiv" style="display:none;">
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td height="10">&nbsp;
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 20px;">
+                            <span id="PtzParameter">云台参数设置</span>&nbsp;&nbsp;&nbsp; <img src="images/line.png" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="20">&nbsp;
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span id="strChooseChannel">选择通道</span>:&nbsp;&nbsp;
+                            <select name="PtzChannelNo" id="PtzChannelNo" onchange="SendGetPtzDecoderInfo();">
+                                <option value="0">channel1</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <table border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td colspan="2" height="20">&nbsp;
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="40">
+                                        <span id="Address">地&nbsp;&nbsp;&nbsp;&nbsp;址</span>:&nbsp;&nbsp;
+                                    </td>
+                                    <td>
+                                        <select id="PTZAddress" name="PTZAddress">
+                                            <option value="0">0</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="40">
+                                        <span id="strBaudRate">波特率</span>:&nbsp;&nbsp;
+                                    </td>
+                                    <td>
+                                        <select name= "BaudRate" id= "BaudRate">
+                                            <option value="50">50</option>
+                                            <option value="75">75</option>
+                                            <option value=110>110</option>
+                                            <option value=150>150</option>
+                                            <option value=300>300</option>
+                                            <option value=600>600</option>
+                                            <option value=1200>1200</option>
+                                            <option value=2400>2400</option>
+                                            <option value=4800>4800</option>
+                                            <option value=9600>9600</option>
+                                            <option value=19200>19200</option>
+                                            <option value=38400>38400</option>
+                                            <option value=57600>57600</option>
+                                            <option value=76800>76800</option>
+                                            <option value=115>115.2K</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="40">
+                                        <span id="Protocol">协&nbsp;&nbsp;&nbsp;&nbsp;议</span>:&nbsp;&nbsp;
+                                    </td>
+                                    <td>
+                                        <select name="selectProtocol" id="selectProtocol">
+                                            <option value = ""></option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="40">
+                                        <span id="strDataBit">数据位</span>:&nbsp;&nbsp;
+                                    </td>
+                                    <td>
+                                        <select name = "DataBit" id = "DataBit">
+                                            <option value= 0>5</option>
+                                            <option value=1>6</option>
+                                            <option value=2>7</option>
+                                            <option value=3>8</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="40">
+                                        <span id="ParityBit">校验位</span>:&nbsp;&nbsp;
+                                    </td>
+                                    <td>
+                                        <select name="Parity" id="Parity">
+                                            <option value=0>无校验</option>
+                                            <option value=1>奇校验</option>
+                                            <option value=2>偶校验</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr align="center">
+                        <td height="50">
+                            <input type="button" value="确定" id="btnSavePtz" onClick="SendSetPtzDecoderInfo();" class="button" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="刷新" id="btnRefreshPtz" onClick="SendGetPtzDecoderInfo();" class="button" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+			<!-------------------------------PTZ Div end-------------------------------------------------------->
+			
+			<!-------------------------------VideoOut Div start------------------------------------------------->
+            <div id="VideoOutParameterDiv" style="display:none;">
+                <table border="0" cellpadding="0" cellspacing="0" widht="100%">
+                    <tr>
+                        <td height="10">&nbsp;
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 20px; ">
+                            <span id="strVideoOutSet">模拟输出设置</span>&nbsp;&nbsp;&nbsp; <img src="images/line.png" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="20">&nbsp;
+                            
+                        </td>
+                    </tr>
+                    <tr style="display:none;">
+                        <td>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 选择通道:&nbsp;&nbsp;
+                            <select id="VideoOutChannel" onchange="SendGetVideoOut();">
+                                <option value="0">通道一</option>
+                                <option value="1">通道二</option>
+                                <option value="2">通道三</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100%">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td align="LEFT" colspan="2" style="line-height: 30px;" valign="BOTTOM">&nbsp;
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="150">&nbsp;
+                                        
+                                    </td>
+                                    <td align="LEFT">
+                                        <input id="EnableOut" name="EnableOut" onclick="RefreshVideoOut();" type="checkbox" />是否启用模拟输出&nbsp;&nbsp; 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="100">&nbsp;
+                                        
+                                    </td>
+                                    <td align="LEFT" style="line-height: 40px;">选择模拟输出类型: 
+                                        <select id="OutMode" name="OutMode">
+                                            <option value="0">YPbPr(720p)</option>
+                                            <option value="1">YPbPr(480p/576p)</option>
+                                            <option value="3">Pb-CVBS(480i/576i)</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="10">&nbsp;
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="center" style="line-height: 40px;">
+                                        <input id="btnSaveOutput" class="button" name="btnSaveOutput" onclick="SendSetVideoOut();" type="button" value="设置" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="btnGetOutput" class="button" name="btnGetOutput" onclick="SendGetVideoOut();" type="button" value="刷新" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+			<!-------------------------------VideoOut Div end--------------------------------------------------->
+			
+			<!-------------------------------AudioInfoDiv start------------------------------------------------->
+            <div id="AudioInfoDiv" style="display:none;">
+                <table border="0" cellpadding="0" cellspacing="0" widht="100%">
+                    <tr>
+                        <td height="10">&nbsp;
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-size:20px;">
+                            <span id="AudioParameter">音频参数设置</span>&nbsp;&nbsp;&nbsp; <img src="images/line.png" />
+                        </td>
+                    </tr>
+					 <tr>
+                        <td height="20">&nbsp;
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                       <td>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span id="strAudioChooseChannel">选择通道</span>:&nbsp;&nbsp;
+                            <select name="AudioChannelNo" id="AudioChannelNo" onchange="SendGetAudioInfo();">
+                                <option value="0">channel1</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <table id="tbMain" align="center" cellspacing="0" width="520">
+                                <tr>
+                                    <td class="csBgStyle">
+                                        <table cellspacing="0" width="100%">
+                                            <tr>
+                                                <td align="right" height="30">
+                                                    <span id="AudiAmplification">音频倍数</span>:&nbsp;&nbsp;
+                                                </td>
+                                                <td align="left">
+                                                    <select id="Audio" name="Audio">
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr style="display:none;">
+                                                <td align="right" height="30">
+                                                    <span id="Intercom">语音对讲</span>:&nbsp;&nbsp;
+                                                </td>
+                                                <td align="left">
+                                                    <select id="NetTalk" name="NetTalk">
+                                                        <option value="0">不启用</option>
+                                                        <option value="1">启用</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="right" height="30">
+                                                    <span id="SpeechFormat">语音格式</span>:&nbsp;&nbsp;
+                                                </td>
+                                                <td align="left">
+                                                    <select id="AudioFormat" name="AudioFormat">
+                                                        <option value="0">MP2</option>
+                                                        <option value="1">AAC</option>
+														<option value="2">G.711</option>
+                                                        <option value="4">G.723</option>
+                                                        <option value="5">G.726</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="right" height="30">
+                                                    <span id="SpeechMode">音频模式</span>:&nbsp;&nbsp;
+                                                </td>
+                                                <td align="left">
+                                                    <select id="AudioMode" name="AudioMode">
+                                                        <option value="0">左声道</option>
+                                                        <option value="1">右声道</option>
+                                                        <option value="2">立体声</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="20">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr height="30">
+                                    <td align="center" class="csBgStyle" colspan="2">
+                                        <input id="btnSaveAudio" class="button" onclick="SendSetAudioInfo();" type="button" value="确定" />&nbsp;&nbsp;&nbsp;&nbsp;<input id="btnRefreshAudio" class="button" onclick="SendGetAudioInfo();" type="button" value="刷新" />&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+			<!-------------------------------AudioInfoDiv end--------------------------------------------------->
+			
+			<!--------------------------------ChannelSetDiv start----------------------------------------------->
+            <div id="ChannelInfoSetDiv" style="display:;">
+                <table border="0" cellpadding="0" cellspacing="0" widht="100%">
+                    <tr>
+                        <td height="10">&nbsp;
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-size:20px;">
+                            <span id="ChannelParameter">通道参数设置</span>&nbsp;&nbsp;<img src="images/line.png" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="20">&nbsp;
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table id="tableinfo" cellspacing="0" height="100" width="700">
+                                <tr>
+                                    <td id="trChannelInfo" height="100%" width="100%">
+                                    </td>
+                                </tr>
+                                <tr height="50">
+                                    <td align="center">
+                                        <input id="btnSaveChannel" class="button" disabled="disabled" onclick="SendSetChannelInfo();" type="button" value="修改" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="btnRefreshChannel" class="button" onclick="SendGetChannelInfo();" type="button" value="刷新" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+					<tr>
+	                    <td align="left" height="40">
+	                        <font color="#FF0000">
+	                            <span id="strNote">注意:修改通道参数后，需要在&quot;系统高级设置&quot;中保存并重启才会生效. </span>
+	                        </font>
+	                    </td>
+                	</tr>
+                </table>
+            </div>
+			<!--------------------------------ChannelSetDiv end------------------------------------------------->
+			<div id="HelpInfoDiv" onmouseout="ChangelTheHelpDivFalg(1);" onmouseover="ChangelTheHelpDivFalg(0);" style="position:absolute; overflow:auto; height:160px; width:300px; display:none;">
+				<iframe style= "position:absolute;left:0;top:0;width:100%;height:100%;z-index:-1;scrolling:no;" frameborder="0"> </iframe>
+				<div id="HelpInfoDivShow"></div>
+			</div>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    JsMain();
+</script>

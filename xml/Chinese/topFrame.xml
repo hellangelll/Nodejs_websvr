@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<soap:Header>
+		<RequestSOAPHeader xmlns="http://www.aipstar.com.cn/schema/ctcc/common/v2_1">
+			<CommandType xmlns="">EnglishLanguage</CommandType>
+		</RequestSOAPHeader>
+	</soap:Header>
+	<soap:Body>
+		<strUserInfo>当前用户</strUserInfo>
+		<strVideoBrowse>视频浏览</strVideoBrowse>
+		<strDetailSet>详细设置</strDetailSet>
+		<exit>退出</exit>
+		<strUpdateContral>点击更新视频控件</strUpdateContral>
+		<strVideoPlayBack>视频回放</strVideoPlayBack>
+		<a_succeed>设置成功!</a_succeed>
+		<a_faild>设置失败!</a_faild>
+		<btnSave>保存设置</btnSave>
+	</soap:Body>
+</soap:Envelope>

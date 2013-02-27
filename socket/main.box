@@ -1,0 +1,54 @@
+Dim httpd
+Set service = Shell.Service
+Set Arg = Shell.Arguments
+ 
+
+service.Name = "WebControlCenter"
+service.DisplayName = "WebControlCenter"
+service.Description = "web管理控制中心"
+
+If Arg.count >=2 then 
+  If LCase(Arg(2)) = "-i" Then
+    service.Install
+    Shell.Quit 0
+  ElseIf LCase(Arg(2)) = "-r" Then
+ 
+    service.Stop
+    service.Remove
+    Shell.Quit 0
+  End If
+End if
+service.Start
+service.SetTimer 1000
+service.DoEvents
+
+ 
+
+'---------------------- Service Event ---------------------
+Sub OnServiceStart()
+Set httpd = CreateObject("NetBox.HttpServer")
+If httpd.Create("", 8181) = 0 Then
+Set host = httpd.AddHost("", "")
+host.EnableScript = true
+host.AddDefault "index.html"
+
+httpd.Start
+
+else
+Shell.Quit 0
+end if
+
+Shell.Service.SetTimer 1000
+
+End Sub
+Sub OnServiceStop()
+httpd.Close
+End Sub
+Sub OnServicePause()
+httpd.Stop
+Shell.Beep
+End Sub
+Sub OnServiceResume()
+httpd.Start
+End Sub
+

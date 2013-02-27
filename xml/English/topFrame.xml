@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<soap:Header>
+		<RequestSOAPHeader xmlns="http://www.aipstar.com.cn/schema/ctcc/common/v2_1">
+			<CommandType xmlns="">EnglishLanguage</CommandType>
+		</RequestSOAPHeader>
+	</soap:Header>
+	<soap:Body>
+		<strUserInfo>User</strUserInfo>
+		<strVideoBrowse>Video</strVideoBrowse>
+		<strDetailSet>Parameter</strDetailSet>
+		<exit>Exit</exit>
+		<strUpdateContral>Update video controls</strUpdateContral>
+		<strVideoPlayBack>PlayBack</strVideoPlayBack>
+		<a_succeed>Set Succeed!</a_succeed>
+		<a_faild>Set Failed!</a_faild>
+		<btnSave>Save</btnSave>
+	</soap:Body>
+</soap:Envelope>

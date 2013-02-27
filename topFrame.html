@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+</head>
+<script src="js/xmlPort/XmlPort.js" type="text/javascript">				//XML数据接口</script>
+<!--[if IE 6]>
+<script type="text/javascript" src="js/png.js"></script>
+<script type="text/javascript">
+  DD_belatedPNG.fix('.sty-TopLogo');
+</script>
+<![endif]-->
+<link href="css/detail.css" rel="stylesheet" type="text/css" />
+
+<script src="js/xmlPort/XmlPort.js" type="text/javascript">				//XML数据接口</script>
+
+<!--<script src="js/CookieOperate.js" type="text/javascript">//Cookie操作函数</script>
+<script src="js/xmlPort/CreateXmlObject.js" type="text/javascript">		//创建XML对象接口</script>-->
+<script type="text/javascript">
+
+var g_UserName = getCookie("g_UserName"), g_Language = getCookie("g_Language"),g_Password = getCookie("g_connectPassword");
+var g_UserLoginFlag = getCookie("g_LoginFlag");
+if( g_UserLoginFlag != 1)
+{
+	parent.location.href = "login.html";
+}
+
+function IsClose()
+{
+	if(event.clientX>(document.body.clientWidth-30)&&event.clientY<0||event.altKey)
+	{
+		delCookie('g_LoginFlag');
+	}
+}
+
+function $(id)
+{
+	return document.getElementById(id);
+}
+
+//禁用鼠标右键
+document.oncontextmenu = function() 
+{ 
+	return false; 
+}
+
+function JsMain()
+{
+	var clientW = parseInt(document.body.clientWidth);
+	if( clientW < 950)
+	{
+		clientW = 950;
+	}
+	
+	$("TopUserInfo").style.width = (clientW - 0) + "px";
+	
+	$("strUserNmae").innerHTML = g_UserName;
+	
+	CreateXmlObject();
+	
+	if(g_Language == "English")
+	{
+		g_xmlDoc = LoadXML("file", "xml/English/topFrame.xml");
+	}
+	else
+	{
+		g_xmlDoc = LoadXML("file", "xml/Chinese/topFrame.xml");
+	}
+	
+	if( typeof(g_xmlDoc) == "object" )
+	{
+		$("strUserInfo").innerHTML = g_xmlDoc.getElementsByTagName("strUserInfo")[0].nodeTypedValue;
+		$("strVideoBrowse").innerHTML = g_xmlDoc.getElementsByTagName("strVideoBrowse")[0].nodeTypedValue;
+		$("strDetailSet").innerHTML = g_xmlDoc.getElementsByTagName("strDetailSet")[0].nodeTypedValue;
+		$("exit").innerHTML = g_xmlDoc.getElementsByTagName("exit")[0].nodeTypedValue;
+		$("strUpdateContral").innerHTML = g_xmlDoc.getElementsByTagName("strUpdateContral")[0].nodeTypedValue;
+		a_succeed = g_xmlDoc.getElementsByTagName("a_succeed")[0].nodeTypedValue;
+		a_faild = g_xmlDoc.getElementsByTagName("a_faild")[0].nodeTypedValue;
+		$("strVideoPlayBack").innerHTML = g_xmlDoc.getElementsByTagName("strVideoPlayBack")[0].nodeTypedValue;
+		$("strSave").innerHTML = g_xmlDoc.getElementsByTagName("btnSave")[0].nodeTypedValue;
+	}
+}
+
+function ShowTime()
+{
+	var timeString;
+	var intYear,intMonth,intDay,intHours,intMinutes,intSeconds;
+	var today;
+	today=new Date();
+	intYear=today.getYear();
+	intMonth=today.getMonth()+1;
+	intDay=today.getDate();
+	intHours=today.getHours();
+	intMinutes=today.getMinutes();
+	intSeconds=today.getSeconds();
+	
+	if(intMonth<10)
+	{
+	   intMonth = "0" + intMonth;
+	}
+	if(intDay<10)
+	{
+	   intDay = "0" + intDay;
+	}
+	if(intHours<10)
+	{
+	   intHours = "0" + intHours;
+	}
+	if(intMinutes<10)
+	{
+	   intMinutes = "0" + intMinutes;
+	}
+	if(intSeconds<10)
+	{
+	   intSeconds = "0" + intSeconds;
+	}
+	timeString = String(intYear) + "-" + String(intMonth) + "-" + intDay + " " + String(intHours) + ":" + String(intMinutes) + ":" + String(intSeconds);
+	document.getElementById("CurrentTime").innerHTML = timeString;
+}
+
+//保存
+function SendSaveConfig()
+{
+	var ExpSaveConfigObj = new SaveConfigObj();
+	
+	ExpSaveConfigObj.callbackfunction = function(Obj){
+			
+			if(Obj.result )
+			{
+				alert(a_succeed);
+			}
+			else
+			{
+				alert(a_faild);
+			}
+		};
+	
+	ExpSaveConfigObj.method = "POST";
+	ExpSaveConfigObj.asynchrony = false;
+	ExpSaveConfigObj.username = g_UserName;
+	ExpSaveConfigObj.password = g_Password;
+
+	SetSaveConfig(ExpSaveConfigObj);
+}
+
+function DownLoad()
+{
+	window.clearInterval(g_timeInter);
+	window.location.href="../HDLive.exe";
+}
+
+function Exit()
+{
+	delCookie('g_LoginFlag');
+	parent.window.location.href='login.html';
+}
+
+</script>
+<body onbeforeunload="IsClose();">
+<!------------------------------Top start---------------------------------------->
+	<div id="topDiv" class="sty-TopDiv">
+    	
+        <div id="TopUserInfo">
+        	
+        	<table id="TopTable">
+                <tr>
+                	<td><img class="sty-TopLogo" src="images/logo_hd-nvr.gif" style="display:none; height:25px;" />
+                	</td>
+                	<td width="50%" align="left">
+                    	<span id="strUserInfo">当前用户</span>: <span id="strUserNmae">system</span> | <span id="CurrentTime">2010-03 12:03:00</span>
+                   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="#" onclick="DownLoad();" style="text-decoration:underline;"><span id="strUpdateContral">点击更新视频控件</span></a>
+                	</td>
+                    <td width="50%" align="right">
+                    	<a href="#"><span id="strVideoBrowse" onclick="javascript:parent.window.location.href='index.html'">视频浏览</span></a>&nbsp;&nbsp;&nbsp;
+						<a href="#"><span id="strVideoPlayBack" onclick="javascript:parent.window.location .href='index.html?command=playback';">视频回放</span></a>&nbsp;&nbsp;&nbsp;
+						<a href="#"><span id="strDetailSet" onclick="javascript:parent.bottomFrame.window.location.href='detailFrame.html'">详细设置</span></a>&nbsp;&nbsp;&nbsp;
+						<a href="#"><span id="strSave" onclick="javascript:SendSaveConfig();">保存设置</span></a>&nbsp;&nbsp;&nbsp;
+						<a href="javascript:Exit();"><span id="exit">退出</span></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+	<!---------------------------------Top end------------------------------------------------->
+
+</body>
+</html>
+<script type="text/javascript">
+JsMain();
+
+//显示界面时间
+var g_timeInter = window.setInterval("ShowTime()",1000);
+	
+</script>
